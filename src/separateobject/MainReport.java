@@ -9,7 +9,7 @@ public class MainReport {
     private static Hospital hospital;
 
     private static Map<Long, Doctor> doctorDetails;
-    private static Doctor neurologistDoctor;
+    private static Doctor neurologist;
     private static Doctor psychiatrist;
     private static Doctor cardiologist;
 
@@ -18,13 +18,18 @@ public class MainReport {
     private static Patients patientsLily;
     private static Patients patientsTommy;
 
-    private static Map<Long,Appointment> appointmentDetails;
+    private static Map<Long, Appointment> appointmentDetails;
     private static Appointment appointment1;
     private static Appointment appointment2;
     private static Appointment appointment3;
 
-    private static Map<Long,Medicine> medicineDetails;
-    private static Medicine medicine;
+    private static Map<Long, Medicine> medicineDetails;
+    private static Medicine cardiologistMedicine;
+    private static Medicine neurologistMedicine;
+    private static Medicine psychiatristMedicine;
+
+    private static Map<Long, VisitingInformation> visitingInformationDetails;
+    private static VisitingInformation visitingInformation1;
 
     static {
 
@@ -36,10 +41,10 @@ public class MainReport {
         hospitalDetails = new HashMap<>();
         hospitalDetails.put(121251l, hospital);
 
-        neurologistDoctor = new Doctor();
-        neurologistDoctor.setDoctorId(01l);
-        neurologistDoctor.setDoctorName(" Dr.Ronald roy ");
-        neurologistDoctor.setDoctorSpecialisation(" Neurologist ");
+        neurologist = new Doctor();
+        neurologist.setDoctorId(01l);
+        neurologist.setDoctorName(" Dr.Ronald roy ");
+        neurologist.setDoctorSpecialisation(" Neurologist ");
 
         psychiatrist = new Doctor();
         psychiatrist.setDoctorId(02l);
@@ -52,7 +57,7 @@ public class MainReport {
         cardiologist.setDoctorSpecialisation(" Cardiologist ");
 
         doctorDetails = new HashMap<>();
-        doctorDetails.put(neurologistDoctor.getDoctorId(), neurologistDoctor);
+        doctorDetails.put(neurologist.getDoctorId(), neurologist);
         doctorDetails.put(psychiatrist.getDoctorId(), psychiatrist);
         doctorDetails.put(cardiologist.getDoctorId(), cardiologist);
 
@@ -85,16 +90,15 @@ public class MainReport {
         patientsDetails.put(patientsLily.getPatientId(), patientsLily);
         patientsDetails.put(patientsTommy.getPatientId(), patientsTommy);
 
-
         appointment1 = new Appointment();
         appointment1.setAppointmentId(1l);
-        appointment1.setDoctor(neurologistDoctor);
+        appointment1.setDoctor(neurologist);
         appointment1.setPatients(patientsRose);
         appointment1.setFirstVisit(true);
         appointment1.setPurposeOfVisit("Headaches");
         appointment1.setBp(120.00);
         appointment1.setTemperature(36.01);
-        appointment1.setDateOfVisit(new Date(2021,10,21));
+        appointment1.setDateOfVisit(new Date(2021, 10, 21));
 
         appointment2 = new Appointment();
         appointment2.setAppointmentId(2l);
@@ -104,7 +108,7 @@ public class MainReport {
         appointment2.setPurposeOfVisit("Memory Loss");
         appointment2.setBp(115.00);
         appointment2.setTemperature(36.15);
-        appointment2.setDateOfVisit(new Date(2021,8,2));
+        appointment2.setDateOfVisit(new Date(2021, 05, 2));
 
         appointment3 = new Appointment();
         appointment3.setAppointmentId(3l);
@@ -114,15 +118,38 @@ public class MainReport {
         appointment3.setPurposeOfVisit("Chest Pain");
         appointment3.setBp(136.15);
         appointment3.setTemperature(37.12);
-        appointment3.setDateOfVisit(new Date(2021,7,12));
+        appointment3.setDateOfVisit(new Date(2021, 07, 12));
 
         appointmentDetails = new HashMap<>();
-        appointmentDetails.put(appointment1.getAppointmentId(),appointment1);
-        appointmentDetails.put(appointment2.getAppointmentId(),appointment2);
-        appointmentDetails.put(appointment3.getAppointmentId(),appointment3);
+        appointmentDetails.put(appointment1.getAppointmentId(), appointment1);
+        appointmentDetails.put(appointment2.getAppointmentId(), appointment2);
+        appointmentDetails.put(appointment3.getAppointmentId(), appointment3);
 
+        neurologistMedicine = new Medicine();
+        neurologistMedicine.setMedicineId(121l);
+        neurologistMedicine.setPatchNumber("B.NO.1080053");
+        neurologistMedicine.setExpiryDate(new Date(2023, 04, 01));
+        neurologistMedicine.setPurposeOfMedicine("used to prevent disease");
+        neurologistMedicine.setMedicineName("Beta 0.5mg");
 
+        psychiatristMedicine = new Medicine();
+        psychiatristMedicine.setMedicineId(122l);
+        psychiatristMedicine.setPatchNumber("B.NO.1200052");
+        psychiatristMedicine.setExpiryDate(new Date(2024, 02, 12));
+        psychiatristMedicine.setPurposeOfMedicine("used to prevent illness");
+        psychiatristMedicine.setMedicineName("Ativan 2mg");
 
+        cardiologistMedicine = new Medicine();
+        cardiologistMedicine.setMedicineId(123l);
+        cardiologistMedicine.setPatchNumber("B.NO.1502514");
+        cardiologistMedicine.setExpiryDate(new Date(2024, 03, 15));
+        cardiologistMedicine.setPurposeOfMedicine("used to prevent the illness issues");
+        cardiologistMedicine.setMedicineName(" Asprin 2mg");
+
+        medicineDetails = new HashMap<>();
+        medicineDetails.put(neurologistMedicine.getMedicineId(), neurologistMedicine);
+        medicineDetails.put(psychiatristMedicine.getMedicineId(), psychiatristMedicine);
+        medicineDetails.put(cardiologistMedicine.getMedicineId(), cardiologistMedicine);
 
 
     }
