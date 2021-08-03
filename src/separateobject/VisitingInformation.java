@@ -3,11 +3,11 @@ package separateobject;
 import java.util.List;
 
 public class VisitingInformation {
-private Long visitId;
-private Appointment appointment;
-private String doctorRecommendation;
-private List<Medicine> listOfMedicine;
-private Boolean followUpNeed;
+    private Long visitId;
+    private Appointment appointment;
+    private String doctorRecommendation;
+    private List<Medicine> listOfMedicine;
+    private Boolean followUpNeed;
 
     public Long getVisitId() {
         return visitId;
