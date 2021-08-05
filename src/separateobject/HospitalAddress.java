@@ -47,4 +47,14 @@ public class HospitalAddress {
         this.contactNumber = contactNumber;
     }
 
+    @Override
+    public String toString() {
+        return "HospitalAddress{" +
+                "hospitalName='" + hospitalName + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode=" + zipCode +
+                ", contactNumber='" + contactNumber + '\'' +
+                '}';
+    }
 }

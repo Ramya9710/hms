@@ -1,5 +1,6 @@
 package MainReport;
 
+import com.oracle.deploy.update.UpdateCheck;
 import separateobject.*;
 
 import java.util.*;
@@ -30,7 +31,7 @@ public class MainReport {
     private static Appointment appointmentSeven;
     private static Appointment appointmentEight;
     private static Appointment appointmentNine;
-    private static Appointment appointmentTen;
+
 
     private static Map<Long, Medicine> medicineDetails;
     private static Medicine neurologistMedicine;
@@ -45,6 +46,7 @@ public class MainReport {
     private static List<Medicine> medicineList;
     private static Medicine medicine;
     private static Object AppointmentBusinessObject;
+    private static UpdateCheck Calender;
 
     private Date date = new Date();
 
@@ -59,17 +61,17 @@ public class MainReport {
         hospitalDetails.put(2525l, hospital);
 
         neurologist = new Doctor();
-        neurologist.setDoctorId(01l);
+        neurologist.setDoctorId(1l);
         neurologist.setDoctorName(" Dr.Ronald roy ");
         neurologist.setDoctorSpecialisation(" Neurologist ");
 
         psychiatrist = new Doctor();
-        psychiatrist.setDoctorId(02l);
+        psychiatrist.setDoctorId(2l);
         psychiatrist.setDoctorName(" Dr.Vijay Kumar ");
         psychiatrist.setDoctorSpecialisation(" Psychiatrist ");
 
         cardiologist = new Doctor();
-        cardiologist.setDoctorId(03l);
+        cardiologist.setDoctorId(3l);
         cardiologist.setDoctorName(" Dr.Rama Chandra ");
         cardiologist.setDoctorSpecialisation(" Cardiologist ");
 
@@ -82,7 +84,7 @@ public class MainReport {
         patientsRose.setPatientName("Rose");
         patientsRose.setDate_of_birth(new Date(1990 / 12 / 10));
         patientsRose.setPatientAddress("Coimbatore");
-        patientsRose.setPatientId(101l);
+        patientsRose.setPatientId(1l);
         patientsRose.setPatientPhoneNumber("9525264410");
         patientsRose.setPatientType(" out Patient ");
 
@@ -90,7 +92,7 @@ public class MainReport {
         patientsLily.setPatientName("Lily");
         patientsLily.setDate_of_birth(new Date(1981 / 10 / 25));
         patientsLily.setPatientAddress("Chennai");
-        patientsLily.setPatientId(102l);
+        patientsLily.setPatientId(2l);
         patientsLily.setPatientPhoneNumber("9585124512");
         patientsLily.setPatientName(" out Patient");
 
@@ -98,7 +100,7 @@ public class MainReport {
         patientsTommy.setPatientName("Tommy");
         patientsTommy.setDate_of_birth(new Date(1998 / 05 / 19));
         patientsTommy.setPatientAddress("Madurai");
-        patientsTommy.setPatientId(103l);
+        patientsTommy.setPatientId(3l);
         patientsTommy.setPatientPhoneNumber("9854561214");
         patientsTommy.setPatientType("out patient");
 
@@ -111,7 +113,7 @@ public class MainReport {
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
-        appointmentOne.setFirstVisit(true);
+        appointmentOne.setFirstVisit(false);
         appointmentOne.setPurposeOfVisit("Headaches");
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
@@ -121,7 +123,7 @@ public class MainReport {
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
         appointmentTwo.setPatients(patientsDetails.get(2l));
-        appointmentTwo.setFirstVisit(true);
+        appointmentTwo.setFirstVisit(false);
         appointmentTwo.setPurposeOfVisit("Memory Loss");
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
@@ -197,16 +199,6 @@ public class MainReport {
         appointmentNine.setTemperature(36.15);
         appointmentNine.setDateOfVisit(new Date(2021 / 01 / 28));
 
-        appointmentTen = new Appointment();
-        appointmentTen.setAppointmentId(10l);
-        appointmentTen.setDoctor(doctorDetails.get(3l));
-        appointmentTen.setPatients(patientsDetails.get(3l));
-        appointmentTen.setFirstVisit(false);
-        appointmentTen.setPurposeOfVisit("Chest Pain");
-        appointmentTen.setBp(136.15);
-        appointmentTen.setTemperature(37.2);
-        appointmentTen.setDateOfVisit(new Date(2021 / 07 / 25));
-
 
         appointmentDetails = new HashMap<>();
         appointmentDetails.put(appointmentOne.getAppointmentId(), appointmentOne);
@@ -218,7 +210,7 @@ public class MainReport {
         appointmentDetails.put(appointmentSeven.getAppointmentId(), appointmentSeven);
         appointmentDetails.put(appointmentEight.getAppointmentId(), appointmentEight);
         appointmentDetails.put(appointmentNine.getAppointmentId(), appointmentThree);
-        appointmentDetails.put(appointmentTen.getAppointmentId(), appointmentTen);
+
 
         neurologistMedicine = new Medicine();
         neurologistMedicine.setMedicineId(121l);
@@ -292,15 +284,24 @@ public class MainReport {
         visitingInformationDetails.put(mentalCheckUp.getVisitId(), mentalCheckUp);
         visitingInformationDetails.put(heartCheckUp.getVisitId(), heartCheckUp);
 
-
     }
 
     public static void main(String[] args) {
         populateVisitingInformation();
-        System.out.println(getMedicine());
+
         AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
-        businessObject.createAppointment(appointmentDetails, patientsDetails, doctorDetails);
-        System.out.println(AppointmentBusinessObject);
+        Appointment appointment = businessObject.createAppointment(7l, patientsDetails, appointmentDetails,
+                " headache ", 2l, doctorDetails);
+        System.out.println(appointmentDetails.put(appointment.getAppointmentId(), appointment));
+
+        VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
+       /* VisitingInformation visitingInformation = visitingInformationBO.createVisitingInformationBO(appointment.getAppointmentId(),
+                appointmentDetails,
+                getMedicine(),
+                "take medicine regularly and take rest",
+                true,
+                visitingInformationDetails);
+        System.out.println(visitingInformationDetails.put(visitingInformation.getVisitId(), visitingInformation));*/
+
     }
 }
-

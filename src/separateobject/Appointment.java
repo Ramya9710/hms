@@ -76,4 +76,18 @@ public class Appointment {
     public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appointmentId=" + appointmentId +
+                ", doctor=" + doctor +
+                ", patients=" + patients +
+                ", dateOfVisit=" + dateOfVisit +
+                ", purposeOfVisit='" + purposeOfVisit + '\'' +
+                ", isFirstVisit=" + isFirstVisit +
+                ", bp=" + bp +
+                ", temperature=" + temperature +
+                '}';
+    }
 }

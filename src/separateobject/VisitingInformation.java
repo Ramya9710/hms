@@ -48,4 +48,15 @@ public class VisitingInformation {
     public void setFollowUpNeed(Boolean followUpNeed) {
         this.followUpNeed = followUpNeed;
     }
+
+    @Override
+    public String toString() {
+        return "VisitingInformation{" +
+                "visitId=" + visitId +
+                ", appointment=" + appointment +
+                ", doctorRecommendation='" + doctorRecommendation + '\'' +
+                ", listOfMedicine=" + listOfMedicine +
+                ", followUpNeed=" + followUpNeed +
+                '}';
+    }
 }
