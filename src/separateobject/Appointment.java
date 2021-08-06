@@ -1,7 +1,7 @@
 package separateobject;
 
+import javax.xml.bind.DataBindingException;
 import java.util.Date;
-import java.util.List;
 
 public class Appointment {
     private Long appointmentId;

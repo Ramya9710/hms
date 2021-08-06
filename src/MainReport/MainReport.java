@@ -45,8 +45,7 @@ public class MainReport {
 
     private static List<Medicine> medicineList;
     private static Medicine medicine;
-    private static Object AppointmentBusinessObject;
-    private static UpdateCheck Calender;
+
 
     private Date date = new Date();
 
@@ -113,7 +112,7 @@ public class MainReport {
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
-        appointmentOne.setFirstVisit(false);
+        appointmentOne.setFirstVisit(true);
         appointmentOne.setPurposeOfVisit("Headaches");
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
@@ -123,7 +122,7 @@ public class MainReport {
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
         appointmentTwo.setPatients(patientsDetails.get(2l));
-        appointmentTwo.setFirstVisit(false);
+        appointmentTwo.setFirstVisit(true);
         appointmentTwo.setPurposeOfVisit("Memory Loss");
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
@@ -173,7 +172,7 @@ public class MainReport {
         appointmentSeven.setAppointmentId(7l);
         appointmentSeven.setDoctor(doctorDetails.get(2l));
         appointmentSeven.setPatients(patientsDetails.get(2l));
-        appointmentSeven.setFirstVisit(false);
+        appointmentSeven.setFirstVisit(true);
         appointmentSeven.setPurposeOfVisit("Memory Loss");
         appointmentSeven.setBp(125.00);
         appointmentSeven.setTemperature(36.05);
@@ -288,20 +287,28 @@ public class MainReport {
 
     public static void main(String[] args) {
         populateVisitingInformation();
+        try {
+            AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
+            Appointment appointment = businessObject.createAppointment(12l, patientsDetails, appointmentDetails,
+                    " headache ", 2l, doctorDetails);
+            appointmentDetails.put(appointment.getAppointmentId(), appointment);
+            System.out.println("New appointment details :" + appointment.getAppointmentId()  + appointment.getDoctor()
+                    + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
+            System.out.println("Patient appointment details :" + appointment.getFirstVisit());
 
-        AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
-        Appointment appointment = businessObject.createAppointment(7l, patientsDetails, appointmentDetails,
-                " headache ", 2l, doctorDetails);
-        System.out.println(appointmentDetails.put(appointment.getAppointmentId(), appointment));
+            VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
+            visitingInformationBO.createVisitingInformation(appointment.getAppointmentId(),
+                    appointmentDetails,
+                    medicineList,
+                    "take medicine regularly and take rest",
+                    true,
+                    visitingInformationDetails);
+            System.out.println("patient visiting details is :" + appointment.getFirstVisit());
 
-        VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-       /* VisitingInformation visitingInformation = visitingInformationBO.createVisitingInformationBO(appointment.getAppointmentId(),
-                appointmentDetails,
-                getMedicine(),
-                "take medicine regularly and take rest",
-                true,
-                visitingInformationDetails);
-        System.out.println(visitingInformationDetails.put(visitingInformation.getVisitId(), visitingInformation));*/
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
 
     }
 }

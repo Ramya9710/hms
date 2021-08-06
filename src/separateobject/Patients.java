@@ -69,4 +69,7 @@ public class Patients {
                 ", patientPhoneNumber='" + patientPhoneNumber + '\'' +
                 '}';
     }
+
+    public void put(long patientId, Patients patients) {
+    }
 }
