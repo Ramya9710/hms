@@ -32,6 +32,7 @@ public class AppointmentBusinessObject {
         Long appointmentNewId = 0l;
         Appointment appointment ;
 
+
         while (itr.hasNext()) {
             appointmentNewId = itr.next();
             appointment = appointmentMap.get(appointmentNewId);

@@ -18,30 +18,36 @@ public class VisitingInformationBO {
 
     public void createVisitingInformation(Long appointmentId, Map<Long, Appointment> appointments,
                                           List<Medicine> medicineList, String doctorRecommendation, Boolean followUpNeed,
-                                          Map<Long, VisitingInformation> visitingInformationMap) {
+                                          Map<Long, VisitingInformation> visits) {
         //visitingInformation created
         VisitingInformation visitingInformation = new VisitingInformation();
         visitingInformation.setAppointment(appointments.get(appointmentId));
-        visitingInformation.setVisitId(VisitingInformationBO.generateNewId(new ArrayList<>(visitingInformationMap.keySet())));
+        visitingInformation.setVisitId(VisitingInformationBO.generateNewId(new ArrayList<>(visits.keySet())));
         visitingInformation.setListOfMedicine(medicineList);
         visitingInformation.setFollowUpNeed(followUpNeed);
         visitingInformation.setDoctorRecommendation(doctorRecommendation);
 
         Appointment appointment = appointments.get(appointmentId);
         Patients patients = appointment.getPatients();
+        patients.setPatientId(generateNewId(new ArrayList<>(visits.keySet())));
+        patients.setPatientName("pooja");
+        patients.setPatientType("out patient");
+        patients.setPatientAddress("chennai");
 
         //A patient has more than 3 visits update the patient type as InPatient.
-        boolean isInPatientLogic = isInPatientLogic(visitingInformationMap,patients.getPatientId());
-            patients.put(patients.getPatientId(), patients);
+        boolean isInPatientLogic = isInPatientLogic(visits, patients.getPatientId());
 
-        visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
+        isInPatientLogic(visits, patients.getPatientId());
+        patients.put(patients.getPatientId(), patients);
+        visits.put(visitingInformation.getVisitId(), visitingInformation);
 
     }
 
     private boolean isInPatientLogic(Map<Long, VisitingInformation> visits, Long patientID) {
         int noOfVisit = 0;
+        isInPatientLogic(visits, patientID);
 
-        VisitingInformation visitingInformation ;
+        VisitingInformation visitingInformation;
 
         Iterator<Long> iterator = visits.keySet().iterator();
         while (iterator.hasNext()) {
@@ -53,6 +59,7 @@ public class VisitingInformationBO {
                     return true;
                 }
             }
+
         }
         return false;
     }

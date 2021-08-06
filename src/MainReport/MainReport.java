@@ -1,6 +1,5 @@
 package MainReport;
 
-import com.oracle.deploy.update.UpdateCheck;
 import separateobject.*;
 
 import java.util.*;
@@ -112,7 +111,7 @@ public class MainReport {
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
-        appointmentOne.setFirstVisit(true);
+        appointmentOne.setFirstVisit(false);
         appointmentOne.setPurposeOfVisit("Headaches");
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
@@ -122,7 +121,7 @@ public class MainReport {
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
         appointmentTwo.setPatients(patientsDetails.get(2l));
-        appointmentTwo.setFirstVisit(true);
+        appointmentTwo.setFirstVisit(false);
         appointmentTwo.setPurposeOfVisit("Memory Loss");
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
@@ -255,7 +254,7 @@ public class MainReport {
         return medicineList;
     }
 
-    public static void populateVisitingInformation() {
+    public static Map<Long, VisitingInformation> populateVisitingInformation() {
 
         nervesCheckUp = new VisitingInformation();
         nervesCheckUp.setVisitId(01l);
@@ -283,6 +282,7 @@ public class MainReport {
         visitingInformationDetails.put(mentalCheckUp.getVisitId(), mentalCheckUp);
         visitingInformationDetails.put(heartCheckUp.getVisitId(), heartCheckUp);
 
+        return null;
     }
 
     public static void main(String[] args) {
@@ -292,23 +292,22 @@ public class MainReport {
             Appointment appointment = businessObject.createAppointment(12l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
-            System.out.println("New appointment details :" + appointment.getAppointmentId()  + appointment.getDoctor()
+            System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
                     + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
             System.out.println("Patient appointment details :" + appointment.getFirstVisit());
 
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             visitingInformationBO.createVisitingInformation(appointment.getAppointmentId(),
                     appointmentDetails,
-                    medicineList,
+                    getMedicine(),
                     "take medicine regularly and take rest",
                     true,
                     visitingInformationDetails);
-            System.out.println("patient visiting details is :" + appointment.getFirstVisit());
-
+            VisitingInformation visitingInformation = null;
+            System.out.println("patient visit one time :" + visitingInformation.getAppointment().getFirstVisit());
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
-
     }
 }
