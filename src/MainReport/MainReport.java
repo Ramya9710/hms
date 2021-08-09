@@ -31,7 +31,6 @@ public class MainReport {
     private static Appointment appointmentEight;
     private static Appointment appointmentNine;
 
-
     private static Map<Long, Medicine> medicineDetails;
     private static Medicine neurologistMedicine;
     private static Medicine psychiatristMedicine;
@@ -45,8 +44,9 @@ public class MainReport {
     private static List<Medicine> medicineList;
     private static Medicine medicine;
 
-
     private Date date = new Date();
+
+    private  static Bed bed;
 
     static {
 
@@ -120,7 +120,7 @@ public class MainReport {
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
-        appointmentTwo.setPatients(patientsDetails.get(2l));
+        appointmentTwo.setPatients(patientsDetails.get(1l));
         appointmentTwo.setFirstVisit(false);
         appointmentTwo.setPurposeOfVisit("Memory Loss");
         appointmentTwo.setBp(115.00);
@@ -130,7 +130,7 @@ public class MainReport {
         appointmentThree = new Appointment();
         appointmentThree.setAppointmentId(3l);
         appointmentThree.setDoctor(doctorDetails.get(3l));
-        appointmentThree.setPatients(patientsDetails.get(3l));
+        appointmentThree.setPatients(patientsDetails.get(1l));
         appointmentThree.setFirstVisit(true);
         appointmentThree.setPurposeOfVisit("Chest Pain");
         appointmentThree.setBp(136.15);
@@ -235,6 +235,16 @@ public class MainReport {
         medicineDetails.put(psychiatristMedicine.getMedicineId(), psychiatristMedicine);
         medicineDetails.put(cardiologistMedicine.getMedicineId(), cardiologistMedicine);
 
+
+        bed =new Bed();
+        bed.setBedId(1l);
+        bed.setBedType("Special type");
+        bed.setRoomName("Special ward");
+        Map<Long, Bed> bedFacilityMap = new HashMap<>();
+        bedFacilityMap.put(bed.getBedId(),bed);
+        bedFacilityMap.put(Long.valueOf(bed.getBedType()),bed);
+        bedFacilityMap.put(Long.valueOf(bed.getBedType()),bed);
+
     }
 
     public static List<Medicine> getMedicine() {
@@ -287,24 +297,29 @@ public class MainReport {
 
     public static void main(String[] args) {
         populateVisitingInformation();
+        AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
+        VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
+        BedObject bedObject = new BedObject();
+
         try {
-            AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
-            Appointment appointment = businessObject.createAppointment(12l, patientsDetails, appointmentDetails,
+            Appointment appointment = businessObject.createAppointment(1l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
             System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
                     + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
             System.out.println("Patient appointment details :" + appointment.getFirstVisit());
 
-            VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-            visitingInformationBO.createVisitingInformation(appointment.getAppointmentId(),
+            visitingInformationBO.createVisitingInformation(9l,
                     appointmentDetails,
                     getMedicine(),
                     "take medicine regularly and take rest",
                     true,
-                    visitingInformationDetails);
-            VisitingInformation visitingInformation = null;
-            System.out.println("patient visit one time :" + visitingInformation.getAppointment().getFirstVisit());
+                    visitingInformationDetails,patientsDetails);
+            System.out.println("patient visiting details:" + appointment.getFirstVisit());
+
+            bedObject.creteBedFacility(bed,1l);
+
+
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

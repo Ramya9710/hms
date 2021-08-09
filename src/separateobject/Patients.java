@@ -70,6 +70,13 @@ public class Patients {
                 '}';
     }
 
-    public void put(long patientId, Patients patients) {
+
+    public void put(long patientId, Patients patients1) {
+        Patients patients = new Patients();
+        patients.setPatientName("Durga");
+        patients.setPatientId(patientId);
+        patients.setPatientAddress("chennai");
+        patients.setDate_of_birth(new Date());
+        patients.setPatientPhoneNumber("9854512120");
     }
 }

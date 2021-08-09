@@ -7,7 +7,7 @@ import separateobject.VisitingInformation;
 
 import java.util.*;
 
-public class VisitingInformationBO {
+public class VisitingInformationBO<visit> {
     public static Long generateNewId(List<Long> VisitId) {
         Long visitNewId = 0l;
         Collections.sort(VisitId);
@@ -18,51 +18,52 @@ public class VisitingInformationBO {
 
     public void createVisitingInformation(Long appointmentId, Map<Long, Appointment> appointments,
                                           List<Medicine> medicineList, String doctorRecommendation, Boolean followUpNeed,
-                                          Map<Long, VisitingInformation> visits) {
+                                          Map<Long, VisitingInformation> visits, Map<Long, Patients> patientsDetails) {
         //visitingInformation created
         VisitingInformation visitingInformation = new VisitingInformation();
+        Patients patients = new Patients();
+
+        Appointment appointment = new Appointment();
+        appointment.getPatients();
+        if (appointments.containsKey(appointmentId)) {
+            appointment = appointments.get(appointmentId);
+            patients = appointment.getPatients();
+        }
         visitingInformation.setAppointment(appointments.get(appointmentId));
         visitingInformation.setVisitId(VisitingInformationBO.generateNewId(new ArrayList<>(visits.keySet())));
         visitingInformation.setListOfMedicine(medicineList);
         visitingInformation.setFollowUpNeed(followUpNeed);
         visitingInformation.setDoctorRecommendation(doctorRecommendation);
 
-        Appointment appointment = appointments.get(appointmentId);
-        Patients patients = appointment.getPatients();
-        patients.setPatientId(generateNewId(new ArrayList<>(visits.keySet())));
-        patients.setPatientName("pooja");
-        patients.setPatientType("out patient");
-        patients.setPatientAddress("chennai");
-
         //A patient has more than 3 visits update the patient type as InPatient.
-        boolean isInPatientLogic = isInPatientLogic(visits, patients.getPatientId());
-
-        isInPatientLogic(visits, patients.getPatientId());
-        patients.put(patients.getPatientId(), patients);
+        Boolean patientIsIP = isIpPatient(visits, patients.getPatientId());
+        patientIsIP.equals(true);
+        patientsDetails.put(patients.getPatientId(), patients);
         visits.put(visitingInformation.getVisitId(), visitingInformation);
 
     }
 
-    private boolean isInPatientLogic(Map<Long, VisitingInformation> visits, Long patientID) {
+    public boolean isIpPatient(Map<Long, VisitingInformation> visits, Long patientID) {
         int noOfVisit = 0;
-        isInPatientLogic(visits, patientID);
-
         VisitingInformation visitingInformation;
+        Patients patients = new Patients();
 
         Iterator<Long> iterator = visits.keySet().iterator();
         while (iterator.hasNext()) {
             visitingInformation = visits.get(iterator.next());
-
             if (visitingInformation.getAppointment().getPatients().getPatientId() == patientID) {
                 noOfVisit++;
-                if (noOfVisit >= 3) {
-                    return true;
-                }
             }
-
+        }
+        if (noOfVisit >= 3) {
+            System.out.println(noOfVisit);
+            patients.setPatientType("IP");
+            System.out.println("The patient type is IP or OP:" + patients.getPatientType());
+            return true;
         }
         return false;
     }
+
 }
 
 

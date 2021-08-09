@@ -17,10 +17,15 @@ public class AppointmentBusinessObject {
     }
 
     public Appointment createAppointment(Long patientId, Map<Long, Patients> patientsMap,
-                                     Map<Long, Appointment> appointmentMap,
-                                     String purposeOfVisit, Long doctorId, Map<Long, Doctor> doctorMap) {
+                                         Map<Long, Appointment> appointmentMap,
+                                         String purposeOfVisit, Long doctorId, Map<Long, Doctor> doctorMap) {
 
         Appointment appointmentNew = new Appointment();
+        if (patientsMap != null && patientsMap.containsKey(patientId)) {
+            appointmentNew.setPatients(patientsMap.get(patientId));
+        } else
+            patientsMap.put(patientId, createAppointment(patientId));
+
         appointmentNew.setPatients(patientsMap.get(patientId));
         appointmentNew.setDoctor(doctorMap.get(doctorId));
         appointmentNew.setPurposeOfVisit(purposeOfVisit);
@@ -30,7 +35,7 @@ public class AppointmentBusinessObject {
 
         Iterator<Long> itr = appointmentMap.keySet().iterator();
         Long appointmentNewId = 0l;
-        Appointment appointment ;
+        Appointment appointment;
 
 
         while (itr.hasNext()) {
@@ -44,6 +49,17 @@ public class AppointmentBusinessObject {
             }
         }
         return appointmentNew;
+    }
+
+    private Patients createAppointment(Long patientId) {
+        Patients patients = new Patients();
+        patients.setPatientName("Durga");
+        patients.setPatientId(patientId);
+        patients.setPatientAddress("chennai");
+        patients.setDate_of_birth(new Date());
+        patients.setPatientPhoneNumber("9854512120");
+        patients.setPatientType("IP");
+        return patients;
     }
 
 
