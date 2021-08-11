@@ -46,7 +46,14 @@ public class MainReport {
 
     private Date date = new Date();
 
-    private  static Bed bed;
+    private static Map<Long, Bed> bedMap;
+    private static Bed bedNoOne;
+    private static Bed bedNoTwo;
+
+    private static Map<Long, IpObject> inPatientObjectMap;
+    private static IpObject ipObjectOne;
+    private static IpObject ipObjectTwo;
+
 
     static {
 
@@ -235,15 +242,33 @@ public class MainReport {
         medicineDetails.put(psychiatristMedicine.getMedicineId(), psychiatristMedicine);
         medicineDetails.put(cardiologistMedicine.getMedicineId(), cardiologistMedicine);
 
+        bedNoOne = new Bed();
+        bedNoOne.setBedId(1l);
+        bedNoOne.setBedType("superBed");
+        bedNoOne.setRoomName("specialWard");
 
-        bed =new Bed();
-        bed.setBedId(1l);
-        bed.setBedType("Special type");
-        bed.setRoomName("Special ward");
-        Map<Long, Bed> bedFacilityMap = new HashMap<>();
-        bedFacilityMap.put(bed.getBedId(),bed);
-        bedFacilityMap.put(Long.valueOf(bed.getBedType()),bed);
-        bedFacilityMap.put(Long.valueOf(bed.getBedType()),bed);
+        bedNoTwo = new Bed();
+        bedNoTwo.setBedId(1l);
+        bedNoTwo.setBedType("superBed");
+        bedNoTwo.setRoomName("specialWard");
+
+        bedMap = new HashMap<>();
+        bedMap.put(bedNoOne.getBedId(), bedNoOne);
+        bedMap.put(bedNoTwo.getBedId(), bedNoTwo);
+
+        ipObjectOne = new IpObject();
+        ipObjectOne.setPatients(patientsDetails.get(1l));
+        ipObjectOne.setBed(bedMap.get(1l));
+        ipObjectOne.setIpIdentificationNumber(1l);
+
+        ipObjectTwo = new IpObject();
+        ipObjectTwo.setPatients(patientsDetails.get(2l));
+        ipObjectTwo.setBed(bedMap.get(2l));
+        ipObjectTwo.setIpIdentificationNumber(2l);
+
+        inPatientObjectMap = new HashMap<Long, IpObject>();
+        inPatientObjectMap.put(ipObjectOne.getIpIdentificationNumber(),ipObjectOne);
+        inPatientObjectMap.put(ipObjectTwo.getIpIdentificationNumber(),ipObjectTwo);
 
     }
 
@@ -299,7 +324,7 @@ public class MainReport {
         populateVisitingInformation();
         AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
         VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-        BedObject bedObject = new BedObject();
+        InPatientObject inPatientObject = new InPatientObject();
 
         try {
             Appointment appointment = businessObject.createAppointment(1l, patientsDetails, appointmentDetails,
@@ -314,13 +339,11 @@ public class MainReport {
                     getMedicine(),
                     "take medicine regularly and take rest",
                     true,
-                    visitingInformationDetails,patientsDetails);
+                    visitingInformationDetails, patientsDetails);
             System.out.println("patient visiting details:" + appointment.getFirstVisit());
 
-            bedObject.creteBedFacility(bed,1l);
-
-
-
+            inPatientObject.createIp(1l,patientsDetails,bedMap,1l,1l);
+            System.out.println("Inpatient visiting details:" + inPatientObject);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

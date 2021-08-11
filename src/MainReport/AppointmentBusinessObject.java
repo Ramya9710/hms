@@ -30,6 +30,7 @@ public class AppointmentBusinessObject {
         appointmentNew.setDoctor(doctorMap.get(doctorId));
         appointmentNew.setPurposeOfVisit(purposeOfVisit);
         appointmentNew.setAppointmentId(generateNewId(new ArrayList<>(appointmentMap.keySet())));
+        appointmentNew.setFirstVisit(true);
 
         appointmentMap.put(appointmentNew.getAppointmentId(), appointmentNew);
 
