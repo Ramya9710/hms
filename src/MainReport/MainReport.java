@@ -327,14 +327,14 @@ public class MainReport {
         InPatientObject inPatientObject = new InPatientObject();
 
         try {
-            Appointment appointment = businessObject.createAppointment(1l, patientsDetails, appointmentDetails,
+            Appointment appointment = businessObject.createAppointment(20l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
             System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
                     + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
             System.out.println("Patient appointment details :" + appointment.getFirstVisit());
 
-            visitingInformationBO.createVisitingInformation(9l,
+            visitingInformationBO.createVisitingInformation(10l,
                     appointmentDetails,
                     getMedicine(),
                     "take medicine regularly and take rest",
@@ -342,8 +342,8 @@ public class MainReport {
                     visitingInformationDetails, patientsDetails);
             System.out.println("patient visiting details:" + appointment.getFirstVisit());
 
-            inPatientObject.createIp(1l,patientsDetails,bedMap,1l,1l);
-            System.out.println("Inpatient visiting details:" + inPatientObject);
+            inPatientObject.createIp(20l,patientsDetails,bedMap,20l,1l);
+            System.out.println("Inpatient visiting details:" + ipObjectOne.getPatients().getPatientType() + ipObjectTwo.getPatients().getPatientType());
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
