@@ -4,6 +4,7 @@ import separateobject.Appointment;
 import separateobject.Medicine;
 import separateobject.Patients;
 import separateobject.VisitingInformation;
+import utility.FindLatestNumberUtil;
 
 import java.util.*;
 
@@ -21,6 +22,8 @@ public class VisitingInformationBO {
                                           Map<Long, VisitingInformation> visits, Map<Long, Patients> patientsDetails) {
         //visitingInformation created
         VisitingInformation visitingInformation = new VisitingInformation();
+        visitingInformation.setVisitId(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
+
         Patients patients = new Patients();
 
         Appointment appointment = null;

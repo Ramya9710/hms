@@ -50,9 +50,9 @@ public class MainReport {
     private static Bed bedNoOne;
     private static Bed bedNoTwo;
 
-    private static Map<Long, IpObject> inPatientObjectMap;
-    private static IpObject ipObjectOne;
-    private static IpObject ipObjectTwo;
+    private static Map<Long, InPatientObject> inPatientObjectMap;
+    private static InPatientObject inPatientObjectOne;
+    private static InPatientObject inPatientObjectTwo;
 
 
     static {
@@ -256,19 +256,19 @@ public class MainReport {
         bedMap.put(bedNoOne.getBedId(), bedNoOne);
         bedMap.put(bedNoTwo.getBedId(), bedNoTwo);
 
-        ipObjectOne = new IpObject();
-        ipObjectOne.setPatients(patientsDetails.get(1l));
-        ipObjectOne.setBed(bedMap.get(1l));
-        ipObjectOne.setIpIdentificationNumber(1l);
+        inPatientObjectOne = new InPatientObject();
+        inPatientObjectOne.setPatients(patientsDetails.get(1l));
+        inPatientObjectOne.setBed(bedMap.get(1l));
+        inPatientObjectOne.setIpIdentificationNumber(1l);
 
-        ipObjectTwo = new IpObject();
-        ipObjectTwo.setPatients(patientsDetails.get(2l));
-        ipObjectTwo.setBed(bedMap.get(2l));
-        ipObjectTwo.setIpIdentificationNumber(2l);
+        inPatientObjectTwo = new InPatientObject();
+        inPatientObjectTwo.setPatients(patientsDetails.get(2l));
+        inPatientObjectTwo.setBed(bedMap.get(2l));
+        inPatientObjectTwo.setIpIdentificationNumber(2l);
 
-        inPatientObjectMap = new HashMap<Long, IpObject>();
-        inPatientObjectMap.put(ipObjectOne.getIpIdentificationNumber(),ipObjectOne);
-        inPatientObjectMap.put(ipObjectTwo.getIpIdentificationNumber(),ipObjectTwo);
+        inPatientObjectMap = new HashMap<Long, InPatientObject>();
+        inPatientObjectMap.put(inPatientObjectOne.getIpIdentificationNumber(), inPatientObjectOne);
+        inPatientObjectMap.put(inPatientObjectTwo.getIpIdentificationNumber(), inPatientObjectTwo);
 
     }
 
@@ -324,11 +324,12 @@ public class MainReport {
         populateVisitingInformation();
         try {
             AppointmentBO appointmentBO = new AppointmentBO();
+
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             Patient patient = new Patient();
             Report report = new Report();
             Appointment appointment = appointmentBO.createAppointment(20l, patientsDetails, appointmentDetails,
-                    " headache ", 2l, doctorDetails);
+                    " headache ", 25l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
             System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
                     + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
@@ -342,11 +343,11 @@ public class MainReport {
                     visitingInformationDetails, patientsDetails);
             System.out.println("patient visiting details:" + appointment.getFirstVisit());
 
-            patient.createIp(20l,patientsDetails,bedMap,20l,1l);
-            System.out.println("Inpatient visiting details:" + ipObjectOne.getPatients().getPatientType() +
-                    ipObjectTwo.getPatients().getPatientType());
+          /*  patient.createIp(20l,patientsDetails,bedMap,20l,1l);
+            System.out.println("Inpatient visiting details:" + inPatientObjectOne.getPatients().getPatientType() +
+                    inPatientObjectTwo.getPatients().getPatientType());
             report.displayListOfVisitForPatient();
-            report.displayPatientsForPatientsId(patientsDetails,1l);
+            report.displayPatientsForPatientsId(patientsDetails,1l);*/
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

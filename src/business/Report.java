@@ -64,10 +64,19 @@ public class Report {
             }
         }
     }
-    public void DisplayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long , VisitingInformation> visitingInformationMap ) {
+    public void displayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long , VisitingInformation> visitingInformationMap ) {
         visitingInformationMap = null;
         if (visitingInformationMap.isEmpty()) {
         }
+        Iterator<Long> iterator1 = visitingInformationMap.keySet().iterator();
+        while (iterator1.hasNext()) {
+            visitingInformationBOMap.get(iterator1.next());
+            if (visitingInformationMap.get(patientId) == visitingInformationMap) {
+                System.out.println("List of patients who needs follow up :" + visitingInformationMap);
+            }
+        }
+    }
+    public void displayListOfPatientByDoctorId(Map<Long,Patients> patientsMap) {
 
     }
 

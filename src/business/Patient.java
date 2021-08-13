@@ -1,7 +1,7 @@
 package business;
 
 import separateobject.Bed;
-import separateobject.IpObject;
+import separateobject.InPatientObject;
 import separateobject.Patients;
 
 import java.util.*;
@@ -26,35 +26,35 @@ public class Patient {
 
     public Bed createIp(Long patientId, Map<Long, Patients> patientsMap, Map<Long, Bed> bedMap, Long BedId,
                         Long ipIdentificationNumber) {
-        IpObject ipObject = new IpObject();
-        ipObject.setBed(bedMap.get(BedId));
-        ipObject.setPatients(patientsMap.get(patientId));
-        ipObject.setIpIdentificationNumber(1l);
+        InPatientObject inPatientObject = new InPatientObject();
+        inPatientObject.setBed(bedMap.get(BedId));
+        inPatientObject.setPatients(patientsMap.get(patientId));
+        inPatientObject.setIpIdentificationNumber(1l);
 
         if (patientsMap != null && patientsMap.containsKey(patientId)) {
-            ipObject.setPatients(patientsMap.get(patientId));
+            inPatientObject.setPatients(patientsMap.get(patientId));
         } else {
             patientsMap.put(patientId, patientsMap.get(patientId));
         }
-        ipObject.setPatients(patientsMap.get(patientId));
-        ipObject.setIpIdentificationNumber(1l);
-        ipObject.setPatients(patientsMap.get(BedId));
-        ipObject.setPatients(patientsMap.get(ipIdentificationNumber));
+        inPatientObject.setPatients(patientsMap.get(patientId));
+        inPatientObject.setIpIdentificationNumber(1l);
+        inPatientObject.setPatients(patientsMap.get(BedId));
+        inPatientObject.setPatients(patientsMap.get(ipIdentificationNumber));
 
-        bedMap.put(ipObject.getIpIdentificationNumber(), ipObject.getBed());
+        bedMap.put(inPatientObject.getIpIdentificationNumber(), inPatientObject.getBed());
 
         Iterator<Long> itr = bedMap.keySet().iterator();
         Long bedNewId = 0l;
-        IpObject ipObject1 = new IpObject();
+        InPatientObject inPatientObject1 = new InPatientObject();
 
         while (itr.hasNext()) {
             bedNewId = itr.next();
             IpObject = bedMap.get(bedNewId);
-            if (ipObject1.getIpIdentificationNumber() != null && ipObject.getPatients().getPatientType() == Bed.getBedType()) {
-                ipObject1.setBed(bedMap.get(bedNewId));
+            if (inPatientObject1.getIpIdentificationNumber() != null && inPatientObject.getPatients().getPatientType() == Bed.getBedType()) {
+                inPatientObject1.setBed(bedMap.get(bedNewId));
                 System.out.println("the patient is OP");
             } else {
-                ipObject.setBed(bedMap.get(bedNewId));
+                inPatientObject.setBed(bedMap.get(bedNewId));
                 System.out.println("the patient is IP");
             }
         }
