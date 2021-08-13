@@ -79,7 +79,7 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" +
+        return "AppointmentBO{" +
                 "appointmentId=" + appointmentId +
                 ", doctor=" + doctor +
                 ", patients=" + patients +

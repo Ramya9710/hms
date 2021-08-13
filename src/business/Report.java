@@ -1,7 +1,5 @@
-package AllReports;
+package business;
 
-import MainReport.AppointmentBusinessObject;
-import MainReport.VisitingInformationBO;
 import separateobject.Patients;
 import separateobject.VisitingInformation;
 
@@ -43,7 +41,7 @@ public class Report {
     }
 
 
-    public void displayPatientsForPatientsNameAndId(Map<Long, AppointmentBusinessObject> appointmentBusinessObjectMap) {
+    public void displayPatientsForPatientsNameAndId(Map<Long, AppointmentBO> appointmentBusinessObjectMap) {
         Map<Long, Patients> patientsMap = null;
         displayPatientsForPatientsId(patientsMap, patientId);
     }
@@ -66,5 +64,12 @@ public class Report {
             }
         }
     }
+    public void DisplayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long , VisitingInformation> visitingInformationMap ) {
+        visitingInformationMap = null;
+        if (visitingInformationMap.isEmpty()) {
+        }
+
+    }
+
 
 }

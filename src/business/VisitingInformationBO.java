@@ -1,4 +1,4 @@
-package MainReport;
+package business;
 
 import separateobject.Appointment;
 import separateobject.Medicine;
@@ -7,7 +7,7 @@ import separateobject.VisitingInformation;
 
 import java.util.*;
 
-public class VisitingInformationBO<visit> {
+public class VisitingInformationBO {
     public static Long generateNewId(List<Long> VisitId) {
         Long visitNewId = 0l;
         Collections.sort(VisitId);
@@ -23,8 +23,7 @@ public class VisitingInformationBO<visit> {
         VisitingInformation visitingInformation = new VisitingInformation();
         Patients patients = new Patients();
 
-        Appointment appointment = new Appointment();
-        appointment.getPatients();
+        Appointment appointment = null;
         if (appointments.containsKey(appointmentId)) {
             appointment = appointments.get(appointmentId);
             patients = appointment.getPatients();

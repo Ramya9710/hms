@@ -14,7 +14,7 @@ public class Bed {
     }
 
     public String getBedType() {
-        return bedType;
+        return (bedType);
     }
 
     public void setBedType(String bedType) {
@@ -22,10 +22,21 @@ public class Bed {
     }
 
     public String getRoomName() {
-        return roomName;
+        return (roomName);
     }
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
+
+    @Override
+    public String toString() {
+        return "Bed{" +
+                "bedId=" + bedId +
+                ", bedType='" + bedType + '\'' +
+                ", roomName='" + roomName + '\'' +
+                '}';
+    }
+
+
 }

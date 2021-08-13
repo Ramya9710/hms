@@ -1,4 +1,4 @@
-package MainReport;
+package business;
 
 import separateobject.*;
 
@@ -20,16 +20,16 @@ public class MainReport {
     private static Patients patientsLily;
     private static Patients patientsTommy;
 
-    private static Map<Long, Appointment> appointmentDetails;
-    private static Appointment appointmentOne;
-    private static Appointment appointmentTwo;
-    private static Appointment appointmentThree;
-    private static Appointment appointmentFour;
-    private static Appointment appointmentFive;
-    private static Appointment appointmentSix;
-    private static Appointment appointmentSeven;
-    private static Appointment appointmentEight;
-    private static Appointment appointmentNine;
+    private static Map<Long, separateobject.Appointment> appointmentDetails;
+    private static separateobject.Appointment appointmentOne;
+    private static separateobject.Appointment appointmentTwo;
+    private static separateobject.Appointment appointmentThree;
+    private static separateobject.Appointment appointmentFour;
+    private static separateobject.Appointment appointmentFive;
+    private static separateobject.Appointment appointmentSix;
+    private static separateobject.Appointment appointmentSeven;
+    private static separateobject.Appointment appointmentEight;
+    private static separateobject.Appointment appointmentNine;
 
     private static Map<Long, Medicine> medicineDetails;
     private static Medicine neurologistMedicine;
@@ -114,7 +114,7 @@ public class MainReport {
         patientsDetails.put(patientsLily.getPatientId(), patientsLily);
         patientsDetails.put(patientsTommy.getPatientId(), patientsTommy);
 
-        appointmentOne = new Appointment();
+        appointmentOne = new separateobject.Appointment();
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
@@ -124,7 +124,7 @@ public class MainReport {
         appointmentOne.setTemperature(36.01);
         appointmentOne.setDateOfVisit(new Date(2021 / 10 / 11));
 
-        appointmentTwo = new Appointment();
+        appointmentTwo = new separateobject.Appointment();
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
         appointmentTwo.setPatients(patientsDetails.get(1l));
@@ -134,7 +134,7 @@ public class MainReport {
         appointmentTwo.setTemperature(36.15);
         appointmentTwo.setDateOfVisit(new Date(2021 / 01 / 06));
 
-        appointmentThree = new Appointment();
+        appointmentThree = new separateobject.Appointment();
         appointmentThree.setAppointmentId(3l);
         appointmentThree.setDoctor(doctorDetails.get(3l));
         appointmentThree.setPatients(patientsDetails.get(1l));
@@ -144,7 +144,7 @@ public class MainReport {
         appointmentThree.setTemperature(37.2);
         appointmentThree.setDateOfVisit(new Date(2021 / 07 / 12));
 
-        appointmentFour = new Appointment();
+        appointmentFour = new separateobject.Appointment();
         appointmentFour.setAppointmentId(4l);
         appointmentFour.setDoctor(doctorDetails.get(1l));
         appointmentFour.setPatients(patientsDetails.get(1l));
@@ -154,7 +154,7 @@ public class MainReport {
         appointmentFour.setTemperature(36.02);
         appointmentFour.setDateOfVisit(new Date(2021 / 10 / 18));
 
-        appointmentFive = new Appointment();
+        appointmentFive = new separateobject.Appointment();
         appointmentFive.setAppointmentId(5l);
         appointmentFive.setDoctor(doctorDetails.get(1l));
         appointmentFive.setPatients(patientsDetails.get(1l));
@@ -164,7 +164,7 @@ public class MainReport {
         appointmentFive.setTemperature(36.01);
         appointmentFive.setDateOfVisit(new Date(2021 / 10 / 27));
 
-        appointmentSix = new Appointment();
+        appointmentSix = new separateobject.Appointment();
         appointmentSix.setAppointmentId(6l);
         appointmentSix.setDoctor(doctorDetails.get(1l));
         appointmentSix.setPatients(patientsDetails.get(1l));
@@ -174,7 +174,7 @@ public class MainReport {
         appointmentSix.setTemperature(36.01);
         appointmentSix.setDateOfVisit(new Date(2021 / 11 / 7));
 
-        appointmentSeven = new Appointment();
+        appointmentSeven = new separateobject.Appointment();
         appointmentSeven.setAppointmentId(7l);
         appointmentSeven.setDoctor(doctorDetails.get(2l));
         appointmentSeven.setPatients(patientsDetails.get(2l));
@@ -184,7 +184,7 @@ public class MainReport {
         appointmentSeven.setTemperature(36.05);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 12));
 
-        appointmentEight = new Appointment();
+        appointmentEight = new separateobject.Appointment();
         appointmentEight.setAppointmentId(8l);
         appointmentEight.setDoctor(doctorDetails.get(2l));
         appointmentEight.setPatients(patientsDetails.get(2l));
@@ -194,7 +194,7 @@ public class MainReport {
         appointmentEight.setTemperature(36.15);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 18));
 
-        appointmentNine = new Appointment();
+        appointmentNine = new separateobject.Appointment();
         appointmentNine.setAppointmentId(9l);
         appointmentNine.setDoctor(doctorDetails.get(2l));
         appointmentNine.setPatients(patientsDetails.get(2l));
@@ -322,12 +322,12 @@ public class MainReport {
 
     public static void main(String[] args) {
         populateVisitingInformation();
-        AppointmentBusinessObject businessObject = new AppointmentBusinessObject();
-        VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-        InPatientObject inPatientObject = new InPatientObject();
-
         try {
-            Appointment appointment = businessObject.createAppointment(20l, patientsDetails, appointmentDetails,
+            AppointmentBO appointmentBO = new AppointmentBO();
+            VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
+            Patient patient = new Patient();
+            Report report = new Report();
+            Appointment appointment = appointmentBO.createAppointment(20l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
             System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
@@ -342,8 +342,12 @@ public class MainReport {
                     visitingInformationDetails, patientsDetails);
             System.out.println("patient visiting details:" + appointment.getFirstVisit());
 
-            inPatientObject.createIp(20l,patientsDetails,bedMap,20l,1l);
-            System.out.println("Inpatient visiting details:" + ipObjectOne.getPatients().getPatientType() + ipObjectTwo.getPatients().getPatientType());
+            patient.createIp(20l,patientsDetails,bedMap,20l,1l);
+            System.out.println("Inpatient visiting details:" + ipObjectOne.getPatients().getPatientType() +
+                    ipObjectTwo.getPatients().getPatientType());
+            report.displayListOfVisitForPatient();
+            report.displayPatientsForPatientsId(patientsDetails,1l);
+
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
