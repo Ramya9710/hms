@@ -1,5 +1,5 @@
-package separateobject;
-import java.util.*;
+package initialprocess;
+
 public class Hospital {
 
     private Long hospitalId;

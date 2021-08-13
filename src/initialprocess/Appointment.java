@@ -1,6 +1,5 @@
-package separateobject;
+package initialprocess;
 
-import javax.xml.bind.DataBindingException;
 import java.util.Date;
 
 public class Appointment {

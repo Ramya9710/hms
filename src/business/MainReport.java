@@ -1,6 +1,6 @@
 package business;
 
-import separateobject.*;
+import initialprocess.*;
 
 import java.util.*;
 
@@ -20,16 +20,16 @@ public class MainReport {
     private static Patients patientsLily;
     private static Patients patientsTommy;
 
-    private static Map<Long, separateobject.Appointment> appointmentDetails;
-    private static separateobject.Appointment appointmentOne;
-    private static separateobject.Appointment appointmentTwo;
-    private static separateobject.Appointment appointmentThree;
-    private static separateobject.Appointment appointmentFour;
-    private static separateobject.Appointment appointmentFive;
-    private static separateobject.Appointment appointmentSix;
-    private static separateobject.Appointment appointmentSeven;
-    private static separateobject.Appointment appointmentEight;
-    private static separateobject.Appointment appointmentNine;
+    private static Map<Long, initialprocess.Appointment> appointmentDetails;
+    private static initialprocess.Appointment appointmentOne;
+    private static initialprocess.Appointment appointmentTwo;
+    private static initialprocess.Appointment appointmentThree;
+    private static initialprocess.Appointment appointmentFour;
+    private static initialprocess.Appointment appointmentFive;
+    private static initialprocess.Appointment appointmentSix;
+    private static initialprocess.Appointment appointmentSeven;
+    private static initialprocess.Appointment appointmentEight;
+    private static initialprocess.Appointment appointmentNine;
 
     private static Map<Long, Medicine> medicineDetails;
     private static Medicine neurologistMedicine;
@@ -114,7 +114,7 @@ public class MainReport {
         patientsDetails.put(patientsLily.getPatientId(), patientsLily);
         patientsDetails.put(patientsTommy.getPatientId(), patientsTommy);
 
-        appointmentOne = new separateobject.Appointment();
+        appointmentOne = new initialprocess.Appointment();
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
@@ -124,7 +124,7 @@ public class MainReport {
         appointmentOne.setTemperature(36.01);
         appointmentOne.setDateOfVisit(new Date(2021 / 10 / 11));
 
-        appointmentTwo = new separateobject.Appointment();
+        appointmentTwo = new initialprocess.Appointment();
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
         appointmentTwo.setPatients(patientsDetails.get(1l));
@@ -134,7 +134,7 @@ public class MainReport {
         appointmentTwo.setTemperature(36.15);
         appointmentTwo.setDateOfVisit(new Date(2021 / 01 / 06));
 
-        appointmentThree = new separateobject.Appointment();
+        appointmentThree = new initialprocess.Appointment();
         appointmentThree.setAppointmentId(3l);
         appointmentThree.setDoctor(doctorDetails.get(3l));
         appointmentThree.setPatients(patientsDetails.get(1l));
@@ -144,7 +144,7 @@ public class MainReport {
         appointmentThree.setTemperature(37.2);
         appointmentThree.setDateOfVisit(new Date(2021 / 07 / 12));
 
-        appointmentFour = new separateobject.Appointment();
+        appointmentFour = new initialprocess.Appointment();
         appointmentFour.setAppointmentId(4l);
         appointmentFour.setDoctor(doctorDetails.get(1l));
         appointmentFour.setPatients(patientsDetails.get(1l));
@@ -154,7 +154,7 @@ public class MainReport {
         appointmentFour.setTemperature(36.02);
         appointmentFour.setDateOfVisit(new Date(2021 / 10 / 18));
 
-        appointmentFive = new separateobject.Appointment();
+        appointmentFive = new initialprocess.Appointment();
         appointmentFive.setAppointmentId(5l);
         appointmentFive.setDoctor(doctorDetails.get(1l));
         appointmentFive.setPatients(patientsDetails.get(1l));
@@ -164,7 +164,7 @@ public class MainReport {
         appointmentFive.setTemperature(36.01);
         appointmentFive.setDateOfVisit(new Date(2021 / 10 / 27));
 
-        appointmentSix = new separateobject.Appointment();
+        appointmentSix = new initialprocess.Appointment();
         appointmentSix.setAppointmentId(6l);
         appointmentSix.setDoctor(doctorDetails.get(1l));
         appointmentSix.setPatients(patientsDetails.get(1l));
@@ -174,7 +174,7 @@ public class MainReport {
         appointmentSix.setTemperature(36.01);
         appointmentSix.setDateOfVisit(new Date(2021 / 11 / 7));
 
-        appointmentSeven = new separateobject.Appointment();
+        appointmentSeven = new initialprocess.Appointment();
         appointmentSeven.setAppointmentId(7l);
         appointmentSeven.setDoctor(doctorDetails.get(2l));
         appointmentSeven.setPatients(patientsDetails.get(2l));
@@ -184,7 +184,7 @@ public class MainReport {
         appointmentSeven.setTemperature(36.05);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 12));
 
-        appointmentEight = new separateobject.Appointment();
+        appointmentEight = new initialprocess.Appointment();
         appointmentEight.setAppointmentId(8l);
         appointmentEight.setDoctor(doctorDetails.get(2l));
         appointmentEight.setPatients(patientsDetails.get(2l));
@@ -194,7 +194,7 @@ public class MainReport {
         appointmentEight.setTemperature(36.15);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 18));
 
-        appointmentNine = new separateobject.Appointment();
+        appointmentNine = new initialprocess.Appointment();
         appointmentNine.setAppointmentId(9l);
         appointmentNine.setDoctor(doctorDetails.get(2l));
         appointmentNine.setPatients(patientsDetails.get(2l));
@@ -342,12 +342,14 @@ public class MainReport {
                     true,
                     visitingInformationDetails, patientsDetails);
             System.out.println("patient visiting details:" + appointment.getFirstVisit());
+/*
 
-          /*  patient.createIp(20l,patientsDetails,bedMap,20l,1l);
+            patient.createIp(20l,patientsDetails,bedMap,20l,1l);
             System.out.println("Inpatient visiting details:" + inPatientObjectOne.getPatients().getPatientType() +
                     inPatientObjectTwo.getPatients().getPatientType());
             report.displayListOfVisitForPatient();
-            report.displayPatientsForPatientsId(patientsDetails,1l);*/
+            report.displayPatientsForPatientsId(patientsDetails,1l);
+*/
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

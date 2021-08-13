@@ -1,8 +1,8 @@
 package business;
 
-import separateobject.Bed;
-import separateobject.InPatientObject;
-import separateobject.Patients;
+import initialprocess.Bed;
+import initialprocess.InPatientObject;
+import initialprocess.Patients;
 
 import java.util.*;
 

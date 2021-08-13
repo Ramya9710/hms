@@ -1,4 +1,4 @@
-package separateobject;
+package initialprocess;
 
 public class HospitalAddress {
     private String hospitalName;

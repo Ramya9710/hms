@@ -1,8 +1,8 @@
 package business;
 
-import separateobject.Appointment;
-import separateobject.Doctor;
-import separateobject.Patients;
+import initialprocess.Appointment;
+import initialprocess.Doctor;
+import initialprocess.Patients;
 import utility.FindLatestNumberUtil;
 
 import java.util.*;
@@ -40,7 +40,6 @@ public class AppointmentBO {
         }
         return true;
     }
-
     private Patients createPatient(Map<Long, Patients> patientsMap) {
         Patients patients = new Patients();
         patients.setPatientName("Joy");

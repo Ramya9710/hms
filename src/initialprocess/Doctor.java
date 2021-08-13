@@ -1,4 +1,4 @@
-package separateobject;
+package initialprocess;
 
 public class Doctor {
     private Long doctorId;

@@ -1,21 +1,14 @@
 package business;
 
-import separateobject.Appointment;
-import separateobject.Medicine;
-import separateobject.Patients;
-import separateobject.VisitingInformation;
+import initialprocess.Appointment;
+import initialprocess.Medicine;
+import initialprocess.Patients;
+import initialprocess.VisitingInformation;
 import utility.FindLatestNumberUtil;
 
 import java.util.*;
 
 public class VisitingInformationBO {
-    public static Long generateNewId(List<Long> VisitId) {
-        Long visitNewId = 0l;
-        Collections.sort(VisitId);
-        visitNewId = VisitId.get(VisitId.size() - 1);
-        visitNewId++;
-        return visitNewId;
-    }
 
     public void createVisitingInformation(Long appointmentId, Map<Long, Appointment> appointments,
                                           List<Medicine> medicineList, String doctorRecommendation, Boolean followUpNeed,
@@ -23,19 +16,18 @@ public class VisitingInformationBO {
         //visitingInformation created
         VisitingInformation visitingInformation = new VisitingInformation();
         visitingInformation.setVisitId(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
+        visitingInformation.setAppointment(appointments.get(appointmentId));
+        visitingInformation.setListOfMedicine(medicineList);
+        visitingInformation.setFollowUpNeed(followUpNeed);
+        visitingInformation.setDoctorRecommendation(doctorRecommendation);
 
-        Patients patients = new Patients();
-
+        Patients patients = null;
         Appointment appointment = null;
         if (appointments.containsKey(appointmentId)) {
             appointment = appointments.get(appointmentId);
             patients = appointment.getPatients();
         }
-        visitingInformation.setAppointment(appointments.get(appointmentId));
-        visitingInformation.setVisitId(VisitingInformationBO.generateNewId(new ArrayList<>(visits.keySet())));
-        visitingInformation.setListOfMedicine(medicineList);
-        visitingInformation.setFollowUpNeed(followUpNeed);
-        visitingInformation.setDoctorRecommendation(doctorRecommendation);
+
 
         //A patient has more than 3 visits update the patient type as InPatient.
         Boolean patientIsIP = isIpPatient(visits, patients.getPatientId());

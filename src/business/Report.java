@@ -1,7 +1,7 @@
 package business;
 
-import separateobject.Patients;
-import separateobject.VisitingInformation;
+import initialprocess.Patients;
+import initialprocess.VisitingInformation;
 
 import java.util.Iterator;
 import java.util.Map;

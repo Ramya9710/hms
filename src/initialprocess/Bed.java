@@ -1,4 +1,4 @@
-package separateobject;
+package initialprocess;
 
 public class Bed {
     private Long bedId;

@@ -1,6 +1,6 @@
-package separateobject;
+package initialprocess;
 
-public class IpObject {
+public class InPatientObject {
     private Long ipIdentificationNumber;
     private Patients patients;
     private Bed bed;
@@ -32,7 +32,7 @@ public class IpObject {
 
     @Override
     public String toString() {
-        return "IpObject{" +
+        return "InPatientObject{" +
                 "ipIdentificationNumber=" + ipIdentificationNumber +
                 ", patients=" + patients +
                 ", bed=" + bed +
