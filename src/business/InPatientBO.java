@@ -1,19 +1,19 @@
 package business;
 
 import initialprocess.Bed;
-import initialprocess.InPatientObject;
+import initialprocess.InPatient;
 import initialprocess.Patients;
 
 import java.util.*;
 
-public class Patient {
+public class InPatientBO {
 
     private Long ipIdentificationNumber;
     private Map<Long, Bed> bedMap;
     private Bed Bed;
     private Bed IpObject;
 
-    public Patient() {
+    public InPatientBO() {
     }
 
     public static Long generateNewId(List<Long> BedId) {
@@ -26,7 +26,7 @@ public class Patient {
 
     public Bed createIp(Long patientId, Map<Long, Patients> patientsMap, Map<Long, Bed> bedMap, Long BedId,
                         Long ipIdentificationNumber) {
-        InPatientObject inPatientObject = new InPatientObject();
+        InPatient inPatientObject = new InPatient();
         inPatientObject.setBed(bedMap.get(BedId));
         inPatientObject.setPatients(patientsMap.get(patientId));
         inPatientObject.setIpIdentificationNumber(1l);
@@ -45,7 +45,7 @@ public class Patient {
 
         Iterator<Long> itr = bedMap.keySet().iterator();
         Long bedNewId = 0l;
-        InPatientObject inPatientObject1 = new InPatientObject();
+        InPatient inPatientObject1 = new InPatient();
 
         while (itr.hasNext()) {
             bedNewId = itr.next();

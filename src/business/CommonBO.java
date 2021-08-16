@@ -1,4 +1,4 @@
-package commonprocess;
+package business;
 
 import initialprocess.Doctor;
 import initialprocess.Patients;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-public class CommonMethods {
-    private Patients createPatient(Map<Long, Patients> patientsMap) {
+public class CommonBO {
+    protected Patients createPatient(Map<Long, Patients> patientsMap) {
         Patients patients = new Patients();
         patients.setPatientName("Joy");
         patients.setPatientId(FindLatestNumberUtil.getLatestId(new ArrayList<>(patientsMap.keySet())));
@@ -21,7 +21,7 @@ public class CommonMethods {
         return patients;
     }
 
-    private Doctor createDoctor(Map<Long, Doctor> doctorMap) {
+    protected Doctor createDoctor(Map<Long, Doctor> doctorMap) {
         Doctor doctor = new Doctor();
         doctor.setDoctorId(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
         doctor.setDoctorName("Dr.Bala");

@@ -50,9 +50,9 @@ public class MainReport {
     private static Bed bedNoOne;
     private static Bed bedNoTwo;
 
-    private static Map<Long, InPatientObject> inPatientObjectMap;
-    private static InPatientObject inPatientObjectOne;
-    private static InPatientObject inPatientObjectTwo;
+    private static Map<Long, InPatient> inPatientObjectMap;
+    private static InPatient inPatientObjectOne;
+    private static InPatient inPatientObjectTwo;
 
 
     static {
@@ -91,7 +91,7 @@ public class MainReport {
         patientsRose.setPatientAddress("Coimbatore");
         patientsRose.setPatientId(1l);
         patientsRose.setPatientPhoneNumber("9525264410");
-        patientsRose.setPatientType(" out Patient ");
+        patientsRose.setPatientType(" out InPatientBO ");
 
         patientsLily = new Patients();
         patientsLily.setPatientName("Lily");
@@ -99,7 +99,7 @@ public class MainReport {
         patientsLily.setPatientAddress("Chennai");
         patientsLily.setPatientId(2l);
         patientsLily.setPatientPhoneNumber("9585124512");
-        patientsLily.setPatientName(" out Patient");
+        patientsLily.setPatientName(" out InPatientBO");
 
         patientsTommy = new Patients();
         patientsTommy.setPatientName("Tommy");
@@ -256,17 +256,17 @@ public class MainReport {
         bedMap.put(bedNoOne.getBedId(), bedNoOne);
         bedMap.put(bedNoTwo.getBedId(), bedNoTwo);
 
-        inPatientObjectOne = new InPatientObject();
+        inPatientObjectOne = new InPatient();
         inPatientObjectOne.setPatients(patientsDetails.get(1l));
         inPatientObjectOne.setBed(bedMap.get(1l));
         inPatientObjectOne.setIpIdentificationNumber(1l);
 
-        inPatientObjectTwo = new InPatientObject();
+        inPatientObjectTwo = new InPatient();
         inPatientObjectTwo.setPatients(patientsDetails.get(2l));
         inPatientObjectTwo.setBed(bedMap.get(2l));
         inPatientObjectTwo.setIpIdentificationNumber(2l);
 
-        inPatientObjectMap = new HashMap<Long, InPatientObject>();
+        inPatientObjectMap = new HashMap<Long, InPatient>();
         inPatientObjectMap.put(inPatientObjectOne.getIpIdentificationNumber(), inPatientObjectOne);
         inPatientObjectMap.put(inPatientObjectTwo.getIpIdentificationNumber(), inPatientObjectTwo);
 
@@ -326,30 +326,25 @@ public class MainReport {
             AppointmentBO appointmentBO = new AppointmentBO();
 
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-            Patient patient = new Patient();
+            InPatientBO patient = new InPatientBO();
             Report report = new Report();
             Appointment appointment = appointmentBO.createAppointment(20l, patientsDetails, appointmentDetails,
                     " headache ", 25l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
             System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
                     + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
-            System.out.println("Patient appointment details :" + appointment.getFirstVisit());
+            System.out.println("InPatientBO appointment details :" + appointment.getFirstVisit());
 
-            visitingInformationBO.createVisitingInformation(10l,
-                    appointmentDetails,
-                    getMedicine(),
-                    "take medicine regularly and take rest",
-                    true,
-                    visitingInformationDetails, patientsDetails);
-            System.out.println("patient visiting details:" + appointment.getFirstVisit());
-/*
+            VisitingInformation visitingInformation = visitingInformationBO.createVisit(5l,patientsDetails,5l,visitingInformationDetails,
+                    5l,appointmentDetails,5l,medicineList);
+            System.out.println("visiting details:" + visitingInformation.getVisitId());
+
 
             patient.createIp(20l,patientsDetails,bedMap,20l,1l);
             System.out.println("Inpatient visiting details:" + inPatientObjectOne.getPatients().getPatientType() +
                     inPatientObjectTwo.getPatients().getPatientType());
             report.displayListOfVisitForPatient();
             report.displayPatientsForPatientsId(patientsDetails,1l);
-*/
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
