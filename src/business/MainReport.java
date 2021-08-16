@@ -20,16 +20,16 @@ public class MainReport {
     private static Patients patientsLily;
     private static Patients patientsTommy;
 
-    private static Map<Long, initialprocess.Appointment> appointmentDetails;
-    private static initialprocess.Appointment appointmentOne;
-    private static initialprocess.Appointment appointmentTwo;
-    private static initialprocess.Appointment appointmentThree;
-    private static initialprocess.Appointment appointmentFour;
-    private static initialprocess.Appointment appointmentFive;
-    private static initialprocess.Appointment appointmentSix;
-    private static initialprocess.Appointment appointmentSeven;
-    private static initialprocess.Appointment appointmentEight;
-    private static initialprocess.Appointment appointmentNine;
+    private static Map<Long, Appointment> appointmentDetails;
+    private static Appointment appointmentOne;
+    private static Appointment appointmentTwo;
+    private static Appointment appointmentThree;
+    private static Appointment appointmentFour;
+    private static Appointment appointmentFive;
+    private static Appointment appointmentSix;
+    private static Appointment appointmentSeven;
+    private static Appointment appointmentEight;
+    private static Appointment appointmentNine;
 
     private static Map<Long, Medicine> medicineDetails;
     private static Medicine neurologistMedicine;
@@ -50,9 +50,8 @@ public class MainReport {
     private static Bed bedNoOne;
     private static Bed bedNoTwo;
 
-    private static Map<Long, InPatient> inPatientObjectMap;
-    private static InPatient inPatientObjectOne;
-    private static InPatient inPatientObjectTwo;
+    private static Map<Long, InPatient> inPatientMap;
+
 
 
     static {
@@ -256,19 +255,7 @@ public class MainReport {
         bedMap.put(bedNoOne.getBedId(), bedNoOne);
         bedMap.put(bedNoTwo.getBedId(), bedNoTwo);
 
-        inPatientObjectOne = new InPatient();
-        inPatientObjectOne.setPatients(patientsDetails.get(1l));
-        inPatientObjectOne.setBed(bedMap.get(1l));
-        inPatientObjectOne.setIpIdentificationNumber(1l);
-
-        inPatientObjectTwo = new InPatient();
-        inPatientObjectTwo.setPatients(patientsDetails.get(2l));
-        inPatientObjectTwo.setBed(bedMap.get(2l));
-        inPatientObjectTwo.setIpIdentificationNumber(2l);
-
-        inPatientObjectMap = new HashMap<Long, InPatient>();
-        inPatientObjectMap.put(inPatientObjectOne.getIpIdentificationNumber(), inPatientObjectOne);
-        inPatientObjectMap.put(inPatientObjectTwo.getIpIdentificationNumber(), inPatientObjectTwo);
+        inPatientMap = new HashMap<>();
 
     }
 
@@ -337,14 +324,15 @@ public class MainReport {
 
             VisitingInformation visitingInformation = visitingInformationBO.createVisit(5l,patientsDetails,5l,visitingInformationDetails,
                     5l,appointmentDetails,5l,medicineList);
-            System.out.println("visiting details:" + visitingInformation.getVisitId());
+            System.out.println("visiting details:" + visitingInformation.getVisitId() + visitingInformation.getDoctorRecommendation() +
+                    visitingInformation.getFollowUpNeed() + visitingInformation.getAppointment() + visitingInformation.getListOfMedicine());
+            System.out.println("patient is already visits " + visitingInformationBO.isIpPatient(visitingInformationDetails,2l));
 
-
-            patient.createIp(20l,patientsDetails,bedMap,20l,1l,inPatientObjectMap);
+          /*  patient.createIp(20l,patientsDetails,bedMap,20l,1l,inPatientObjectMap);
             System.out.println("Inpatient visiting details:" + inPatientObjectOne.getPatients().getPatientType() +
                     inPatientObjectTwo.getPatients().getPatientType());
             report.displayListOfVisitForPatient();
-            report.displayPatientsForPatientsId(patientsDetails,1l);
+            report.displayPatientsForPatientsId(patientsDetails,1l);*/
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
