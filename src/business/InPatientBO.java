@@ -29,7 +29,6 @@ public class InPatientBO {
             throw new Exception("");
         }
         bedMap.put(inPatientObject.getIpIdentificationNumber(), inPatientObject.getBed());
-
-
     }
 }
+
