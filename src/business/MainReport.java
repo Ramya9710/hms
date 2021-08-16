@@ -340,7 +340,7 @@ public class MainReport {
             System.out.println("visiting details:" + visitingInformation.getVisitId());
 
 
-            patient.createIp(20l,patientsDetails,bedMap,20l,1l);
+            patient.createIp(20l,patientsDetails,bedMap,20l,1l,inPatientObjectMap);
             System.out.println("Inpatient visiting details:" + inPatientObjectOne.getPatients().getPatientType() +
                     inPatientObjectTwo.getPatients().getPatientType());
             report.displayListOfVisitForPatient();

@@ -21,7 +21,6 @@ public class VisitingInformationBO  {
             throw new Exception("visit Id is null");
         if (doctorId == null)
             throw new Exception("doctor Id is null");
-
         Patients patients = null;
         Appointment appointment;
 
@@ -48,7 +47,6 @@ public class VisitingInformationBO  {
 
         return visitingInformation;
     }
-
     public boolean isIpPatient(Map<Long, VisitingInformation> visitingInformationMap, Long patientId) {
         int noOfVisit = 0;
         VisitingInformation visitingInformation;
@@ -65,7 +63,7 @@ public class VisitingInformationBO  {
             System.out.println(noOfVisit);
             patients.setPatientType("IP");
             System.out.println("InPatientBO type is IP or OP :" + patients.getPatientType());
-            return true;
+
         }
         return false;
     }
