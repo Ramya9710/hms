@@ -42,6 +42,7 @@ public class VisitingInformationBO  {
         patientsMap.put(patients.getPatientId(), patients);
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
 
+
         return visitingInformation;
     }
     public boolean isIpPatient(Map<Long, VisitingInformation> visitingInformationMap, Long patientId) {

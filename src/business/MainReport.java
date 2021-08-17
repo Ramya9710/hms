@@ -53,7 +53,6 @@ public class MainReport {
     private static Map<Long, InPatient> inPatientMap;
 
 
-
     static {
 
         Hospital hospital = new Hospital();
@@ -311,28 +310,27 @@ public class MainReport {
         populateVisitingInformation();
         try {
             AppointmentBO appointmentBO = new AppointmentBO();
-
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-            InPatientBO patient = new InPatientBO();
-            Report report = new Report();
+            InPatientBO inPatientBO = new InPatientBO();
+
             Appointment appointment = appointmentBO.createAppointment(20l, patientsDetails, appointmentDetails,
                     " headache ", 25l, doctorDetails);
             appointmentDetails.put(appointment.getAppointmentId(), appointment);
-            System.out.println("New appointment details :" + appointment.getAppointmentId() + appointment.getDoctor()
-                    + appointment.getFirstVisit() + appointment.getPurposeOfVisit() + appointment.getPatients());
-            System.out.println("InPatientBO appointment details :" + appointment.getFirstVisit());
+            System.out.println("Appointment Details :" + appointment.getAppointmentId() + appointment.getPatients() + appointment.getPurposeOfVisit()
+                    + appointment.getDoctor() + appointment.getDateOfVisit() + appointment.getBp() + appointment.getFirstVisit() + appointment.getTemperature());
 
-            VisitingInformation visitingInformation = visitingInformationBO.createVisit(5l,patientsDetails,5l,visitingInformationDetails,
-                    5l,appointmentDetails,5l,medicineList);
-            System.out.println("visiting details:" + visitingInformation.getVisitId() + visitingInformation.getDoctorRecommendation() +
-                    visitingInformation.getFollowUpNeed() + visitingInformation.getAppointment() + visitingInformation.getListOfMedicine());
-            System.out.println("patient is already visits " + visitingInformationBO.isIpPatient(visitingInformationDetails,2l));
 
-          /*  patient.createIp(20l,patientsDetails,bedMap,20l,1l,inPatientObjectMap);
-            System.out.println("Inpatient visiting details:" + inPatientObjectOne.getPatients().getPatientType() +
-                    inPatientObjectTwo.getPatients().getPatientType());
-            report.displayListOfVisitForPatient();
-            report.displayPatientsForPatientsId(patientsDetails,1l);*/
+            VisitingInformation visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
+                    5l, appointmentDetails, 5l, medicineList);
+            System.out.println("Visiting details for InPatient :" + visitingInformation.getAppointment() +
+                    visitingInformation.getVisitId() + visitingInformation.getListOfMedicine() + visitingInformation.getDoctorRecommendation()
+                    + visitingInformation.getFollowUpNeed());
+            System.out.println("patient is IP or Not:" + visitingInformationBO.isIpPatient(visitingInformationDetails, 1l));
+
+            InPatient inPatient = inPatientBO.createIp(patientsDetails, inPatientMap, bedMap);
+            System.out.println("patient is Ip allocate bed :" + inPatientBO.allocateBedForIpPatients(inPatientMap, patientsDetails, bedMap, 1l));
+            System.out.println("InPatient detail:" + inPatient.getPatients() + inPatient.getBed() + inPatient.getIpIdentificationNumber());
+
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

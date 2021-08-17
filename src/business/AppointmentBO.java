@@ -18,8 +18,6 @@ public class AppointmentBO extends CommonBO {
         appointment.setAppointmentId(FindLatestNumberUtil.getLatestId(new ArrayList<>(appointmentMap.keySet())));
         appointment.setDateOfVisit(new Date());
 
-
-
         if (doctorMap != null && doctorMap.containsKey(doctorId)) {
             appointment.setDoctor(doctorMap.get(doctorId));
         } else
@@ -31,7 +29,6 @@ public class AppointmentBO extends CommonBO {
             appointment.setPatients(createPatient(patientsMap));
 
         appointmentMap.put(appointment.getAppointmentId(), appointment);
-
         appointment.setFirstVisit(verifyPatientAlreadyVisited(appointmentMap, patientId));
         return appointment;
     }
