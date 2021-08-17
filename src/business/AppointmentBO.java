@@ -14,22 +14,25 @@ public class AppointmentBO extends CommonBO {
                                          String purposeOfVisit, Long doctorId, Map<Long, Doctor> doctorMap) {
 
         Appointment appointment = new Appointment();
-        appointment.setPurposeOfVisit(purposeOfVisit);
-        appointment.setAppointmentId(FindLatestNumberUtil.getLatestId(new ArrayList<>(appointmentMap.keySet())));
-        appointment.setDateOfVisit(new Date());
+        try {
+            appointment.setPurposeOfVisit(purposeOfVisit);
+            appointment.setAppointmentId(FindLatestNumberUtil.getLatestId(new ArrayList<>(appointmentMap.keySet())));
+            appointment.setDateOfVisit(new Date());
+            if (doctorMap != null && doctorMap.containsKey(doctorId)) {
+                appointment.setDoctor(doctorMap.get(doctorId));
+            } else
+                throw new Exception("doctor is not available...");
 
-        if (doctorMap != null && doctorMap.containsKey(doctorId)) {
-            appointment.setDoctor(doctorMap.get(doctorId));
-        } else
-            appointment.setDoctor(createDoctor(doctorMap));
+            if (patientsMap != null && patientsMap.containsKey(patientId)) {
+                appointment.setPatients(patientsMap.get(patientId));
+            } else
+                appointment.setPatients(createPatient(patientsMap));
+            appointmentMap.put(appointment.getAppointmentId(), appointment);
+            appointment.setFirstVisit(verifyPatientAlreadyVisited(appointmentMap, patientId));
+            System.out.println(appointment);
+        } catch (Exception e) {
 
-        if (patientsMap != null && patientsMap.containsKey(patientId)) {
-            appointment.setPatients(patientsMap.get(patientId));
-        } else
-            appointment.setPatients(createPatient(patientsMap));
-
-        appointmentMap.put(appointment.getAppointmentId(), appointment);
-        appointment.setFirstVisit(verifyPatientAlreadyVisited(appointmentMap, patientId));
+        }
         return appointment;
     }
 

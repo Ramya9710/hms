@@ -8,7 +8,7 @@ import utility.FindLatestNumberUtil;
 
 import java.util.*;
 
-public class VisitingInformationBO  {
+public class VisitingInformationBO {
     //visitingInformation
 
     public VisitingInformation createVisit(Long patientID, Map<Long, Patients> patientsMap, Long doctorId, Map<Long, VisitingInformation> visitingInformationMap,
@@ -22,8 +22,6 @@ public class VisitingInformationBO  {
         if (doctorId == null)
             throw new Exception("doctor Id is null");
         Patients patients = null;
-        Appointment appointment;
-
         VisitingInformation visitingInformation = new VisitingInformation();
         visitingInformation.setVisitId(FindLatestNumberUtil.getLatestId(new ArrayList<>(visitingInformationMap.keySet())));
         visitingInformation.setFollowUpNeed(true);
@@ -31,7 +29,9 @@ public class VisitingInformationBO  {
         visitingInformation.setListOfMedicine(medicineList);
         visitingInformation.setAppointment(appointmentMap.get(appointmentId));
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
+        System.out.println(visitingInformation);
 
+        Appointment appointment = null;
         if (appointmentMap != null && appointmentMap.containsKey(appointmentId)) {
             visitingInformation.setAppointment(appointmentMap.get(appointmentId));
             appointment = appointmentMap.get(appointmentId);
@@ -41,10 +41,9 @@ public class VisitingInformationBO  {
         patientIsIp.equals(true);
         patientsMap.put(patients.getPatientId(), patients);
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
-
-
         return visitingInformation;
     }
+
     public boolean isIpPatient(Map<Long, VisitingInformation> visitingInformationMap, Long patientId) {
         int noOfVisit = 0;
         VisitingInformation visitingInformation;
@@ -57,7 +56,7 @@ public class VisitingInformationBO  {
             }
         }
         if (noOfVisit >= 3) {
-            return  true;
+            return true;
         }
         return false;
     }

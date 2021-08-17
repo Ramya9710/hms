@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  *
  */
-public class Report {
+public class ReportBO {
 
     private Map<Long, VisitingInformationBO> visitingInformationBOMap;
     private Long patientId;

@@ -1,8 +1,6 @@
 package business;
 
-import initialprocess.Bed;
-import initialprocess.InPatient;
-import initialprocess.Patients;
+import initialprocess.*;
 import utility.FindLatestNumberUtil;
 
 import java.util.*;
@@ -10,44 +8,58 @@ import java.util.*;
 public class InPatientBO {
 
 
-    public InPatient createIp(Map<Long ,Patients> patientsMap, Map<Long, InPatient> inPatientMap, Map<Long, Bed> bedMap) throws Exception {
-        InPatientBO inPatientBO = new InPatientBO();
-        Patients patients = new Patients();
-        InPatient inPatient = inPatientBO.allocateBedForIpPatients(inPatientMap, patientsMap,bedMap,25l);
-        inPatient.equals(true);
-        inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
+    public void createIp(Patients patients, Map<Long, InPatient> inPatientMap, Map<Long, Bed> bedMap) throws Exception {
 
-        if ( patientsMap == null && inPatientMap.isEmpty()) {
-            throw new Exception("patient ID is not there");
+        InPatientBO inPatientBO = new InPatientBO();
+
+        if (patients == null) {
+            throw new Exception("OutPatient is not available");
         }
         if (inPatientMap.isEmpty()) {
-            throw new Exception("patient is not available");
+            throw new Exception("Inpatient is not available");
         }
         if (bedMap.isEmpty()) {
-            throw new Exception("bed is not available");
+            throw new Exception("Bed is not available for the patients");
         }
-        return inPatient;
+       /* if (inPatientMap != null && inPatientMap.containsKey(patients.getPatientId())) {
+            inPatientBO.getBed(1l,bedMap);
+        } else {
+            throw  new Exception("the patient is OP");
+        }*/
+        try {
+            inPatientBO.allocateBedForIpPatients(inPatientMap, patients, bedMap);
+            System.out.println(allocateBedForIpPatients(inPatientMap, patients, bedMap));
+            System.out.println(inPatientBO);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
-    public InPatient allocateBedForIpPatients(Map<Long, InPatient> inPatientMap, Map<Long,Patients> patientsMap, Map<Long, Bed> bedMap, Long bedId) throws Exception {
+    public InPatient allocateBedForIpPatients(Map<Long, InPatient> inPatientMap, Patients patients,
+                                              Map<Long, Bed> bedMap) throws Exception {
         InPatient inPatient = new InPatient();
-
-        if (patientsMap != null && patientsMap.equals("InPatients")) {
-            inPatient = null;
-            inPatient.setBed(inPatient.getBed());
-            inPatient.setPatients(patientsMap.get(inPatient));
-            inPatient.setIpIdentificationNumber(FindLatestNumberUtil.getLatestId(new ArrayList<>(inPatientMap.keySet())));
-            inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
-            Bed bed = null;
-            if (bedMap.containsKey(bed.getBedId())) {
+        if (patients != null && patients.getPatientType().equals("InPatients"))
+            if (patients.equals("InPatients")) {
+                inPatient = null;
+                inPatient.setBed(getBed(2l, bedMap));
+                inPatient.setPatients(patients);
+                inPatient.setIpIdentificationNumber(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
+                inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
             }
-            if (bedMap != null  && bedId == null && bedId == 0 && bedMap.isEmpty()) {
-                throw new Exception("Bed is not available for In Patient");
-            }
-        }
         return inPatient;
     }
 
+    public Bed getBed(Long bedId, Map<Long, Bed> bedMap) throws Exception {
+        Bed bed = null;
+        if (bedMap.containsKey(bed.getBedId())) {
+        }
+        if (bedId != null && bedId == 0) {
+            throw new Exception("Bed is not available for In Patient");
+        }
+        return bed;
+    }
 
 }
+
 

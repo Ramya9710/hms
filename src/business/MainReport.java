@@ -49,6 +49,7 @@ public class MainReport {
     private static Map<Long, Bed> bedMap;
     private static Bed bedNoOne;
     private static Bed bedNoTwo;
+    private static Bed bedNoThree;
 
     private static Map<Long, InPatient> inPatientMap;
 
@@ -246,13 +247,20 @@ public class MainReport {
         bedNoOne.setRoomName("specialWard");
 
         bedNoTwo = new Bed();
-        bedNoTwo.setBedId(1l);
+        bedNoTwo.setBedId(2l);
         bedNoTwo.setBedType("superBed");
         bedNoTwo.setRoomName("specialWard");
+
+
+        bedNoThree = new Bed();
+        bedNoThree.setBedId(3l);
+        bedNoThree.setBedType("superBed");
+        bedNoThree.setRoomName("specialWard");
 
         bedMap = new HashMap<>();
         bedMap.put(bedNoOne.getBedId(), bedNoOne);
         bedMap.put(bedNoTwo.getBedId(), bedNoTwo);
+        bedMap.put(bedNoThree.getBedId(), bedNoThree);
 
         inPatientMap = new HashMap<>();
 
@@ -312,25 +320,14 @@ public class MainReport {
             AppointmentBO appointmentBO = new AppointmentBO();
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
-
-            Appointment appointment = appointmentBO.createAppointment(20l, patientsDetails, appointmentDetails,
-                    " headache ", 25l, doctorDetails);
-            appointmentDetails.put(appointment.getAppointmentId(), appointment);
-            System.out.println("Appointment Details :" + appointment.getAppointmentId() + appointment.getPatients() + appointment.getPurposeOfVisit()
-                    + appointment.getDoctor() + appointment.getDateOfVisit() + appointment.getBp() + appointment.getFirstVisit() + appointment.getTemperature());
-
-
-            VisitingInformation visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
-                    5l, appointmentDetails, 5l, medicineList);
-            System.out.println("Visiting details for InPatient :" + visitingInformation.getAppointment() +
-                    visitingInformation.getVisitId() + visitingInformation.getListOfMedicine() + visitingInformation.getDoctorRecommendation()
-                    + visitingInformation.getFollowUpNeed());
-            System.out.println("patient is IP or Not:" + visitingInformationBO.isIpPatient(visitingInformationDetails, 1l));
-
-            InPatient inPatient = inPatientBO.createIp(patientsDetails, inPatientMap, bedMap);
-            System.out.println("patient is Ip allocate bed :" + inPatientBO.allocateBedForIpPatients(inPatientMap, patientsDetails, bedMap, 1l));
-            System.out.println("InPatient detail:" + inPatient.getPatients() + inPatient.getBed() + inPatient.getIpIdentificationNumber());
-
+            VisitingInformation visitingInformation = null;
+            Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
+                    " headache ", 2l, doctorDetails);
+            if (appointment != null)
+                visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
+                        5l, appointmentDetails, 5l, medicineList);
+            if (inPatientBO != null)
+                inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
