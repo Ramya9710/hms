@@ -22,15 +22,18 @@ public class ReportBO {
       Display only the out-patient
       Display the today’s visited patient  */
 
-    public void displayPatientDetails(Map<Long, Patients> patientsMap, Long patientId) throws Exception {
-        Patients patients = null;
+    public void displayPatientDetails(Map<Long, Patients> patientsMap, Long patientId ,String patientsName) throws Exception {
+        Patients patients;
         if (patientsMap.isEmpty()) {
             throw new Exception("patients is not available");
         }
         if (patientId == null && patientId == 0) {
             throw new Exception("patientId is not there");
         }
-        if (patientsMap.containsKey(patients)) {
+        if (patientsName == null) {
+            throw  new Exception("Patient name is not there");
+        }
+        if (patientsMap.containsKey(patientsName)) {
             patients = patientsMap.get(patientId);
             System.out.println("Patients details :" + patients);
         }
@@ -85,7 +88,7 @@ public class ReportBO {
         }
         if (appointmentMap.containsKey(doctorId)) {
             appointment = appointmentMap.get(doctorId);
-            System.out.println("Doctor Id is :" + appointment);
+            System.out.println("Doctor Id is :" + appointment.getDoctor());
         }
     }
 
@@ -99,7 +102,7 @@ public class ReportBO {
         }
         if (visitingInformationMap.containsKey(followUpNeed.equals(true))) {
             visitingInformation = visitingInformationMap.get(followUpNeed.equals(true));
-            System.out.println("Follow up need :" + visitingInformation);
+            System.out.println("Follow up need :" + visitingInformation.getFollowUpNeed());
         }
     }
 
@@ -122,7 +125,7 @@ public class ReportBO {
         if (patientsMap.containsKey(patients)) {
             patientsMap.get(patients.getPatientId());
             patientsMap.get(patients.getPatientType().equals("OutPatient"));
-            System.out.println("OutPatient details :" + patients);
+            System.out.println("OutPatient details :" + patients.getPatientType());
         }
     }
 

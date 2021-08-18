@@ -318,7 +318,7 @@ public class MainReport {
         ReportBO reportBo = new ReportBO();
 
         try {
-            reportBo.displayPatientDetails(patientsDetails,2l);
+            reportBo.displayPatientDetails(patientsDetails,2l,"Durga");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -356,30 +356,24 @@ public class MainReport {
         } catch (Exception e) {
             e.getMessage();
         }
-
-
-
-
     }
 
     public static void main(String[] args) {
         populateVisitingInformation();
+        allReport();
         try {
             AppointmentBO appointmentBO = new AppointmentBO();
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
-            ReportBO reportBO = new ReportBO();
-            reportBO = null;
             VisitingInformation visitingInformation = null;
+            InPatient inPatient = null;
             Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
                 visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
-              InPatient inPatient=  inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
-            if (inPatientBO != null)
-
-                allReport();
+            if (inPatient != null)
+              inPatient =  inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
