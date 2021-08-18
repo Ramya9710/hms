@@ -320,28 +320,31 @@ public class MainReport {
         try {
             reportBo.displayPatientDetails(patientsDetails,2l,"Durga");
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         try {
             reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            reportBo.displayPatientsForPatientsId(patientsDetails,2l);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            reportBo.displayInPatientDetails(inPatientMap);
         } catch (Exception e) {
             e.getMessage();
         }
 
         try {
+            reportBo.displayPatientsForPatientsId(patientsDetails,2l);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        try {
+            reportBo.displayPatientsForDoctorId(appointmentDetails,2l);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        try {
             reportBo.displayOutPatientDetails(patientsDetails);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        try {
+            reportBo.displayInPatientDetails(inPatientMap);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -351,11 +354,7 @@ public class MainReport {
         } catch (Exception e) {
             e.getMessage();
         }
-        try {
-            reportBo.displayPatientsForDoctorId(appointmentDetails,2l);
-        } catch (Exception e) {
-            e.getMessage();
-        }
+
     }
 
     public static void main(String[] args) {
@@ -373,7 +372,8 @@ public class MainReport {
                 visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
             if (inPatient != null)
-              inPatient =  inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
+               inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
+
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

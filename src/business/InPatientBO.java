@@ -27,9 +27,8 @@ public class InPatientBO {
             throw  new Exception("the patient is OP");
         }*/
         try {
-            inPatientBO.allocateBedForIpPatients(inPatientMap, patients, bedMap);
-            System.out.println(allocateBedForIpPatients(inPatientMap, patients, bedMap));
-            System.out.println(inPatientBO);
+            inPatientBO.allocateBedForIpPatients(inPatientMap, patients, bedMap,2l);
+            System.out.println(allocateBedForIpPatients(inPatientMap, patients, bedMap,2l));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -37,20 +36,22 @@ public class InPatientBO {
         return null;
     }
     public InPatient allocateBedForIpPatients(Map<Long, InPatient> inPatientMap, Patients patients,
-                                              Map<Long, Bed> bedMap) throws Exception {
+                                              Map<Long, Bed> bedMap,Long bedId) throws Exception {
         InPatient inPatient = new InPatient();
         if (patients != null && patients.getPatientType().equals("InPatients"))
             if (patients.equals("InPatients")) {
                 inPatient = null;
-                inPatient.setBed(getBed(2l, bedMap));
+                inPatient.setBed(bedMap.get(bedId));
+               // inPatient.setBed(getBed(2l, bedMap));
                 inPatient.setPatients(patients);
                 inPatient.setIpIdentificationNumber(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
                 inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
+
             }
         return inPatient;
     }
 
-    public Bed getBed(Long bedId, Map<Long, Bed> bedMap) throws Exception {
+   /* public Bed getBed(Long bedId, Map<Long, Bed> bedMap) throws Exception {
         Bed bed = null;
         if (bedMap.containsKey(bed.getBedId())) {
         }
@@ -59,7 +60,7 @@ public class InPatientBO {
         }
         return bed;
     }
-
+*/
 }
 
 
