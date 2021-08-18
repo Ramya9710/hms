@@ -8,7 +8,7 @@ import java.util.*;
 public class InPatientBO {
 
 
-    public void createIp(Patients patients, Map<Long, InPatient> inPatientMap, Map<Long, Bed> bedMap) throws Exception {
+    public InPatient createIp(Patients patients, Map<Long, InPatient> inPatientMap, Map<Long, Bed> bedMap) throws Exception {
 
         InPatientBO inPatientBO = new InPatientBO();
 
@@ -34,8 +34,8 @@ public class InPatientBO {
             System.out.println(e.getMessage());
         }
 
+        return null;
     }
-
     public InPatient allocateBedForIpPatients(Map<Long, InPatient> inPatientMap, Patients patients,
                                               Map<Long, Bed> bedMap) throws Exception {
         InPatient inPatient = new InPatient();

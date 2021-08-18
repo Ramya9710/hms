@@ -314,20 +314,72 @@ public class MainReport {
         return null;
     }
 
+    public static void allReport() {
+        ReportBO reportBo = new ReportBO();
+
+        try {
+            reportBo.displayPatientDetails(patientsDetails,2l);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            reportBo.displayPatientsForPatientsId(patientsDetails,2l);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            reportBo.displayInPatientDetails(inPatientMap);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+        try {
+            reportBo.displayOutPatientDetails(patientsDetails);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+        try {
+            reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails,true);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        try {
+            reportBo.displayPatientsForDoctorId(appointmentDetails,2l);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+
+
+
+    }
+
     public static void main(String[] args) {
         populateVisitingInformation();
         try {
             AppointmentBO appointmentBO = new AppointmentBO();
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
+            ReportBO reportBO = new ReportBO();
+            reportBO = null;
             VisitingInformation visitingInformation = null;
             Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
                 visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
+              InPatient inPatient=  inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
             if (inPatientBO != null)
-                inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
+
+                allReport();
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
