@@ -344,7 +344,7 @@ public class MainReport {
             e.getMessage();
         }
         try {
-            reportBo.displayInPatientDetails(inPatientMap);
+            reportBo.displayInPatientDetails(patientsDetails);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -373,7 +373,7 @@ public class MainReport {
             Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
-                visitingInformation = visitingInformationBO.createVisit(55l, patientsDetails, 5l, visitingInformationDetails,
+                visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
             inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap,2l);
 
