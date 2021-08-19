@@ -23,13 +23,13 @@ public class InPatientBO {
                 throw new Exception("Inpatient is not available");
             }
             if (!bedMap.isEmpty() && bedMap.containsKey(inPatient.getBed())) {
-                inPatient.setBed(bedMap.get(bedId));
+                inPatient.setBed(getBed(1l,bedMap));
             } else {
                 throw new Exception("the bed is not available");
             }
+            inPatient.setPatients(allocateBedForIpPatients(patients, bedMap));
             inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
             System.out.println(inPatient);
-            inPatient.setPatients(allocateBedForIpPatients(patients, bedMap));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -37,14 +37,17 @@ public class InPatientBO {
     }
 
     public Patients allocateBedForIpPatients(Patients patients, Map<Long, Bed> bedMap) throws Exception {
-        InPatient inPatient;
+        if (bedMap.isEmpty()) {
+            throw new Exception("bed details is empty");
+        }
+        InPatient inPatient = null;
         if (patients != null && patients.getPatientType().equals("InPatients"))
-            if (patients.equals("InPatients")) {
-                inPatient = null;
+            if (patients.equals(inPatient.getPatients())) {
                 //inPatient.setBed(bedMap.get(bedId));
-                inPatient.setBed(getBed(2l, bedMap));
+               /* inPatient.setBed(getBed(2l, bedMap));
                 inPatient.setPatients(patients);
-                inPatient.setIpIdentificationNumber(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
+                inPatient.setIpIdentificationNumber(FindLatestNumberUtil.getLatestId(new ArrayList<>()));*/
+
             }
         return patients;
     }

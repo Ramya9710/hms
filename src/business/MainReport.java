@@ -53,6 +53,10 @@ public class MainReport {
 
     private static Map<Long, InPatient> inPatientMap;
 
+    private static Map<String ,Integer> calendarMap;
+
+
+    private static final Date dateValue = null;
 
     static {
 
@@ -264,6 +268,11 @@ public class MainReport {
 
         inPatientMap = new HashMap<>();
 
+        Calendar cal = Calendar.getInstance();
+        calendarMap = new HashMap<>();
+        calendarMap.put("year",cal.get(Calendar.YEAR));
+        calendarMap.put("Month", cal.get(Calendar.MONTH));
+        calendarMap.put("Date",cal.get(Calendar.DATE));
     }
 
     public static List<Medicine> getMedicine() {
@@ -356,7 +365,7 @@ public class MainReport {
         }
 
         try {
-            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,appointmentDetails);
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,calendarMap);
         } catch (Exception e) {
             e.getMessage();
         }
