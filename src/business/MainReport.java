@@ -350,13 +350,18 @@ public class MainReport {
         }
 
         try {
-            reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails,true);
+            reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+        try {
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,appointmentDetails);
         } catch (Exception e) {
             e.getMessage();
         }
 
     }
-
     public static void main(String[] args) {
         populateVisitingInformation();
         allReport();
@@ -365,15 +370,12 @@ public class MainReport {
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
             VisitingInformation visitingInformation = null;
-            InPatient inPatient = null;
             Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
-                visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
+                visitingInformation = visitingInformationBO.createVisit(55l, patientsDetails, 5l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
-            if (inPatient != null)
-               inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
-
+            inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap,2l);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
