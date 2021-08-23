@@ -31,7 +31,7 @@ public class AppointmentBO extends CommonBO {
             appointment.setFirstVisit(verifyPatientAlreadyVisited(appointmentMap, patientId));
             System.out.println(appointment);
         } catch (Exception e) {
-              e.getMessage();
+            e.getMessage();
         }
         return appointment;
     }

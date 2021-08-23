@@ -31,10 +31,11 @@ public class VisitingInformationBO {
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
         System.out.println(visitingInformation);
 
-        Appointment appointment = null;
+        Appointment appointment;
         if (appointmentMap != null && appointmentMap.containsKey(appointmentId)) {
             visitingInformation.setAppointment(appointmentMap.get(appointmentId));
             appointment = appointmentMap.get(appointmentId);
+            System.out.println(appointmentMap.get(appointmentId));
             patients = appointment.getPatients();
         }
         Boolean patientIsIp = isIpPatient(visitingInformationMap, patients.getPatientId());

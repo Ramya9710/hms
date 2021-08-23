@@ -52,7 +52,11 @@ public class MainReport {
     private static Bed bedNoThree;
 
     private static Map<Long, InPatient> inPatientMap;
-    private static Map<String ,Integer> calendarMap;
+
+    private static Map<String, Integer> calendarMap;
+    private static Calendar calendar1;
+    private static Calendar calendar2;
+    private static Calendar calendar3;
 
 
     private static final Date dateValue = null;
@@ -116,7 +120,7 @@ public class MainReport {
         patientsDetails.put(patientsLily.getPatientId(), patientsLily);
         patientsDetails.put(patientsTommy.getPatientId(), patientsTommy);
 
-        appointmentOne = new initialprocess.Appointment();
+        appointmentOne = new Appointment();
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
@@ -126,57 +130,57 @@ public class MainReport {
         appointmentOne.setTemperature(36.01);
         appointmentOne.setDateOfVisit(new Date(2021 / 10 / 11));
 
-        appointmentTwo = new initialprocess.Appointment();
+        appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
         appointmentTwo.setDoctor(doctorDetails.get(2l));
-        appointmentTwo.setPatients(patientsDetails.get(1l));
+        appointmentTwo.setPatients(patientsDetails.get(2l));
         appointmentTwo.setFirstVisit(false);
         appointmentTwo.setPurposeOfVisit("Memory Loss");
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
         appointmentTwo.setDateOfVisit(new Date(2021 / 01 / 06));
 
-        appointmentThree = new initialprocess.Appointment();
+        appointmentThree = new Appointment();
         appointmentThree.setAppointmentId(3l);
         appointmentThree.setDoctor(doctorDetails.get(3l));
-        appointmentThree.setPatients(patientsDetails.get(1l));
+        appointmentThree.setPatients(patientsDetails.get(3l));
         appointmentThree.setFirstVisit(true);
         appointmentThree.setPurposeOfVisit("Chest Pain");
         appointmentThree.setBp(136.15);
         appointmentThree.setTemperature(37.2);
         appointmentThree.setDateOfVisit(new Date(2021 / 07 / 12));
 
-        appointmentFour = new initialprocess.Appointment();
+        appointmentFour = new Appointment();
         appointmentFour.setAppointmentId(4l);
         appointmentFour.setDoctor(doctorDetails.get(1l));
-        appointmentFour.setPatients(patientsDetails.get(1l));
+        appointmentFour.setPatients(patientsDetails.get(4l));
         appointmentFour.setFirstVisit(false);
         appointmentFour.setPurposeOfVisit("Headaches");
         appointmentFour.setBp(110.00);
         appointmentFour.setTemperature(36.02);
         appointmentFour.setDateOfVisit(new Date(2021 / 10 / 18));
 
-        appointmentFive = new initialprocess.Appointment();
+        appointmentFive = new Appointment();
         appointmentFive.setAppointmentId(5l);
         appointmentFive.setDoctor(doctorDetails.get(1l));
-        appointmentFive.setPatients(patientsDetails.get(1l));
+        appointmentFive.setPatients(patientsDetails.get(2l));
         appointmentFive.setFirstVisit(false);
         appointmentFive.setPurposeOfVisit("Headaches");
         appointmentFive.setBp(110.00);
         appointmentFive.setTemperature(36.01);
         appointmentFive.setDateOfVisit(new Date(2021 / 10 / 27));
 
-        appointmentSix = new initialprocess.Appointment();
+        appointmentSix = new Appointment();
         appointmentSix.setAppointmentId(6l);
         appointmentSix.setDoctor(doctorDetails.get(1l));
-        appointmentSix.setPatients(patientsDetails.get(1l));
+        appointmentSix.setPatients(patientsDetails.get(4l));
         appointmentSix.setFirstVisit(false);
         appointmentSix.setPurposeOfVisit("Headaches");
         appointmentSix.setBp(120.00);
         appointmentSix.setTemperature(36.01);
         appointmentSix.setDateOfVisit(new Date(2021 / 11 / 7));
 
-        appointmentSeven = new initialprocess.Appointment();
+        appointmentSeven = new Appointment();
         appointmentSeven.setAppointmentId(7l);
         appointmentSeven.setDoctor(doctorDetails.get(2l));
         appointmentSeven.setPatients(patientsDetails.get(2l));
@@ -186,7 +190,7 @@ public class MainReport {
         appointmentSeven.setTemperature(36.05);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 12));
 
-        appointmentEight = new initialprocess.Appointment();
+        appointmentEight = new Appointment();
         appointmentEight.setAppointmentId(8l);
         appointmentEight.setDoctor(doctorDetails.get(2l));
         appointmentEight.setPatients(patientsDetails.get(2l));
@@ -196,10 +200,10 @@ public class MainReport {
         appointmentEight.setTemperature(36.15);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 18));
 
-        appointmentNine = new initialprocess.Appointment();
+        appointmentNine = new Appointment();
         appointmentNine.setAppointmentId(9l);
         appointmentNine.setDoctor(doctorDetails.get(2l));
-        appointmentNine.setPatients(patientsDetails.get(2l));
+        appointmentNine.setPatients(patientsDetails.get(1l));
         appointmentNine.setFirstVisit(false);
         appointmentNine.setPurposeOfVisit("Memory Loss");
         appointmentNine.setBp(110.00);
@@ -254,7 +258,6 @@ public class MainReport {
         bedNoTwo.setBedType("superBed");
         bedNoTwo.setRoomName("specialWard");
 
-
         bedNoThree = new Bed();
         bedNoThree.setBedId(3l);
         bedNoThree.setBedType("superBed");
@@ -268,10 +271,13 @@ public class MainReport {
         inPatientMap = new HashMap<>();
 
         Calendar cal = Calendar.getInstance();
+       /* calendar1.set(2021,3,21,4,25,15);
+        calendar2.set(2021,5,17,4,25,15);
+        calendar3.set(2021,8,15,6,15,15);*/
         calendarMap = new HashMap<>();
-        calendarMap.put("year",cal.get(Calendar.YEAR));
+        calendarMap.put("year", cal.get(Calendar.YEAR));
         calendarMap.put("Month", cal.get(Calendar.MONTH));
-        calendarMap.put("Date",cal.get(Calendar.DATE));
+        calendarMap.put("Date", cal.get(Calendar.DATE));
     }
 
     public static List<Medicine> getMedicine() {
@@ -324,25 +330,24 @@ public class MainReport {
 
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
+        try {
+            reportBo.displayPatientDetails(patientsDetails, 1l, "Swetha");
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        try {
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
+        } catch (Exception e) {
+            e.getMessage();
+        }
 
         try {
-            reportBo.displayPatientDetails(patientsDetails,2l,"Durga");
+            reportBo.displayPatientsForPatientsId(patientsDetails, 1l);
         } catch (Exception e) {
             e.getMessage();
         }
         try {
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-
-        try {
-            reportBo.displayPatientsForPatientsId(patientsDetails,2l);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        try {
-            reportBo.displayPatientsForDoctorId(appointmentDetails,2l);
+            reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -352,24 +357,22 @@ public class MainReport {
             e.getMessage();
         }
         try {
-            reportBo.displayInPatientDetails(patientsDetails);
+            reportBo.displayInPatientDetails(inPatientMap);
         } catch (Exception e) {
             e.getMessage();
         }
-
         try {
             reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails);
         } catch (Exception e) {
             e.getMessage();
         }
-
         try {
-            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,calendarMap,appointmentDetails);
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails, calendarMap, appointmentDetails);
         } catch (Exception e) {
             e.getMessage();
         }
-
     }
+
     public static void main(String[] args) {
         populateVisitingInformation();
         allReport();
@@ -378,13 +381,13 @@ public class MainReport {
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
             VisitingInformation visitingInformation = null;
-            Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
+            Appointment appointment = appointmentBO.createAppointment(10l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
-                visitingInformation = visitingInformationBO.createVisit(5l, patientsDetails, 5l, visitingInformationDetails,
+                visitingInformation = visitingInformationBO.createVisit(10l, patientsDetails, 5l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
-            inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap,2l);
-
+            InPatient inPatient = inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
+           if (inPatient != null);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
