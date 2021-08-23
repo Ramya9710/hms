@@ -52,7 +52,6 @@ public class MainReport {
     private static Bed bedNoThree;
 
     private static Map<Long, InPatient> inPatientMap;
-
     private static Map<String ,Integer> calendarMap;
 
 
@@ -365,7 +364,7 @@ public class MainReport {
         }
 
         try {
-            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,calendarMap);
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,calendarMap,appointmentDetails);
         } catch (Exception e) {
             e.getMessage();
         }

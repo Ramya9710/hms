@@ -6,6 +6,7 @@ import initialprocess.VisitingInformation;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -110,7 +111,7 @@ public class ReportBO {
     }
 
     public void displayInPatientDetails(Map<Long, Patients> patientsMap) throws Exception {
-        System.out.println("..........Display all patient who are in-patient..........");
+        System.out.println(".............Display all patient who are in-patient............");
         if (patientsMap.isEmpty()) {
             throw new Exception("In Patient is not available");
         }
@@ -127,14 +128,14 @@ public class ReportBO {
     }
 
     public void displayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long, VisitingInformation> visitingInformationMap) throws Exception {
-        System.out.println(".........Display the list of patient who needs the followup visit.........");
+        System.out.println("............Display the list of patient who needs the followup visit...........");
         if (visitingInformationMap.isEmpty()) {
             throw new Exception("no need of followUpNeed");
         }
         Iterator<Long> itr = visitingInformationMap.keySet().iterator();
         while (itr.hasNext()) {
             VisitingInformation followUpNeed = visitingInformationMap.get(itr.next());
-            if (followUpNeed.getFollowUpNeed()) {
+            if (followUpNeed.getFollowUpNeed() == true) {
                 visitingInformationMap.get(followUpNeed);
                 System.out.println("patients follow up need details :" + followUpNeed);
             } else {
@@ -143,24 +144,52 @@ public class ReportBO {
         }
     }
 
-    public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap, Map<String, Integer> calenderMap) throws Exception {
+    public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap, Map<String, Integer> calenderMap,Map<Long,Appointment> appointmentMap) throws Exception {
         System.out.println(".........Display the today’s visited patient..........");
         if (visitingInformationMap.isEmpty()) {
             throw new Exception("no visiting details today");
         }
         VisitingInformation visitingInformation;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/YYYY");
+        Date date;
         Iterator<Long> itr = visitingInformationMap.keySet().iterator();
         while (itr.hasNext()) {
             visitingInformation = visitingInformationMap.get(itr.next());
+            date = visitingInformation.getAppointment().getDateOfVisit();
+            try {
+                Date date1 = simpleDateFormat2.parse(simpleDateFormat2.format(date));
+                if (date.equals(date1)) {
+                    System.out.println(date);
+                }
+                Date startDate = new SimpleDateFormat("dd/MM/YYYY").parse("2020/1/1");
+                Date endDate = new SimpleDateFormat("dd/MM/YYYY").parse("2021/4/4");
+                if (startDate.equals(endDate)) {
+                    System.out.println(visitingInformation.getAppointment().getPatients());
+                }
+            } catch (Exception e) {
+                e.getMessage();
+            }
             visitingInformationMap.get(calenderMap.get(new Date()));
             if (!calenderMap.isEmpty() && calenderMap.containsKey(visitingInformation.getAppointment().getPatients())) {
                 simpleDateFormat.format(DateFormat.getDateInstance());
             }
             System.out.println(calenderMap);
+            Appointment appointment;
+            for (Long visitId: appointmentMap.keySet()) {
+                appointment = appointmentMap.get(visitId);
+                Date dates = appointment.getDateOfVisit();
+                String date1 = simpleDateFormat.format(dates);
+                String date2 = simpleDateFormat1.format(Calendar.getInstance().getTime());
+                if (date1.equals(date2)) {
+                    System.out.println(appointment.getPatients());
+                }
+            }
         }
-    }
+
+        }
+
 }
 
 
