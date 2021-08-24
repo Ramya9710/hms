@@ -26,7 +26,7 @@ public class ReportBO {
       Display only the out-patient
       Display the today’s visited patient  */
 
-    public void displayPatientDetails(Map<Long, Patients> patientsMap, Long patientId, String patientsName) throws Exception {
+    public void displayPatientDetails(Map<Long, Patients> patientsMap, Long patientId, String patientsName) {
         System.out.println("-------------------Display  patient details for the patient name/id------------------");
         Patients patients;
         if (!patientsMap.isEmpty() && patientsMap.containsKey(patientId)) {
@@ -50,8 +50,9 @@ public class ReportBO {
         if (!visitingInformationDetails.isEmpty() && visitingInformationDetails.containsKey(patientId)) {
             visitingInformation = visitingInformationDetails.get(patientId);
             System.out.println("visits details:" + visitingInformation);
+            System.out.println("patient ID is :" + patientId);
         } else {
-            System.out.println("visit details is not available");
+            System.out.println("list of visit for patientId is not available");
         }
     }
 
@@ -66,7 +67,7 @@ public class ReportBO {
         }
     }
 
-    public void displayPatientsForDoctorId(Map<Long, Appointment> appointmentMap, Long doctorId) throws Exception {
+    public void displayPatientsForDoctorId(Map<Long, Appointment> appointmentMap, Long doctorId) {
         System.out.println("-----------------Display the list of patient by doctor id----------------");
         Appointment appointment;
         if (!appointmentMap.isEmpty() && appointmentMap.containsKey(doctorId)) {
@@ -78,17 +79,15 @@ public class ReportBO {
         }
     }
 
-    public void displayOutPatientDetails(Map<Long, Patients> patientsMap) throws Exception {
+    public void displayOutPatientDetails(Map<Long, Patients> patientsMap) {
         System.out.println("-----------------Display only the out-patient----------------");
         Patients patients;
         Iterator<Long> iterator = patientsMap.keySet().iterator();
         while (iterator.hasNext()) {
             patients = patientsMap.get(iterator.next());
             if (!patientsMap.isEmpty() && patients.getPatientType().equals("op")) {
-                System.out.println("Out patient details :" + patients.getPatientType().equals("op"));
-            } else {
-                System.out.println("out patient details is not available:");
             }
+            System.out.println("Out patient details :" + patients.getPatientType().equals("op"));
         }
     }
 
@@ -98,22 +97,30 @@ public class ReportBO {
         Iterator<Long> patientItr = inPatientMap.keySet().iterator();
         while (patientItr.hasNext()) {
             inPatient = inPatientMap.get(patientItr.next());
-            if (!inPatientMap.isEmpty() && inPatient.getPatients().equals("IP")) {
-                System.out.println("In patient details :" + inPatient.getPatients());
-            } else {
-                System.out.println("Inpatient is not available :");
+            if (!inPatientMap.isEmpty() && inPatient.getPatients().getPatientType().equals("ip")) {
+                System.out.println("In patient details :" + inPatient.getPatients().getPatientType().equals(inPatient));
             }
+            System.out.println(inPatient);
+
+            /* for (Long inPatient : inPatientMap.keySet()) {
+            System.out.println(inPatient);
+        } for (InPatient patient : inPatientMap.values()) {
+            System.out.println(patient.getPatients().getPatientType());
+        }
+        System.out.println(inPatientMap);*/
         }
     }
 
-    public void displayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long, VisitingInformation> visitingInformationMap) throws Exception {
+    public void displayTheListOfPatientWhoNeedsTheFollowUpVisit
+            (Map<Long, VisitingInformation> visitingInformationMap) throws Exception {
         System.out.println("-----------------Display the list of patient who needs the followup visit---------------");
         Iterator<Long> itr = visitingInformationMap.keySet().iterator();
         while (itr.hasNext()) {
             VisitingInformation followUpNeed = visitingInformationMap.get(itr.next());
             if (!visitingInformationMap.isEmpty() && followUpNeed.getFollowUpNeed()) {
-                System.out.println("patients follow up need details :" + followUpNeed.getAppointment().getPatients());
             }
+            System.out.println("patients follow up need details :" + followUpNeed);
+
        /* for (Long followUpNeed : visitingInformationMap.keySet()) {
             System.out.println("patient follow up :" + visitingInformationMap.get(followUpNeed));
         }

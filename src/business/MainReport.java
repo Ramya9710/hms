@@ -52,6 +52,9 @@ public class MainReport {
     private static Bed bedNoThree;
 
     private static Map<Long, InPatient> inPatientMap;
+    private static InPatient inPatientOne;
+    private static InPatient inPatientTwo;
+    private static InPatient inPatientThree;
 
     private static Map<String, Integer> calendarMap;
     private static Calendar calendar1;
@@ -268,7 +271,25 @@ public class MainReport {
         bedMap.put(bedNoTwo.getBedId(), bedNoTwo);
         bedMap.put(bedNoThree.getBedId(), bedNoThree);
 
+        inPatientOne = new InPatient();
+        inPatientOne.setPatients(patientsDetails.get(1l));
+        inPatientOne.setBed(bedMap.get(1l));
+        inPatientOne.setIpIdentificationNumber(1l);
+
+        inPatientTwo = new InPatient();
+        inPatientTwo.setPatients(patientsDetails.get(2l));
+        inPatientTwo.setBed(bedMap.get(2l));
+        inPatientTwo.setIpIdentificationNumber(2l);
+
+        inPatientThree = new InPatient();
+        inPatientThree.setPatients(patientsDetails.get(3l));
+        inPatientThree.setBed(bedMap.get(3l));
+        inPatientThree.setIpIdentificationNumber(3l);
+
         inPatientMap = new HashMap<>();
+        inPatientMap.put(inPatientOne.getIpIdentificationNumber(), inPatientOne);
+        inPatientMap.put(inPatientTwo.getIpIdentificationNumber(), inPatientTwo);
+        inPatientMap.put(inPatientThree.getIpIdentificationNumber(), inPatientThree);
 
         Calendar cal = Calendar.getInstance();
        /* calendar1.set(2021,3,21,4,25,15);
@@ -381,13 +402,13 @@ public class MainReport {
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
             VisitingInformation visitingInformation = null;
-            Appointment appointment = appointmentBO.createAppointment(10l, patientsDetails, appointmentDetails,
+            Appointment appointment = appointmentBO.createAppointment(21l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
-                visitingInformation = visitingInformationBO.createVisit(10l, patientsDetails, 5l, visitingInformationDetails,
+                visitingInformation = visitingInformationBO.createVisit(21l, patientsDetails, 2l, visitingInformationDetails,
                         5l, appointmentDetails, 5l, medicineList);
             InPatient inPatient = inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
-           if (inPatient != null);
+            if (inPatient != null) ;
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
