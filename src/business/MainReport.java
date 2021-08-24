@@ -352,23 +352,23 @@ public class MainReport {
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 1l, "Swetha");
+            reportBo.displayPatientDetails(patientsDetails, 5l, "Swetha");
         } catch (Exception e) {
             e.getMessage();
         }
         try {
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
         } catch (Exception e) {
             e.getMessage();
         }
 
         try {
-            reportBo.displayPatientsForPatientsId(patientsDetails, 1l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 2l);
         } catch (Exception e) {
             e.getMessage();
         }
         try {
-            reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);
+            reportBo.displayPatientsForDoctorId(appointmentDetails, 3l);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -387,8 +387,9 @@ public class MainReport {
         } catch (Exception e) {
             e.getMessage();
         }
+
         try {
-            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails, calendarMap, appointmentDetails);
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,appointmentDetails);
         } catch (Exception e) {
             e.getMessage();
         }
