@@ -44,6 +44,7 @@ public class MainReport {
     private static List<Medicine> medicineList;
     private static Medicine medicine;
 
+
     private Date date = new Date();
 
     private static Map<Long, Bed> bedMap;
@@ -51,7 +52,7 @@ public class MainReport {
     private static Bed bedNoTwo;
     private static Bed bedNoThree;
 
-    private static Map<Long, InPatient> inPatientMap;
+    private static Map<Long, InPatient> inPatientDetails;
     private static InPatient inPatientOne;
     private static InPatient inPatientTwo;
     private static InPatient inPatientThree;
@@ -60,9 +61,6 @@ public class MainReport {
     private static Calendar calendar1;
     private static Calendar calendar2;
     private static Calendar calendar3;
-
-
-    private static final Date dateValue = null;
 
     static {
 
@@ -100,7 +98,7 @@ public class MainReport {
         patientsRose.setPatientAddress("Coimbatore");
         patientsRose.setPatientId(1l);
         patientsRose.setPatientPhoneNumber("9525264410");
-        patientsRose.setPatientType(" out InPatientBO ");
+        patientsRose.setPatientType("InPatient");
 
         patientsLily = new Patients();
         patientsLily.setPatientName("Lily");
@@ -108,7 +106,7 @@ public class MainReport {
         patientsLily.setPatientAddress("Chennai");
         patientsLily.setPatientId(2l);
         patientsLily.setPatientPhoneNumber("9585124512");
-        patientsLily.setPatientName(" out InPatientBO");
+        patientsLily.setPatientType("out patient");
 
         patientsTommy = new Patients();
         patientsTommy.setPatientName("Tommy");
@@ -286,15 +284,12 @@ public class MainReport {
         inPatientThree.setBed(bedMap.get(3l));
         inPatientThree.setIpIdentificationNumber(3l);
 
-        inPatientMap = new HashMap<>();
-        inPatientMap.put(inPatientOne.getIpIdentificationNumber(), inPatientOne);
-        inPatientMap.put(inPatientTwo.getIpIdentificationNumber(), inPatientTwo);
-        inPatientMap.put(inPatientThree.getIpIdentificationNumber(), inPatientThree);
+        inPatientDetails = new HashMap<>();
+        inPatientDetails.put(inPatientOne.getIpIdentificationNumber(), inPatientOne);
+        inPatientDetails.put(inPatientTwo.getIpIdentificationNumber(), inPatientTwo);
+        inPatientDetails.put(inPatientThree.getIpIdentificationNumber(), inPatientThree);
 
         Calendar cal = Calendar.getInstance();
-       /* calendar1.set(2021,3,21,4,25,15);
-        calendar2.set(2021,5,17,4,25,15);
-        calendar3.set(2021,8,15,6,15,15);*/
         calendarMap = new HashMap<>();
         calendarMap.put("year", cal.get(Calendar.YEAR));
         calendarMap.put("Month", cal.get(Calendar.MONTH));
@@ -352,44 +347,14 @@ public class MainReport {
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 5l, "Swetha");
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        try {
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-
-        try {
-            reportBo.displayPatientsForPatientsId(patientsDetails, 2l);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        try {
-            reportBo.displayPatientsForDoctorId(appointmentDetails, 3l);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        try {
+            reportBo.displayPatientDetails(patientsDetails, 1l, "Jose");
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 1l);
+            reportBo.displayPatientsForDoctorId(appointmentDetails, 2l);
             reportBo.displayOutPatientDetails(patientsDetails);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        try {
-            reportBo.displayInPatientDetails(inPatientMap);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        try {
+            reportBo.displayInPatientDetails(inPatientDetails);
             reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-
-        try {
-            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails,appointmentDetails);
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails, appointmentDetails);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -397,19 +362,21 @@ public class MainReport {
 
     public static void main(String[] args) {
         populateVisitingInformation();
-        allReport();
         try {
             AppointmentBO appointmentBO = new AppointmentBO();
             VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
             VisitingInformation visitingInformation = null;
-            Appointment appointment = appointmentBO.createAppointment(21l, patientsDetails, appointmentDetails,
+            ReportBO reportBO = new ReportBO();
+            Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
                     " headache ", 2l, doctorDetails);
             if (appointment != null)
-                visitingInformation = visitingInformationBO.createVisit(21l, patientsDetails, 2l, visitingInformationDetails,
-                        5l, appointmentDetails, 5l, medicineList);
-            InPatient inPatient = inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientMap, bedMap);
-            if (inPatient != null) ;
+                visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
+                        appointment, medicineList);
+            if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().equals("Inpatient")) {
+                inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
+                allReport();
+            }
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

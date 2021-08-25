@@ -27,8 +27,8 @@ public class AppointmentBO extends CommonBO {
                 appointment.setPatients(patientsMap.get(patientId));
             } else
                 appointment.setPatients(createPatient(patientsMap));
-            appointmentMap.put(appointment.getAppointmentId(), appointment);
             appointment.setFirstVisit(verifyPatientAlreadyVisited(appointmentMap, patientId));
+            appointmentMap.put(appointment.getAppointmentId(), appointment);
             System.out.println(appointment);
         } catch (Exception e) {
             e.getMessage();

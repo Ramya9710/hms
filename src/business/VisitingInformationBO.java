@@ -9,38 +9,22 @@ import utility.FindLatestNumberUtil;
 import java.util.*;
 
 public class VisitingInformationBO {
-    //visitingInformation
+    public VisitingInformation createVisit(Map<Long, VisitingInformation> visitingInformationMap,
+                                           Appointment appointment, List<Medicine> medicineList) {
 
-    public VisitingInformation createVisit(Long patientID, Map<Long, Patients> patientsMap, Long doctorId, Map<Long, VisitingInformation> visitingInformationMap,
-                                           Long visitId, Map<Long, Appointment> appointmentMap, Long appointmentId,
-                                           List<Medicine> medicineList) throws Exception {
-
-        if (patientID == null)
-            throw new Exception("patient Id is null");
-        if (visitId == null)
-            throw new Exception("visit Id is null");
-        if (doctorId == null)
-            throw new Exception("doctor Id is null");
-        Patients patients = null;
         VisitingInformation visitingInformation = new VisitingInformation();
         visitingInformation.setVisitId(FindLatestNumberUtil.getLatestId(new ArrayList<>(visitingInformationMap.keySet())));
         visitingInformation.setFollowUpNeed(true);
         visitingInformation.setDoctorRecommendation("Take Rest");
         visitingInformation.setListOfMedicine(medicineList);
-        visitingInformation.setAppointment(appointmentMap.get(appointmentId));
+        visitingInformation.setAppointment(appointment);
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
         System.out.println(visitingInformation);
-
-        Appointment appointment;
-        if (appointmentMap != null && appointmentMap.containsKey(appointmentId)) {
-            visitingInformation.setAppointment(appointmentMap.get(appointmentId));
-            appointment = appointmentMap.get(appointmentId);
-            System.out.println(appointmentMap.get(appointmentId));
-            patients = appointment.getPatients();
+        boolean patientIsIp = isIpPatient(visitingInformationMap, appointment.getPatients().getPatientId());
+        if (patientIsIp) {
+            appointment.getPatients().setPatientType("Inpatient");
+            //patientsMap.put(appointment.getPatients().getPatientId(), appointment.getPatients());
         }
-        Boolean patientIsIp = isIpPatient(visitingInformationMap, patients.getPatientId());
-        patientIsIp.equals(true);
-        patientsMap.put(patients.getPatientId(), patients);
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
         return visitingInformation;
     }

@@ -16,7 +16,7 @@ public class CommonBO {
         patients.setPatientAddress("chennai");
         patients.setDate_of_birth(new Date());
         patients.setPatientPhoneNumber("9854512120");
-        patients.setPatientType("IP");
+        patients.setPatientType("In Patient");
         patientsMap.put(patients.getPatientId(), patients);
         return patients;
     }
