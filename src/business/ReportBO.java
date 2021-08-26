@@ -87,34 +87,35 @@ public class ReportBO {
     public void displayOutPatientDetails(Map<Long, Patients> patientsMap) {
         System.out.println("-----------------Display only the out-patient----------------");
         Patients patients;
+        boolean outPatientIsAvailable = false;
         Iterator<Long> patientItr = patientsMap.keySet().iterator();
         while (patientItr.hasNext()) {
             patients = patientsMap.get(patientItr.next());
             if (patients.getPatientType().equalsIgnoreCase("out patient")) {
+                outPatientIsAvailable = true;
                 System.out.println("out patient details :" + patients);
             }
         }
-        /*for (Long OutPatient : patientsMap.keySet())
-            System.out.println("details of outpatients :" + patientsMap.get(OutPatient));
-*/
-
+        if (!outPatientIsAvailable) {
+            System.out.println("Out patient detail is not available");
+        }
     }
 
     public void displayInPatientDetails(Map<Long, InPatient> inPatientMap) {
         System.out.println("----------------Display all patient who are in-patient--------------");
-        InPatient inPatient;
-        Iterator<Long> patientItr = inPatientMap.keySet().iterator();
-        while (patientItr.hasNext()) {
-            inPatient = inPatientMap.get(patientItr.next());
-            if (inPatient.getPatients().getPatientType().equals("InPatient")) {
-                System.out.println("In patient details :" + inPatient);
-            }
-        }
-       /* for (Long InPatient : inPatientMap.keySet())
+        for (Long InPatient : inPatientMap.keySet()) {
             System.out.println("Inpatient details :" + inPatientMap.get(InPatient));
-*/
-    }
+        }
+       /* InPatient inPatient;
+        Iterator<Long> itr = inPatientMap.keySet().iterator();
+        while (itr.hasNext()) {
+            inPatient = inPatientMap.get(itr.next());
+            if (inPatient.getPatients().getPatientType().equals("InPatient")) {
+                System.out.println("InPatient Details :" + inPatient);
+            }
+        }*/
 
+    }
 
     public void displayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long, VisitingInformation> visitingInformationMap) {
         System.out.println("-----------------Display the list of patient who needs the followup visit---------------");

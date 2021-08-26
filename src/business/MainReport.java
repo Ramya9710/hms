@@ -98,7 +98,7 @@ public class MainReport {
         patientsRose.setPatientAddress("Coimbatore");
         patientsRose.setPatientId(1l);
         patientsRose.setPatientPhoneNumber("9525264410");
-        patientsRose.setPatientType("InPatient");
+        patientsRose.setPatientType("out patient");
 
         patientsLily = new Patients();
         patientsLily.setPatientName("Lily");
@@ -106,7 +106,7 @@ public class MainReport {
         patientsLily.setPatientAddress("Chennai");
         patientsLily.setPatientId(2l);
         patientsLily.setPatientPhoneNumber("9585124512");
-        patientsLily.setPatientType("out patient");
+        patientsLily.setPatientType("InPatient");
 
         patientsTommy = new Patients();
         patientsTommy.setPatientName("Tommy");
@@ -154,7 +154,7 @@ public class MainReport {
         appointmentFour = new Appointment();
         appointmentFour.setAppointmentId(4l);
         appointmentFour.setDoctor(doctorDetails.get(1l));
-        appointmentFour.setPatients(patientsDetails.get(4l));
+        appointmentFour.setPatients(patientsDetails.get(3l));
         appointmentFour.setFirstVisit(false);
         appointmentFour.setPurposeOfVisit("Headaches");
         appointmentFour.setBp(110.00);
@@ -174,7 +174,7 @@ public class MainReport {
         appointmentSix = new Appointment();
         appointmentSix.setAppointmentId(6l);
         appointmentSix.setDoctor(doctorDetails.get(1l));
-        appointmentSix.setPatients(patientsDetails.get(4l));
+        appointmentSix.setPatients(patientsDetails.get(3l));
         appointmentSix.setFirstVisit(false);
         appointmentSix.setPurposeOfVisit("Headaches");
         appointmentSix.setBp(120.00);
@@ -204,7 +204,7 @@ public class MainReport {
         appointmentNine = new Appointment();
         appointmentNine.setAppointmentId(9l);
         appointmentNine.setDoctor(doctorDetails.get(2l));
-        appointmentNine.setPatients(patientsDetails.get(1l));
+        appointmentNine.setPatients(patientsDetails.get(3l));
         appointmentNine.setFirstVisit(false);
         appointmentNine.setPurposeOfVisit("Memory Loss");
         appointmentNine.setBp(110.00);
@@ -270,17 +270,17 @@ public class MainReport {
         bedMap.put(bedNoThree.getBedId(), bedNoThree);
 
         inPatientOne = new InPatient();
-        inPatientOne.setPatients(patientsDetails.get(1l));
+        inPatientOne.setPatients(patientsDetails.get(inPatientOne));
         inPatientOne.setBed(bedMap.get(1l));
         inPatientOne.setIpIdentificationNumber(1l);
 
         inPatientTwo = new InPatient();
-        inPatientTwo.setPatients(patientsDetails.get(2l));
+        inPatientTwo.setPatients(patientsDetails.get(inPatientTwo));
         inPatientTwo.setBed(bedMap.get(2l));
         inPatientTwo.setIpIdentificationNumber(2l);
 
         inPatientThree = new InPatient();
-        inPatientThree.setPatients(patientsDetails.get(3l));
+        inPatientThree.setPatients(patientsDetails.get(inPatientThree));
         inPatientThree.setBed(bedMap.get(3l));
         inPatientThree.setIpIdentificationNumber(3l);
 
@@ -347,9 +347,9 @@ public class MainReport {
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 1l, "Jose");
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
-            reportBo.displayPatientsForPatientsId(patientsDetails, 1l);
+            reportBo.displayPatientDetails(patientsDetails, 2l, "Jose");
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 2l);
             reportBo.displayPatientsForDoctorId(appointmentDetails, 2l);
             reportBo.displayOutPatientDetails(patientsDetails);
             reportBo.displayInPatientDetails(inPatientDetails);
@@ -362,23 +362,21 @@ public class MainReport {
 
     public static void main(String[] args) {
         populateVisitingInformation();
-        try {
-            AppointmentBO appointmentBO = new AppointmentBO();
-            VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-            InPatientBO inPatientBO = new InPatientBO();
-            VisitingInformation visitingInformation = null;
-            ReportBO reportBO = new ReportBO();
-            Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
-                    " headache ", 2l, doctorDetails);
-            if (appointment != null)
-                visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
-                        appointment, medicineList);
-            if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().equals("Inpatient")) {
-                inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
-                allReport();
-            }
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+        AppointmentBO appointmentBO = new AppointmentBO();
+        VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
+        InPatientBO inPatientBO = new InPatientBO();
+        VisitingInformation visitingInformation = null;
+        System.out.println("========================Hospital Management System==========================");
+        System.out.println("Hospital Details :" + hospitalDetails);
+        Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
+                " headache ", 2l, doctorDetails);
+        if (appointment != null)
+            visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
+                    appointment, medicineList);
+        if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().equals("Inpatient")) {
         }
+        inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
+        System.out.println("========================Hospital Management System Report==========================");
+        allReport();
     }
 }

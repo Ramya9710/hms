@@ -15,14 +15,14 @@ public class InPatientBO {
             if (!bedMap.isEmpty() && bedMap.containsKey(1l)) {
                 inPatient.setBed(bedMap.get(1l));
             } else {
-                throw new Exception("the bed is not available");
+                throw new Exception("the bed is not available for outpatient");
             }
-            inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
+            inPatientMap.put(patients.getPatientId(), inPatient);
             System.out.println(inPatient);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return inPatient;
     }
 
 }

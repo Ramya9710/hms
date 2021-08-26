@@ -23,7 +23,6 @@ public class VisitingInformationBO {
         boolean patientIsIp = isIpPatient(visitingInformationMap, appointment.getPatients().getPatientId());
         if (patientIsIp) {
             appointment.getPatients().setPatientType("Inpatient");
-            //patientsMap.put(appointment.getPatients().getPatientId(), appointment.getPatients());
         }
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
         return visitingInformation;
