@@ -5,9 +5,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SampleDate {
-    public final void format(Date date) {
-        DateFormat Date = DateFormat.getDateInstance();
-        Calendar cals = Calendar.getInstance();
-        String currentDate = Date.format(cals.getTime());
+    private Calendar calendar;
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

@@ -91,7 +91,7 @@ public class ReportBO {
         Iterator<Long> patientItr = patientsMap.keySet().iterator();
         while (patientItr.hasNext()) {
             patients = patientsMap.get(patientItr.next());
-            if (patients.getPatientType().equalsIgnoreCase("out patient")) {
+            if (patients.getPatientType().equals("out patient")) {
                 outPatientIsAvailable = true;
                 System.out.println("out patient details :" + patients);
             }
@@ -134,23 +134,32 @@ public class ReportBO {
     }
 
     public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap, Map<Long, Appointment> appointmentMap) throws ParseException {
-        System.out.println("-----------------Display the today’s visited patient-------------");
+        System.out.println("-----------------Display the today’s visited patient Detail---------------");
         VisitingInformation visitingInformation;
+        Appointment appointment;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/YYYY");
         Date date;
+        for (Long visitId : appointmentMap.keySet()) {
+            appointment = appointmentMap.get(visitId);
+            Date dates = appointment.getDateOfVisit();
+            String date1 = simpleDateFormat.format(dates);
+            String date2 = simpleDateFormat1.format(Calendar.getInstance().getTime());
+            if (date1.equals(date2)) {
+                System.out.println(appointment.getPatients());
+            }
+        }
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/YYYY");
         Iterator<Long> itr = visitingInformationMap.keySet().iterator();
         while (itr.hasNext()) {
             visitingInformation = visitingInformationMap.get(itr.next());
             date = visitingInformation.getAppointment().getDateOfVisit();
-
-            Date date1 = simpleDateFormat2.parse(simpleDateFormat2.format(date));
+           /* Date date1 = simpleDateFormat2.parse(simpleDateFormat2.format(date));
             if (date.equals(date1)) {
                 System.out.println(date);
-            }
+            }*/
             Date visitingDate = simpleDateFormat2.parse(simpleDateFormat2.format(date));
-            Date startDate = new SimpleDateFormat("dd/MM/YYYY").parse("2020/1/1");
+            Date startDate = new SimpleDateFormat("dd/MM/YYYY").parse("2021/1/1");
             Date endDate = new SimpleDateFormat("dd/MM/YYYY").parse("2021/4/4");
             if (startDate.equals(endDate)) {
                 System.out.println(visitingInformation.getAppointment().getPatients());
@@ -162,16 +171,7 @@ public class ReportBO {
                     simpleDateFormat.format(DateFormat.getDateInstance());
                 }
                 System.out.println(calenderMap);*/
-        Appointment appointment;
-        for (Long visitId : appointmentMap.keySet()) {
-            appointment = appointmentMap.get(visitId);
-            Date dates = appointment.getDateOfVisit();
-            String date1 = simpleDateFormat.format(dates);
-            String date2 = simpleDateFormat1.format(Calendar.getInstance().getTime());
-            if (date1.equals(date2)) {
-                System.out.println(appointment.getPatients());
-            }
-        }
+
     }
 
 }
