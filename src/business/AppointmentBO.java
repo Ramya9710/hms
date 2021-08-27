@@ -46,7 +46,6 @@ public class AppointmentBO extends CommonBO {
         }
         return true;
     }
-
 }
 
 

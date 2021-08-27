@@ -1,6 +1,8 @@
 package business;
 
 import initialprocess.*;
+import utility.PatientDiseases;
+import utility.PatientType;
 import utility.SampleDate;
 
 import java.util.*;
@@ -99,7 +101,7 @@ public class MainReport {
         patientsRose.setPatientAddress("Coimbatore");
         patientsRose.setPatientId(1l);
         patientsRose.setPatientPhoneNumber("9525264410");
-        patientsRose.setPatientType("out patient");
+        patientsRose.setPatientType(PatientType.OUTPATIENT.getType());
 
         patientsLily = new Patients();
         patientsLily.setPatientName("Lily");
@@ -107,7 +109,7 @@ public class MainReport {
         patientsLily.setPatientAddress("Chennai");
         patientsLily.setPatientId(2l);
         patientsLily.setPatientPhoneNumber("9585124512");
-        patientsLily.setPatientType("InPatient");
+        patientsLily.setPatientType(PatientType.INPATIENT.getType());
 
         patientsTommy = new Patients();
         patientsTommy.setPatientName("Tommy");
@@ -115,7 +117,7 @@ public class MainReport {
         patientsTommy.setPatientAddress("Madurai");
         patientsTommy.setPatientId(3l);
         patientsTommy.setPatientPhoneNumber("9854561214");
-        patientsTommy.setPatientType("out patient");
+        patientsTommy.setPatientType(PatientType.OUTPATIENT.getType());
 
         patientsDetails = new HashMap<>();
         patientsDetails.put(patientsRose.getPatientId(), patientsRose);
@@ -127,7 +129,7 @@ public class MainReport {
         appointmentOne.setDoctor(doctorDetails.get(1l));
         appointmentOne.setPatients(patientsDetails.get(1l));
         appointmentOne.setFirstVisit(false);
-        appointmentOne.setPurposeOfVisit("Headaches");
+        appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
         appointmentOne.setDateOfVisit(new Date(2021 / 10 / 11));
@@ -137,7 +139,7 @@ public class MainReport {
         appointmentTwo.setDoctor(doctorDetails.get(2l));
         appointmentTwo.setPatients(patientsDetails.get(2l));
         appointmentTwo.setFirstVisit(false);
-        appointmentTwo.setPurposeOfVisit("Memory Loss");
+        appointmentTwo.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
         appointmentTwo.setDateOfVisit(new Date(2021 / 01 / 06));
@@ -147,7 +149,7 @@ public class MainReport {
         appointmentThree.setDoctor(doctorDetails.get(3l));
         appointmentThree.setPatients(patientsDetails.get(3l));
         appointmentThree.setFirstVisit(true);
-        appointmentThree.setPurposeOfVisit("Chest Pain");
+        appointmentThree.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES2.getDiseases());
         appointmentThree.setBp(136.15);
         appointmentThree.setTemperature(37.2);
         appointmentThree.setDateOfVisit(new Date(2021 / 07 / 12));
@@ -157,17 +159,17 @@ public class MainReport {
         appointmentFour.setDoctor(doctorDetails.get(1l));
         appointmentFour.setPatients(patientsDetails.get(3l));
         appointmentFour.setFirstVisit(false);
-        appointmentFour.setPurposeOfVisit("Headaches");
+        appointmentFour.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentFour.setBp(110.00);
         appointmentFour.setTemperature(36.02);
         appointmentFour.setDateOfVisit(new Date(2021 / 10 / 18));
 
         appointmentFive = new Appointment();
         appointmentFive.setAppointmentId(5l);
-        appointmentFive.setDoctor(doctorDetails.get(1l));
+        appointmentFive.setDoctor(doctorDetails.get(2l));
         appointmentFive.setPatients(patientsDetails.get(2l));
         appointmentFive.setFirstVisit(false);
-        appointmentFive.setPurposeOfVisit("Headaches");
+        appointmentFive.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentFive.setBp(110.00);
         appointmentFive.setTemperature(36.01);
         appointmentFive.setDateOfVisit(new Date(2021 / 10 / 27));
@@ -177,7 +179,7 @@ public class MainReport {
         appointmentSix.setDoctor(doctorDetails.get(1l));
         appointmentSix.setPatients(patientsDetails.get(3l));
         appointmentSix.setFirstVisit(false);
-        appointmentSix.setPurposeOfVisit("Headaches");
+        appointmentSix.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentSix.setBp(120.00);
         appointmentSix.setTemperature(36.01);
         appointmentSix.setDateOfVisit(new Date(2021 / 11 / 7));
@@ -187,7 +189,7 @@ public class MainReport {
         appointmentSeven.setDoctor(doctorDetails.get(2l));
         appointmentSeven.setPatients(patientsDetails.get(2l));
         appointmentSeven.setFirstVisit(true);
-        appointmentSeven.setPurposeOfVisit("Memory Loss");
+        appointmentSeven.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentSeven.setBp(125.00);
         appointmentSeven.setTemperature(36.05);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 12));
@@ -197,21 +199,20 @@ public class MainReport {
         appointmentEight.setDoctor(doctorDetails.get(2l));
         appointmentEight.setPatients(patientsDetails.get(2l));
         appointmentEight.setFirstVisit(false);
-        appointmentEight.setPurposeOfVisit("Memory Loss");
+        appointmentEight.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentEight.setBp(110.00);
         appointmentEight.setTemperature(36.15);
         appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 18));
 
         appointmentNine = new Appointment();
         appointmentNine.setAppointmentId(9l);
-        appointmentNine.setDoctor(doctorDetails.get(2l));
+        appointmentNine.setDoctor(doctorDetails.get(3l));
         appointmentNine.setPatients(patientsDetails.get(3l));
         appointmentNine.setFirstVisit(false);
-        appointmentNine.setPurposeOfVisit("Memory Loss");
+        appointmentNine.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES2.getDiseases());
         appointmentNine.setBp(110.00);
         appointmentNine.setTemperature(36.15);
         appointmentNine.setDateOfVisit(new Date(2021 / 01 / 28));
-
 
         appointmentDetails = new HashMap<>();
         appointmentDetails.put(appointmentOne.getAppointmentId(), appointmentOne);
@@ -223,7 +224,6 @@ public class MainReport {
         appointmentDetails.put(appointmentSeven.getAppointmentId(), appointmentSeven);
         appointmentDetails.put(appointmentEight.getAppointmentId(), appointmentEight);
         appointmentDetails.put(appointmentNine.getAppointmentId(), appointmentThree);
-
 
         neurologistMedicine = new Medicine();
         neurologistMedicine.setMedicineId(121l);
@@ -271,17 +271,17 @@ public class MainReport {
         bedMap.put(bedNoThree.getBedId(), bedNoThree);
 
         inPatientOne = new InPatient();
-        inPatientOne.setPatients(patientsDetails.get(inPatientOne));
+        inPatientOne.setPatients(patientsDetails.get(patientsRose.getPatientId()));
         inPatientOne.setBed(bedMap.get(1l));
         inPatientOne.setIpIdentificationNumber(1l);
 
         inPatientTwo = new InPatient();
-        inPatientTwo.setPatients(patientsDetails.get(inPatientTwo));
+        inPatientTwo.setPatients(patientsDetails.get(patientsLily.getPatientId()));
         inPatientTwo.setBed(bedMap.get(2l));
         inPatientTwo.setIpIdentificationNumber(2l);
 
         inPatientThree = new InPatient();
-        inPatientThree.setPatients(patientsDetails.get(inPatientThree));
+        inPatientThree.setPatients(patientsDetails.get(patientsTommy.getPatientId()));
         inPatientThree.setBed(bedMap.get(3l));
         inPatientThree.setIpIdentificationNumber(3l);
 
@@ -344,12 +344,13 @@ public class MainReport {
 
         return null;
     }
+
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 2l, "Jose");
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
-            reportBo.displayPatientsForPatientsId(patientsDetails, 2l);
+            reportBo.displayPatientDetails(patientsDetails, 15l, "Jose");
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 12l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 11l);
             reportBo.displayPatientsForDoctorId(appointmentDetails, 2l);
             reportBo.displayOutPatientDetails(patientsDetails);
             reportBo.displayInPatientDetails(inPatientDetails);
@@ -374,8 +375,8 @@ public class MainReport {
             visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
                     appointment, medicineList);
         }
-        if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().equals("Inpatient")) {
-           inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
+        if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().getPatientType() != null && visitingInformation.getAppointment().getPatients().getPatientType().equals(PatientType.INPATIENT.getType())) {
+            inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
         }
         System.out.println("========================Hospital Management System Report==========================");
         allReport();

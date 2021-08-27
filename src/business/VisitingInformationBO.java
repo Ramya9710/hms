@@ -44,7 +44,6 @@ public class VisitingInformationBO {
         }
         return false;
     }
-
 }
 
 
