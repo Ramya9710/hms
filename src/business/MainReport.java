@@ -348,14 +348,15 @@ public class MainReport {
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 15l, "Jose");
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 12l);
-            reportBo.displayPatientsForPatientsId(patientsDetails, 11l);
-            reportBo.displayPatientsForDoctorId(appointmentDetails, 2l);
+            reportBo.displayPatientDetails(patientsDetails, 2l, "Jose");
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 3l);
+            reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);
             reportBo.displayOutPatientDetails(patientsDetails);
             reportBo.displayInPatientDetails(inPatientDetails);
             reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails);
-            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails, appointmentDetails);
+            reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails);
+            reportBo.displayVisitedPatientDateRange(visitingInformationDetails);
         } catch (Exception e) {
             e.getMessage();
         }

@@ -5,6 +5,7 @@ import initialprocess.InPatient;
 import initialprocess.Patients;
 import initialprocess.VisitingInformation;
 import utility.PatientType;
+import utility.SampleDate;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -125,55 +126,53 @@ public class ReportBO {
             visitingInformation = visitingInformationMap.get(visits);
             if (visitingInformation.getFollowUpNeed())
                 System.out.println("Follow up need details:" + visitingInformation);
-            }
-            if (!isFollowUpNeedIsMust) {
-                System.out.println("Follow up need not necessary");
-            }
-                
         }
-
-        public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap, Map<Long, Appointment> appointmentMap) throws ParseException {
-        System.out.println("-----------------Display the today’s visited patient Detail---------------");
-        VisitingInformation visitingInformation;
-        Appointment appointment;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
-        Date date;
-        for (Long visitId : appointmentMap.keySet()) {
-            appointment = appointmentMap.get(visitId);
-            Date dates = appointment.getDateOfVisit();
-            String date1 = simpleDateFormat.format(dates);
-            String date2 = simpleDateFormat1.format(Calendar.getInstance().getTime());
-            if (date1.equals(date2)) {
-                System.out.println(appointment.getPatients());
-            }
+        if (!isFollowUpNeedIsMust) {
+            System.out.println("Follow up need not necessary");
         }
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/YYYY");
-        Iterator<Long> itr = visitingInformationMap.keySet().iterator();
-        while (itr.hasNext()) {
-            visitingInformation = visitingInformationMap.get(itr.next());
-            date = visitingInformation.getAppointment().getDateOfVisit();
-           /* Date date1 = simpleDateFormat2.parse(simpleDateFormat2.format(date));
-            if (date.equals(date1)) {
-                System.out.println(date);
-            }*/
-            Date visitingDate = simpleDateFormat2.parse(simpleDateFormat2.format(date));
-            Date startDate = new SimpleDateFormat("dd/MM/YYYY").parse("2021/1/1");
-            Date endDate = new SimpleDateFormat("dd/MM/YYYY").parse("2021/4/4");
-            if (startDate.equals(endDate)) {
-                System.out.println(visitingInformation.getAppointment().getPatients());
-            }
-            System.out.println(visitingDate);
-        }
-        /* visitingInformationMap.get(calenderMap.get(new Date()));
-                if (!calenderMap.isEmpty() && calenderMap.containsKey(visitingInformation.getAppointment().getPatients())) {
-                    simpleDateFormat.format(DateFormat.getDateInstance());
-                }
-                System.out.println(calenderMap);*/
 
     }
 
+    public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap) {
+        System.out.println("-----------------Display the today’s visited patient Detail---------------");
+        VisitingInformation visitingInformation;
+        for (Long visits : visitingInformationMap.keySet()) {
+            visitingInformation = visitingInformationMap.get(visits);
+            Date currentDate = covertDateFormat(new Date());
+            Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
+            if (visitedDate.equals(currentDate)) {
+                System.out.println("Today's visited patients details:" + visitingInformation.getAppointment().getPatients());
+            }
+        }
+    }
+
+    public void displayVisitedPatientDateRange(Map<Long, VisitingInformation> visitingInformationMap) {
+        System.out.println("---------------Display visited patient date range-----------------");
+        VisitingInformation visitingInformation;
+        for (Long visitsCheck : visitingInformationMap.keySet()) {
+            visitingInformation = visitingInformationMap.get(visitsCheck);
+            Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
+            Date startDate = covertDateFormat(new Date());
+            Date endDate = covertDateFormat(new Date(2021 / 12 / 10));
+            if (visitDate.equals(startDate) || visitDate.equals(endDate) || (visitDate.after(startDate) && visitDate.before(endDate))) {
+                System.out.println("Display visited patient date range:" + covertDateFormat(visitDate));
+            }
+        }
+    }
+
+    public Date covertDateFormat(Date date) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            dateFormat.format(date);
+            return dateFormat.parse(dateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
+
 
 
 
