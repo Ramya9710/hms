@@ -118,21 +118,21 @@ public class ReportBO {
 
     public void displayTheListOfPatientWhoNeedsTheFollowUpVisit(Map<Long, VisitingInformation> visitingInformationMap) {
         System.out.println("-----------------Display the list of patient who needs the followup visit---------------");
-        Iterator<Long> itr = visitingInformationMap.keySet().iterator();
-        boolean isFollowUpNeed = false;
-        while (itr.hasNext()) {
-            VisitingInformation visitingInformation = visitingInformationMap.get(itr.next());
-            if (!visitingInformationMap.isEmpty() && visitingInformation.getFollowUpNeed() != null && visitingInformation.getFollowUpNeed()) {
-                isFollowUpNeed = true;
-                System.out.println("patients followUp details :" + visitingInformation.getAppointment().getPatients());
+        VisitingInformation visitingInformation;
+        boolean isFollowUpNeedIsMust = false;
+        for (Long visits : visitingInformationMap.keySet()) {
+            isFollowUpNeedIsMust = true;
+            visitingInformation = visitingInformationMap.get(visits);
+            if (visitingInformation.getFollowUpNeed())
+                System.out.println("Follow up need details:" + visitingInformation);
             }
+            if (!isFollowUpNeedIsMust) {
+                System.out.println("Follow up need not necessary");
+            }
+                
         }
-        if (isFollowUpNeed == false) {
-            System.out.println("patient followup not need: ");
-        }
-    }
 
-    public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap, Map<Long, Appointment> appointmentMap) throws ParseException {
+        public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap, Map<Long, Appointment> appointmentMap) throws ParseException {
         System.out.println("-----------------Display the today’s visited patient Detail---------------");
         VisitingInformation visitingInformation;
         Appointment appointment;

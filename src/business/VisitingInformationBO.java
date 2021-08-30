@@ -5,6 +5,7 @@ import initialprocess.Medicine;
 import initialprocess.Patients;
 import initialprocess.VisitingInformation;
 import utility.FindLatestNumberUtil;
+import utility.PatientType;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ public class VisitingInformationBO {
         System.out.println(visitingInformation);
         boolean patientIsIp = isIpPatient(visitingInformationMap, appointment.getPatients().getPatientId());
         if (patientIsIp) {
-            appointment.getPatients().setPatientType("Inpatient");
+            appointment.getPatients().setPatientType(PatientType.INPATIENT.getType());
         }
         visitingInformationMap.put(visitingInformation.getVisitId(), visitingInformation);
         return visitingInformation;
