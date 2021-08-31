@@ -141,7 +141,8 @@ public class ReportBO {
             Date currentDate = covertDateFormat(new Date());
             Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             if (visitedDate.equals(currentDate)) {
-                System.out.println("Today's visited patients details:" + visitingInformation.getAppointment().getPatients());
+                System.out.println("Today's visited date:" + visitedDate);
+                System.out.println("today's visited patient details:" + visitingInformation.getAppointment().getPatients());
             }
         }
     }
@@ -153,9 +154,10 @@ public class ReportBO {
             visitingInformation = visitingInformationMap.get(visitsCheck);
             Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             Date startDate = covertDateFormat(new Date());
-            Date endDate = covertDateFormat(new Date(2021 / 12 / 10));
+            Date endDate = covertDateFormat(new Date(2021 / 12 / 31));
+            // Date endDate = covertDateFormat(visitDate);
             if (visitDate.equals(startDate) || visitDate.equals(endDate) || (visitDate.after(startDate) && visitDate.before(endDate))) {
-                System.out.println("Display visited patient date range:" + covertDateFormat(visitDate));
+                System.out.println("Display visited patient date range:" + visitDate);
             }
         }
     }

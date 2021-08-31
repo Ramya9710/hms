@@ -47,9 +47,6 @@ public class MainReport {
     private static List<Medicine> medicineList;
     private static Medicine medicine;
 
-
-    private Date date = new Date();
-
     private static Map<Long, Bed> bedMap;
     private static Bed bedNoOne;
     private static Bed bedNoTwo;
@@ -60,12 +57,10 @@ public class MainReport {
     private static InPatient inPatientTwo;
     private static InPatient inPatientThree;
 
-    private static Map<String, Integer> calendarMap;
-    private static Calendar calendar1;
-    private static Calendar calendar2;
-    private static Calendar calendar3;
+    private static Map<Date,Date> dateMap;
 
     static {
+        Date date = new Date();
 
         Hospital hospital = new Hospital();
         hospital.setHospitalName("Apollo");
@@ -132,7 +127,7 @@ public class MainReport {
         appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
-        appointmentOne.setDateOfVisit(new Date(2021 / 10 / 11));
+        appointmentOne.setDateOfVisit(new Date(2021 / 01 / 11));
 
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
@@ -142,7 +137,7 @@ public class MainReport {
         appointmentTwo.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
-        appointmentTwo.setDateOfVisit(new Date(2021 / 01 / 06));
+        appointmentTwo.setDateOfVisit(new Date(2021 / 02 / 06));
 
         appointmentThree = new Appointment();
         appointmentThree.setAppointmentId(3l);
@@ -152,7 +147,7 @@ public class MainReport {
         appointmentThree.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES2.getDiseases());
         appointmentThree.setBp(136.15);
         appointmentThree.setTemperature(37.2);
-        appointmentThree.setDateOfVisit(new Date(2021 / 07 / 12));
+        appointmentThree.setDateOfVisit(new Date(2021 / 03 / 12));
 
         appointmentFour = new Appointment();
         appointmentFour.setAppointmentId(4l);
@@ -162,7 +157,7 @@ public class MainReport {
         appointmentFour.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentFour.setBp(110.00);
         appointmentFour.setTemperature(36.02);
-        appointmentFour.setDateOfVisit(new Date(2021 / 10 / 18));
+        appointmentFour.setDateOfVisit(new Date(2021 / 04 / 18));
 
         appointmentFive = new Appointment();
         appointmentFive.setAppointmentId(5l);
@@ -172,7 +167,7 @@ public class MainReport {
         appointmentFive.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentFive.setBp(110.00);
         appointmentFive.setTemperature(36.01);
-        appointmentFive.setDateOfVisit(new Date(2021 / 10 / 27));
+        appointmentFive.setDateOfVisit(new Date(2021 / 05 / 27));
 
         appointmentSix = new Appointment();
         appointmentSix.setAppointmentId(6l);
@@ -182,7 +177,7 @@ public class MainReport {
         appointmentSix.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentSix.setBp(120.00);
         appointmentSix.setTemperature(36.01);
-        appointmentSix.setDateOfVisit(new Date(2021 / 11 / 7));
+        appointmentSix.setDateOfVisit(new Date(2021 / 06 / 7));
 
         appointmentSeven = new Appointment();
         appointmentSeven.setAppointmentId(7l);
@@ -192,7 +187,7 @@ public class MainReport {
         appointmentSeven.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentSeven.setBp(125.00);
         appointmentSeven.setTemperature(36.05);
-        appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 12));
+        appointmentSeven.setDateOfVisit(new Date(2021 / 05 / 12));
 
         appointmentEight = new Appointment();
         appointmentEight.setAppointmentId(8l);
@@ -202,7 +197,8 @@ public class MainReport {
         appointmentEight.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentEight.setBp(110.00);
         appointmentEight.setTemperature(36.15);
-        appointmentSeven.setDateOfVisit(new Date(2021 / 01 / 18));
+        appointmentSeven.setDateOfVisit(new Date(2021 / 07 / 18));
+       // appointmentSeven.setDateOfVisit(SampleDate.DATES.getOrDefault(date,date));
 
         appointmentNine = new Appointment();
         appointmentNine.setAppointmentId(9l);
@@ -212,7 +208,7 @@ public class MainReport {
         appointmentNine.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES2.getDiseases());
         appointmentNine.setBp(110.00);
         appointmentNine.setTemperature(36.15);
-        appointmentNine.setDateOfVisit(new Date(2021 / 01 / 28));
+        appointmentNine.setDateOfVisit(new Date(2021 / 03 / 28));
 
         appointmentDetails = new HashMap<>();
         appointmentDetails.put(appointmentOne.getAppointmentId(), appointmentOne);
@@ -290,11 +286,7 @@ public class MainReport {
         inPatientDetails.put(inPatientTwo.getIpIdentificationNumber(), inPatientTwo);
         inPatientDetails.put(inPatientThree.getIpIdentificationNumber(), inPatientThree);
 
-        Calendar cal = Calendar.getInstance();
-        calendarMap = new HashMap<>();
-        calendarMap.put("year", cal.get(Calendar.YEAR));
-        calendarMap.put("Month", cal.get(Calendar.MONTH));
-        calendarMap.put("Date", cal.get(Calendar.DATE));
+
     }
 
     public static List<Medicine> getMedicine() {
@@ -348,7 +340,7 @@ public class MainReport {
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 2l, "Jose");
+            reportBo.displayPatientDetails(patientsDetails, 2l, "Rose");
             reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
             reportBo.displayPatientsForPatientsId(patientsDetails, 3l);
             reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);

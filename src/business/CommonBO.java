@@ -29,4 +29,6 @@ public class CommonBO {
         doctorMap.put(doctor.getDoctorId(),doctor);
         return doctor;
     }
+
+
 }
