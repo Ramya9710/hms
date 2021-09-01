@@ -8,7 +8,7 @@ import utility.SampleDate;
 import java.util.*;
 
 
-public class MainReport {
+public class MainReport extends CommonBO{
 
     private static Map<Long, Hospital> hospitalDetails;
     private static Hospital hospital;
@@ -127,7 +127,7 @@ public class MainReport {
         appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
-        appointmentOne.setDateOfVisit(new Date(2021 / 01 / 11));
+        appointmentOne.setDateOfVisit(getDateFormat("2021/1/11"));
 
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
@@ -137,7 +137,7 @@ public class MainReport {
         appointmentTwo.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentTwo.setBp(115.00);
         appointmentTwo.setTemperature(36.15);
-        appointmentTwo.setDateOfVisit(new Date(2021 / 02 / 06));
+        appointmentTwo.setDateOfVisit(getDateFormat("2021/04/03"));
 
         appointmentThree = new Appointment();
         appointmentThree.setAppointmentId(3l);
@@ -147,7 +147,7 @@ public class MainReport {
         appointmentThree.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES2.getDiseases());
         appointmentThree.setBp(136.15);
         appointmentThree.setTemperature(37.2);
-        appointmentThree.setDateOfVisit(new Date(2021 / 03 / 12));
+        appointmentThree.setDateOfVisit(getDateFormat("2021/05/06"));
 
         appointmentFour = new Appointment();
         appointmentFour.setAppointmentId(4l);
@@ -198,7 +198,6 @@ public class MainReport {
         appointmentEight.setBp(110.00);
         appointmentEight.setTemperature(36.15);
         appointmentSeven.setDateOfVisit(new Date(2021 / 07 / 18));
-       // appointmentSeven.setDateOfVisit(SampleDate.DATES.getOrDefault(date,date));
 
         appointmentNine = new Appointment();
         appointmentNine.setAppointmentId(9l);

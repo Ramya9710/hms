@@ -4,7 +4,11 @@ import initialprocess.Doctor;
 import initialprocess.Patients;
 import utility.FindLatestNumberUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -26,9 +30,37 @@ public class CommonBO {
         doctor.setDoctorId(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
         doctor.setDoctorName("Dr.Bala");
         doctor.setDoctorSpecialisation("General doctor");
-        doctorMap.put(doctor.getDoctorId(),doctor);
+        doctorMap.put(doctor.getDoctorId(), doctor);
         return doctor;
     }
 
+    public static Date getDateFormat (String s) {
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = null;
+        try {
+            date = format.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public Date covertDateFormat(Date date) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            dateFormat.format(date);
+            return dateFormat.parse(dateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public String getDisplayDateFormat(Date date) {
+       /* DateFormat Date = DateFormat.getDateInstance();
+        return Date.format(date.getTime());*/
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        return dateFormat.format(date);
+
+    }
 
 }
