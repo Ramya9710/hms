@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class CommonBO {
         doctor.setDoctorId(FindLatestNumberUtil.getLatestId(new ArrayList<>()));
         doctor.setDoctorName("Dr.Bala");
         doctor.setDoctorSpecialisation("General doctor");
-        doctorMap.put(doctor.getDoctorId(),doctor);
+        doctorMap.put(doctor.getDoctorId(), doctor);
         return doctor;
     }
     public static Date getDateFormat (String s) {
@@ -43,6 +44,20 @@ public class CommonBO {
         return date;
     }
 
+<<<<<<< HEAD
+=======
+    public static Date getDateFormat (String s) {
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = null;
+        try {
+            date = format.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+>>>>>>> ec48006df8ab0e470599455ff31314dc2009a50b
     public Date covertDateFormat(Date date) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -53,11 +68,21 @@ public class CommonBO {
         }
         return null;
     }
+<<<<<<< HEAD
    /* public String getDisplayDateFormat(Date date) {
        *//* DateFormat Date = DateFormat.getDateInstance();
         return Date.format(date.getTime());*//*
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
         return dateFormat.format(date);
+=======
+    public String getDisplayDateFormat(Date date) {
+       /* DateFormat Date = DateFormat.getDateInstance();
+        return Date.format(date.getTime());*/
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        return dateFormat.format(date);
+
+    }
+>>>>>>> ec48006df8ab0e470599455ff31314dc2009a50b
 
     }*/
 }

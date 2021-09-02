@@ -17,7 +17,7 @@ public class AppointmentBO extends CommonBO {
         try {
             appointment.setPurposeOfVisit(purposeOfVisit);
             appointment.setAppointmentId(FindLatestNumberUtil.getLatestId(new ArrayList<>(appointmentMap.keySet())));
-            appointment.setDateOfVisit(new Date());
+            appointment.setDateOfVisit(getDateFormat("2021/9/1"));
             if (doctorMap != null && doctorMap.containsKey(doctorId)) {
                 appointment.setDoctor(doctorMap.get(doctorId));
             } else
