@@ -15,7 +15,7 @@ import java.util.*;
 /**
  *
  */
-public class ReportBO {
+public class ReportBO extends CommonBO{
   /*  The following reports are need
       Display patient details for the patient name/id
       Display the list of visit for the patient id
@@ -57,7 +57,7 @@ public class ReportBO {
         VisitingInformation visitingInformation;
         if (!visitingInformationDetails.isEmpty() && visitingInformationDetails.containsKey(patientId)) {
             visitingInformation = visitingInformationDetails.get(patientId);
-            System.out.println("visits details:" + visitingInformation);
+            System.out.println("visits details :" + visitingInformation);
         } else {
             System.out.println("list of visit for patientId and also visiting information details are not available");
         }
@@ -125,7 +125,7 @@ public class ReportBO {
             isFollowUpNeedIsMust = true;
             visitingInformation = visitingInformationMap.get(visits);
             if (visitingInformation.getFollowUpNeed())
-                System.out.println("Follow up need details:" + visitingInformation);
+                System.out.println("Follow up need details :" + visitingInformation);
         }
         if (!isFollowUpNeedIsMust) {
             System.out.println("Follow up need not necessary");
@@ -142,7 +142,7 @@ public class ReportBO {
             Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             if (visitedDate.equals(currentDate)) {
                 System.out.println("Today's visited date:" + visitedDate);
-                System.out.println("today's visited patient details:" + visitingInformation.getAppointment().getPatients());
+                System.out.println("today's visited patient details :" + visitingInformation);
             }
         }
     }
@@ -152,26 +152,21 @@ public class ReportBO {
         VisitingInformation visitingInformation;
         for (Long visitsCheck : visitingInformationMap.keySet()) {
             visitingInformation = visitingInformationMap.get(visitsCheck);
-            Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
+           /* Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             Date startDate = covertDateFormat(new Date());
-            Date endDate = covertDateFormat(new Date(2021 / 12 / 31));
-            // Date endDate = covertDateFormat(visitDate);
+            Date endDate = covertDateFormat(new Date(2021 / 12 / 31));*/
+            Date visitDate = visitingInformation.getAppointment().getDateOfVisit();
+            Date startDate = getDateFormat("2021/04/12");
+            Date endDate = getDateFormat("2021/9/1");
             if (visitDate.equals(startDate) || visitDate.equals(endDate) || (visitDate.after(startDate) && visitDate.before(endDate))) {
-                System.out.println("Display visited patient date range:" + visitDate);
+               // DateFormat Date = DateFormat.getDateInstance();
+                System.out.println("Display visited date :" + visitDate);
+                System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients().getPatientName());
+                System.out.println("Display visited patient details :" + visitingInformation.getAppointment().getPatients());
             }
         }
     }
 
-    public Date covertDateFormat(Date date) {
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            dateFormat.format(date);
-            return dateFormat.parse(dateFormat.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
 
 
