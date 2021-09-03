@@ -353,6 +353,42 @@ public class MainReport extends CommonBO{
         }
     }
 
+ /*   public static void appointmentReport() {
+        AppointmentBO appointmentBO = new AppointmentBO();
+        try {
+            Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
+                    " headache ", 2l, doctorDetails);
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public static void visitingInformationReport() {
+        VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
+        Appointment appointment = new Appointment();
+        try {
+            if (appointment != null) {
+                VisitingInformation visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
+                       appointment, medicineList);
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public static void inPatientInformationReport() {
+        InPatientBO inPatientBO = new InPatientBO();
+        VisitingInformation visitingInformation = new VisitingInformation();
+        try {
+            if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().getPatientType() != null && visitingInformation.getAppointment().getPatients().getPatientType().equals(PatientType.INPATIENT.getType())) {
+                inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+*/
     public static void main(String[] args) {
         populateVisitingInformation();
         AppointmentBO appointmentBO = new AppointmentBO();

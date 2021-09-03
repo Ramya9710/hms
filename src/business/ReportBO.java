@@ -130,7 +130,6 @@ public class ReportBO extends CommonBO{
         if (!isFollowUpNeedIsMust) {
             System.out.println("Follow up need not necessary");
         }
-
     }
 
     public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap) {
@@ -141,11 +140,7 @@ public class ReportBO extends CommonBO{
             Date currentDate = covertDateFormat(new Date());
             Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             if (visitedDate.equals(currentDate)) {
-<<<<<<< HEAD
                 System.out.println("Today's visited date:" + visitedDate);
-=======
->>>>>>> ec48006df8ab0e470599455ff31314dc2009a50b
-                System.out.println("today's visited patient details :" + visitingInformation);
             }
         }
     }
@@ -155,17 +150,13 @@ public class ReportBO extends CommonBO{
         VisitingInformation visitingInformation;
         for (Long visitsCheck : visitingInformationMap.keySet()) {
             visitingInformation = visitingInformationMap.get(visitsCheck);
-<<<<<<< HEAD
-           /* Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
+            /* Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             Date startDate = covertDateFormat(new Date());
             Date endDate = covertDateFormat(new Date(2021 / 12 / 31));*/
-=======
->>>>>>> ec48006df8ab0e470599455ff31314dc2009a50b
             Date visitDate = visitingInformation.getAppointment().getDateOfVisit();
             Date startDate = getDateFormat("2021/04/12");
             Date endDate = getDateFormat("2021/9/1");
             if (visitDate.equals(startDate) || visitDate.equals(endDate) || (visitDate.after(startDate) && visitDate.before(endDate))) {
-<<<<<<< HEAD
                // DateFormat Date = DateFormat.getDateInstance();
                 System.out.println("Display visited date :" + visitDate);
                 System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients().getPatientName());
@@ -173,16 +164,6 @@ public class ReportBO extends CommonBO{
             }
         }
     }
-
-=======
-                DateFormat Date = DateFormat.getDateInstance();
-                System.out.println("Display visited date :" + getDisplayDateFormat(visitDate));
-                System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients().getPatientName());
-                System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients());
-            }
-        }
-    }
->>>>>>> ec48006df8ab0e470599455ff31314dc2009a50b
 }
 
 
