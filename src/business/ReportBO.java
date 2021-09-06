@@ -15,7 +15,7 @@ import java.util.*;
 /**
  *
  */
-public class ReportBO extends CommonBO{
+public class ReportBO extends CommonBO {
   /*  The following reports are need
       Display patient details for the patient name/id
       Display the list of visit for the patient id
@@ -43,7 +43,7 @@ public class ReportBO extends CommonBO{
                     patients = patientsMap.get(patientItr.next());
                     if (patients.getPatientName().equals(patientsName)) {
                         isPatientNameAvailable = true;
-                        System.out.println("patient details :" + patients);
+                        System.out.println("patient details is get by patient name :" + patients);
                     }
                 }
                 if (!isPatientNameAvailable)   // isPatientNameAvailable == false
@@ -122,43 +122,51 @@ public class ReportBO extends CommonBO{
         VisitingInformation visitingInformation;
         boolean isFollowUpNeedIsMust = false;
         for (Long visits : visitingInformationMap.keySet()) {
-            isFollowUpNeedIsMust = true;
             visitingInformation = visitingInformationMap.get(visits);
-            if (visitingInformation.getFollowUpNeed())
+            if (visitingInformation.getFollowUpNeed()) {
+                isFollowUpNeedIsMust = true;
                 System.out.println("Follow up need details :" + visitingInformation);
+            }
         }
         if (!isFollowUpNeedIsMust) {
             System.out.println("Follow up need not necessary");
         }
-
     }
 
     public void displayTodayVisitedPatientDetails(Map<Long, VisitingInformation> visitingInformationMap) {
         System.out.println("-----------------Display the today’s visited patient Detail---------------");
         VisitingInformation visitingInformation;
+        Date currentDate = covertDateFormat(new Date());
+        boolean isTodayVisit = false;
         for (Long visits : visitingInformationMap.keySet()) {
             visitingInformation = visitingInformationMap.get(visits);
-            Date currentDate = covertDateFormat(new Date());
             Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             if (visitedDate.equals(currentDate)) {
+                isTodayVisit = true;
+                System.out.println("Today's visited date:" + visitedDate);
                 System.out.println("today's visited patient details :" + visitingInformation);
             }
+        }
+        if (!isTodayVisit) {
+            System.out.println("Today's visited patient detail is not available");
         }
     }
 
     public void displayVisitedPatientDateRange(Map<Long, VisitingInformation> visitingInformationMap) {
         System.out.println("---------------Display visited patient date range-----------------");
         VisitingInformation visitingInformation;
+        Date startDate = getDateFormat("2021/04/12");
+        Date endDate = getDateFormat("2021/9/1");
         for (Long visitsCheck : visitingInformationMap.keySet()) {
             visitingInformation = visitingInformationMap.get(visitsCheck);
+            /* Date visitDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
+            Date startDate = covertDateFormat(new Date());
+            Date endDate = covertDateFormat(new Date(2021 / 12 / 31));*/
             Date visitDate = visitingInformation.getAppointment().getDateOfVisit();
-            Date startDate = getDateFormat("2021/04/12");
-            Date endDate = getDateFormat("2021/9/1");
             if (visitDate.equals(startDate) || visitDate.equals(endDate) || (visitDate.after(startDate) && visitDate.before(endDate))) {
-                DateFormat Date = DateFormat.getDateInstance();
                 System.out.println("Display visited date :" + getDisplayDateFormat(visitDate));
                 System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients().getPatientName());
-                System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients());
+                System.out.println("Display visited patient details :" + visitingInformation.getAppointment().getPatients());
             }
         }
     }

@@ -3,14 +3,13 @@ package business;
 import initialprocess.*;
 import utility.PatientDiseases;
 import utility.PatientType;
-import utility.SampleDate;
 
 import java.util.*;
 
 
-public class MainReport extends CommonBO{
+public class AllDetails extends CommonBO {
 
-    private static Map<Long, Hospital> hospitalDetails;
+    static Map<Long, Hospital> hospitalDetails;
     private static Hospital hospital;
 
     private static Map<Long, Doctor> doctorDetails;
@@ -57,7 +56,8 @@ public class MainReport extends CommonBO{
     private static InPatient inPatientTwo;
     private static InPatient inPatientThree;
 
-    private static Map<Date,Date> dateMap;
+    private static Map<Date, Date> dateMap;
+    private static Object Appointment;
 
     static {
         Date date = new Date();
@@ -127,7 +127,7 @@ public class MainReport extends CommonBO{
         appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
-        appointmentOne.setDateOfVisit(getDateFormat("2021/1/11"));
+        appointmentOne.setDateOfVisit(getDateFormat("2021/09/06"));
 
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
@@ -284,8 +284,6 @@ public class MainReport extends CommonBO{
         inPatientDetails.put(inPatientOne.getIpIdentificationNumber(), inPatientOne);
         inPatientDetails.put(inPatientTwo.getIpIdentificationNumber(), inPatientTwo);
         inPatientDetails.put(inPatientThree.getIpIdentificationNumber(), inPatientThree);
-
-
     }
 
     public static List<Medicine> getMedicine() {
@@ -328,6 +326,8 @@ public class MainReport extends CommonBO{
         heartCheckUp.setFollowUpNeed(true);
         heartCheckUp.setListOfMedicine(getMedicine());
 
+
+
         visitingInformationDetails = new HashMap<>();
         visitingInformationDetails.put(nervesCheckUp.getVisitId(), nervesCheckUp);
         visitingInformationDetails.put(mentalCheckUp.getVisitId(), mentalCheckUp);
@@ -339,7 +339,7 @@ public class MainReport extends CommonBO{
     public static void allReport() {
         ReportBO reportBo = new ReportBO();
         try {
-            reportBo.displayPatientDetails(patientsDetails, 2l, "Rose");
+            reportBo.displayPatientDetails(patientsDetails, 2l, "Jack");
             reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
             reportBo.displayPatientsForPatientsId(patientsDetails, 3l);
             reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);
@@ -349,28 +349,44 @@ public class MainReport extends CommonBO{
             reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails);
             reportBo.displayVisitedPatientDateRange(visitingInformationDetails);
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println("All reports throws exception:" + e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
-        populateVisitingInformation();
+    public static Appointment createAppointment() {
         AppointmentBO appointmentBO = new AppointmentBO();
+        Appointment appointment = null;
+        try {
+            appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
+                    " headache ", 2l, doctorDetails);
+        } catch (Exception e) {
+            System.out.println("this is appointment detail exception:" + e.getMessage());
+        }
+        return appointment;
+    }
+
+    public static VisitingInformation createVisitingInformation(Appointment appointment) {
         VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
-        InPatientBO inPatientBO = new InPatientBO();
         VisitingInformation visitingInformation = null;
-        System.out.println("========================Hospital Management System==========================");
-        System.out.println("Hospital Details :" + hospitalDetails);
-        Appointment appointment = appointmentBO.createAppointment(2l, patientsDetails, appointmentDetails,
-                " headache ", 2l, doctorDetails);
-        if (appointment != null) {
-            visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
-                    appointment, medicineList);
+        try {
+            if (appointment != null) {
+                visitingInformation = visitingInformationBO.createVisit(visitingInformationDetails,
+                        appointment, medicineList);
+            }
+        } catch (Exception e) {
+            System.out.println("this is visiting information detail exception:" + e.getMessage());
         }
-        if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().getPatientType() != null && visitingInformation.getAppointment().getPatients().getPatientType().equals(PatientType.INPATIENT.getType())) {
-            inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
+        return visitingInformation;
+    }
+
+    public static void createInPatientInformation(VisitingInformation visitingInformation) {
+        InPatientBO inPatientBO = new InPatientBO();
+        try {
+            if (visitingInformation.getAppointment().getPatients() != null && visitingInformation.getAppointment().getPatients().getPatientType() != null && visitingInformation.getAppointment().getPatients().getPatientType().equals(PatientType.INPATIENT.getType())) {
+                inPatientBO.createIp(visitingInformation.getAppointment().getPatients(), inPatientDetails, bedMap);
+            }
+        } catch (Exception e) {
+            System.out.println("this is inpatient information detail exception:" + e.getMessage());
         }
-        System.out.println("========================Hospital Management System Report==========================");
-        allReport();
     }
 }
