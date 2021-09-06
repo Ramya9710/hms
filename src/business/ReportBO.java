@@ -57,7 +57,7 @@ public class ReportBO extends CommonBO {
         VisitingInformation visitingInformation;
         if (!visitingInformationDetails.isEmpty() && visitingInformationDetails.containsKey(patientId)) {
             visitingInformation = visitingInformationDetails.get(patientId);
-            System.out.println("visits details:" + visitingInformation);
+            System.out.println("visits details :" + visitingInformation);
         } else {
             System.out.println("list of visit for patientId and also visiting information details are not available");
         }
@@ -142,7 +142,6 @@ public class ReportBO extends CommonBO {
             visitingInformation = visitingInformationMap.get(visits);
             Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             if (visitedDate.equals(currentDate)) {
-                isTodayVisit = true;
                 System.out.println("Today's visited date:" + visitedDate);
                 System.out.println("today's visited patient details :" + visitingInformation);
             }
@@ -164,7 +163,7 @@ public class ReportBO extends CommonBO {
             Date endDate = covertDateFormat(new Date(2021 / 12 / 31));*/
             Date visitDate = visitingInformation.getAppointment().getDateOfVisit();
             if (visitDate.equals(startDate) || visitDate.equals(endDate) || (visitDate.after(startDate) && visitDate.before(endDate))) {
-                System.out.println("Display visited date :" + getDisplayDateFormat(visitDate));
+                System.out.println("Display visited date :" + visitDate);
                 System.out.println("Display visited patient name :" + visitingInformation.getAppointment().getPatients().getPatientName());
                 System.out.println("Display visited patient details :" + visitingInformation.getAppointment().getPatients());
             }
