@@ -55,14 +55,15 @@ public class ReportBO extends CommonBO {
     public void displayListOfVisitForPatientId(Map<Long, VisitingInformation> visitingInformationDetails, Long patientId) {
         System.out.println("-----------------Display the list of visit for the patient id----------------");
         VisitingInformation visitingInformation;
-        if (!visitingInformationDetails.isEmpty() && visitingInformationDetails.containsKey(patientId)) {
-            visitingInformation = visitingInformationDetails.get(patientId);
-            System.out.println("visits details :" + visitingInformation);
-        } else {
-            System.out.println("list of visit for patientId and also visiting information details are not available");
+        if (!visitingInformationDetails.isEmpty()) {
+            if (visitingInformationDetails.containsKey(patientId)) {
+                visitingInformation = visitingInformationDetails.get(patientId);
+                System.out.println("visits details :" + visitingInformation);
+            } else {
+                System.out.println("list of visit for patientId and also visiting information details are not available");
+            }
         }
     }
-
     public void displayPatientsForPatientsId(Map<Long, Patients> patientsMap, Long patientId) {
         System.out.println("-----------------Display the list of patients Id----------------");
         Patients patients;
@@ -142,6 +143,7 @@ public class ReportBO extends CommonBO {
             visitingInformation = visitingInformationMap.get(visits);
             Date visitedDate = covertDateFormat(visitingInformation.getAppointment().getDateOfVisit());
             if (visitedDate.equals(currentDate)) {
+                isTodayVisit = true;
                 System.out.println("Today's visited date:" + visitedDate);
                 System.out.println("today's visited patient details :" + visitingInformation);
             }
@@ -169,6 +171,20 @@ public class ReportBO extends CommonBO {
             }
         }
     }
+
+  /*  public VisitingInformation displayVisitedPatientDateRangeTest(Map<Long, VisitingInformation> visitingInformationMap) {
+        System.out.println("---------------Display visited patient date range-----------------");
+        VisitingInformation visitingInformation = null;
+        try {
+            for (Long visitsCheck : visitingInformationMap.keySet()) {
+                visitingInformation = visitingInformationMap.get(visitsCheck);
+            }
+            visitingInformation = new VisitingInformation();
+        }catch (Exception e) {
+            e.getMessage();
+        }
+        return visitingInformation;
+    }*/
 }
 
 

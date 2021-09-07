@@ -5,12 +5,8 @@ import utility.PatientDiseases;
 import utility.PatientType;
 
 import java.util.*;
-
-
 public class AllDetails extends CommonBO {
-
     static Map<Long, Hospital> hospitalDetails;
-    private static Hospital hospital;
 
     private static Map<Long, Doctor> doctorDetails;
     private static Doctor neurologist;
@@ -56,15 +52,10 @@ public class AllDetails extends CommonBO {
     private static InPatient inPatientTwo;
     private static InPatient inPatientThree;
 
-    private static Map<Date, Date> dateMap;
-    private static Object Appointment;
-
     static {
-        Date date = new Date();
-
         Hospital hospital = new Hospital();
         hospital.setHospitalName("Apollo");
-        hospital.setHospitalId(2525l);
+        hospital.setHospitalId(101l);
         hospital.setHospitalLocation("Chennai");
 
         hospitalDetails = new HashMap<>();
@@ -127,7 +118,7 @@ public class AllDetails extends CommonBO {
         appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
-        appointmentOne.setDateOfVisit(getDateFormat("2021/09/06"));
+        appointmentOne.setDateOfVisit(getDateFormat("2021/09/07"));
 
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
@@ -157,7 +148,7 @@ public class AllDetails extends CommonBO {
         appointmentFour.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentFour.setBp(110.00);
         appointmentFour.setTemperature(36.02);
-        appointmentFour.setDateOfVisit(new Date(2021 / 04 / 18));
+        appointmentFour.setDateOfVisit(getDateFormat("2021/05/20"));
 
         appointmentFive = new Appointment();
         appointmentFive.setAppointmentId(5l);
@@ -326,8 +317,6 @@ public class AllDetails extends CommonBO {
         heartCheckUp.setFollowUpNeed(true);
         heartCheckUp.setListOfMedicine(getMedicine());
 
-
-
         visitingInformationDetails = new HashMap<>();
         visitingInformationDetails.put(nervesCheckUp.getVisitId(), nervesCheckUp);
         visitingInformationDetails.put(mentalCheckUp.getVisitId(), mentalCheckUp);
@@ -341,13 +330,14 @@ public class AllDetails extends CommonBO {
         try {
             reportBo.displayPatientDetails(patientsDetails, 2l, "Jack");
             reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
-            reportBo.displayPatientsForPatientsId(patientsDetails, 3l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 1l);
             reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);
             reportBo.displayOutPatientDetails(patientsDetails);
             reportBo.displayInPatientDetails(inPatientDetails);
             reportBo.displayTheListOfPatientWhoNeedsTheFollowUpVisit(visitingInformationDetails);
             reportBo.displayTodayVisitedPatientDetails(visitingInformationDetails);
             reportBo.displayVisitedPatientDateRange(visitingInformationDetails);
+           // reportBo.displayVisitedPatientDateRangeTest(visitingInformationDetails);
         } catch (Exception e) {
             System.out.println("All reports throws exception:" + e.getMessage());
         }

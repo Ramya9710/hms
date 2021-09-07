@@ -3,7 +3,7 @@ package utility;
 public enum PatientType {
     INPATIENT("IP"), OUTPATIENT("OP");
 
-    PatientType(String type) {
+     PatientType(String type) {
         this.type = type;
     }
 

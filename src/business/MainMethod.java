@@ -15,7 +15,6 @@ public class MainMethod {
         createInPatientInformation(visitingInformation);
         System.out.println("==========================Hospital Management All Details Report==========================");
         allReport();
-
         /*   AppointmentBO appointmentBO = new AppointmentBO();
         VisitingInformationBO visitingInformationBO = new VisitingInformationBO();
         InPatientBO inPatientBO = new InPatientBO();
