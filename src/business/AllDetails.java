@@ -118,7 +118,7 @@ public class AllDetails extends CommonBO {
         appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
-        appointmentOne.setDateOfVisit(getDateFormat("2021/09/07"));
+        appointmentOne.setDateOfVisit(getDateFormat("2021/09/08"));
 
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
