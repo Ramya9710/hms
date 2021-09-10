@@ -53,7 +53,6 @@ public class ReportBO extends CommonBO {
             }
         }
     }
-
     public void displayListOfVisitForPatientId(Map<Long, VisitingInformation> visitingInformationDetails, Long patientId) {
         System.out.println("-----------------Display the list of visit for the patient id----------------");
         VisitingInformation visitingInformation;
@@ -101,6 +100,26 @@ public class ReportBO extends CommonBO {
                 System.out.println("out patient details :" + patients);
             }
         }
+
+    /*    Patients patients;
+        boolean outPatientIsAvailable = false;
+        for (Map.Entry<Long,Patients> patientsEntry : patientsMap.entrySet()) {
+            patients = patientsMap.get(patientsEntry);
+            if (patients.getPatientType().equalsIgnoreCase(PatientType.OUTPATIENT.getType())) {
+                outPatientIsAvailable = true;
+                System.out.println(patientsEntry.getValue() + " " + patientsEntry.getKey());
+                System.out.println("out patient details :" + patients);
+            }
+        }*/
+     /*   Patients patients;
+        boolean outPatientIsAvailable = false;
+          for (Long patient : patientsMap.keySet()) {
+            patients = patientsMap.get(patient);
+            if (patients.getPatientType().equals(PatientType.OUTPATIENT.getType())) {
+                outPatientIsAvailable = true;
+                System.out.println("out patient details :" + patients);
+            }
+        }*/
         if (!outPatientIsAvailable) {
             System.out.println("outpatient details is not available");
         }
@@ -126,15 +145,25 @@ public class ReportBO extends CommonBO {
         }*/
     }
 
+
     public void displayInPatientDetails(Map<Long, InPatient> inPatientMap) {
         System.out.println("----------------Display all patient who are in-patient--------------");
-        InPatient inPatient;
+       /* InPatient inPatient;
         boolean inPatientIsAvailable = false;
         for (Long inPatients : inPatientMap.keySet()) {
             inPatientIsAvailable = true;
             inPatient = inPatientMap.get(inPatients);
             if (inPatient.getPatients().getPatientType().equalsIgnoreCase(PatientType.INPATIENT.getType()))
                 System.out.println("Inpatient details :" + inPatient);
+        }*/
+        InPatient inPatient;
+        boolean inPatientIsAvailable = false;
+        for (long a = 1l; a <= inPatientMap.size(); a++) {
+            inPatient = inPatientMap.get(a);
+            if (inPatient.getPatients().getPatientType().equalsIgnoreCase(PatientType.INPATIENT.getType())) {
+                inPatientIsAvailable = true;
+                System.out.println("Inpatient details :" + inPatient);
+            }
         }
       /*  InPatient inPatient;
         boolean inPatientIsAvailable = false;
