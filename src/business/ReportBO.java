@@ -53,6 +53,7 @@ public class ReportBO extends CommonBO {
             }
         }
     }
+
     public void displayListOfVisitForPatientId(Map<Long, VisitingInformation> visitingInformationDetails, Long patientId) {
         System.out.println("-----------------Display the list of visit for the patient id----------------");
         VisitingInformation visitingInformation;
@@ -100,6 +101,9 @@ public class ReportBO extends CommonBO {
                 System.out.println("out patient details :" + patients);
             }
         }
+        if (!outPatientIsAvailable) {
+            System.out.println("outpatient details is not available");
+        }
 
     /*    Patients patients;
         boolean outPatientIsAvailable = false;
@@ -120,23 +124,19 @@ public class ReportBO extends CommonBO {
                 System.out.println("out patient details :" + patients);
             }
         }*/
-        if (!outPatientIsAvailable) {
-            System.out.println("outpatient details is not available");
-        }
     }
-
 
     public void displayInPatientDetails(Map<Long, InPatient> inPatientMap) {
         System.out.println("----------------Display all patient who are in-patient--------------");
-       /* InPatient inPatient;
+        InPatient inPatient;
         boolean inPatientIsAvailable = false;
         for (Long inPatients : inPatientMap.keySet()) {
             inPatientIsAvailable = true;
             inPatient = inPatientMap.get(inPatients);
             if (inPatient.getPatients().getPatientType().equalsIgnoreCase(PatientType.INPATIENT.getType()))
                 System.out.println("Inpatient details :" + inPatient);
-        }*/
-        InPatient inPatient;
+        }
+      /*  InPatient inPatient;
         boolean inPatientIsAvailable = false;
         for (long a = 1l; a <= inPatientMap.size(); a++) {
             inPatient = inPatientMap.get(a);
@@ -144,7 +144,7 @@ public class ReportBO extends CommonBO {
                 inPatientIsAvailable = true;
                 System.out.println("Inpatient details :" + inPatient);
             }
-        }
+        }*/
         if (!inPatientIsAvailable) {
             System.out.println("Inpatient detail is not available");
         }
@@ -203,20 +203,6 @@ public class ReportBO extends CommonBO {
             }
         }
     }
-
-  /*  public VisitingInformation displayVisitedPatientDateRangeTest(Map<Long, VisitingInformation> visitingInformationMap) {
-        System.out.println("---------------Display visited patient date range-----------------");
-        VisitingInformation visitingInformation = null;
-        try {
-            for (Long visitsCheck : visitingInformationMap.keySet()) {
-                visitingInformation = visitingInformationMap.get(visitsCheck);
-            }
-            visitingInformation = new VisitingInformation();
-        }catch (Exception e) {
-            e.getMessage();
-        }
-        return visitingInformation;
-    }*/
 }
 
 
