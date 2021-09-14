@@ -9,14 +9,14 @@ public class AllDetails extends CommonBO {
     static Map<Long, Hospital> hospitalDetails;
 
     private static Map<Long, Doctor> doctorDetails;
-    private static Doctor neurologist;
+  /* private static Doctor neurologist;
     private static Doctor psychiatrist;
-    private static Doctor cardiologist;
+    private static Doctor cardiologist;*/
 
     private static Map<Long, Patients> patientsDetails;
-    private static Patients patientsRose;
+   /* private static Patients patientsRose;
     private static Patients patientsLily;
-    private static Patients patientsTommy;
+    private static Patients patientsTommy;*/
 
     private static Map<Long, Appointment> appointmentDetails;
     private static Appointment appointmentOne;
@@ -57,11 +57,32 @@ public class AllDetails extends CommonBO {
         hospital.setHospitalName("Apollo");
         hospital.setHospitalId(101l);
         hospital.setHospitalLocation("Chennai");
-
         hospitalDetails = new HashMap<>();
         hospitalDetails.put(2525l, hospital);
 
-        neurologist = new Doctor();
+        Doctor doctor = new Doctor();
+        doctor.setDoctorId(1l);
+        doctor.setDoctorName("Dr.Ronald roy");
+        doctor.setDoctorSpecialisation("Neurologist");
+        doctorDetails = new HashMap<>();
+        doctorDetails.put(doctor.getDoctorId(), doctor);
+
+        Doctor doctor1 = new Doctor();
+        doctor1.setDoctorId(2l);
+        doctor1.setDoctorName("Dr.Vijay Kumar");
+        doctor1.setDoctorSpecialisation("Psychiatrist");
+        doctorDetails = new HashMap<>();
+        doctorDetails.put(doctor1.getDoctorId(), doctor1);
+
+        Doctor doctor2 = new Doctor();
+        doctor2.setDoctorId(3l);
+        doctor2.setDoctorName("Dr.Rama Chandra");
+        doctor2.setDoctorSpecialisation("Cardiologist");
+
+        doctorDetails = new HashMap<>();
+        doctorDetails.put(doctor2.getDoctorId(), doctor2);
+
+        /*  neurologist = new Doctor();
         neurologist.setDoctorId(1l);
         neurologist.setDoctorName(" Dr.Ronald roy ");
         neurologist.setDoctorSpecialisation(" Neurologist ");
@@ -79,9 +100,39 @@ public class AllDetails extends CommonBO {
         doctorDetails = new HashMap<>();
         doctorDetails.put(neurologist.getDoctorId(), neurologist);
         doctorDetails.put(psychiatrist.getDoctorId(), psychiatrist);
-        doctorDetails.put(cardiologist.getDoctorId(), cardiologist);
+        doctorDetails.put(cardiologist.getDoctorId(), cardiologist);*/
 
-        patientsRose = new Patients();
+        Patients patients = new Patients();
+        patients.setPatientName("Rose");
+        patients.setDate_of_birth(new Date(1990 / 12 / 10));
+        patients.setPatientAddress("Coimbatore");
+        patients.setPatientId(1l);
+        patients.setPatientPhoneNumber("9525264410");
+        patients.setPatientType(PatientType.OUTPATIENT.getType());
+        patientsDetails = new HashMap<>();
+        patientsDetails.put(patients.getPatientId(), patients);
+
+        Patients patients1 = new Patients();
+        patients1.setPatientName("Lily");
+        patients1.setDate_of_birth(new Date(1981 / 10 / 25));
+        patients1.setPatientAddress("Chennai");
+        patients1.setPatientId(2l);
+        patients1.setPatientPhoneNumber("9585124512");
+        patients1.setPatientType(PatientType.INPATIENT.getType());
+        patientsDetails = new HashMap<>();
+        patientsDetails.put(patients1.getPatientId(), patients1);
+
+        Patients patients2 = new Patients();
+        patients2.setPatientName("Tommy");
+        patients2.setDate_of_birth(new Date(1998 / 05 / 19));
+        patients2.setPatientAddress("Madurai");
+        patients2.setPatientId(3l);
+        patients2.setPatientPhoneNumber("9854561214");
+        patients2.setPatientType(PatientType.OUTPATIENT.getType());
+        patientsDetails = new HashMap<>();
+        patientsDetails.put(patients2.getPatientId(), patients2);
+
+        /*  patientsRose = new Patients();
         patientsRose.setPatientName("Rose");
         patientsRose.setDate_of_birth(new Date(1990 / 12 / 10));
         patientsRose.setPatientAddress("Coimbatore");
@@ -109,7 +160,7 @@ public class AllDetails extends CommonBO {
         patientsDetails.put(patientsRose.getPatientId(), patientsRose);
         patientsDetails.put(patientsLily.getPatientId(), patientsLily);
         patientsDetails.put(patientsTommy.getPatientId(), patientsTommy);
-
+*/
         appointmentOne = new Appointment();
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
@@ -118,7 +169,7 @@ public class AllDetails extends CommonBO {
         appointmentOne.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentOne.setBp(120.00);
         appointmentOne.setTemperature(36.01);
-        appointmentOne.setDateOfVisit(getDateFormat("2021/09/08"));
+        appointmentOne.setDateOfVisit(getDateFormat("2021/09/13"));
 
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
@@ -158,7 +209,7 @@ public class AllDetails extends CommonBO {
         appointmentFive.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES1.getDiseases());
         appointmentFive.setBp(110.00);
         appointmentFive.setTemperature(36.01);
-        appointmentFive.setDateOfVisit(new Date(2021 / 05 / 27));
+        appointmentFive.setDateOfVisit(getDateFormat("2021/07/08"));
 
         appointmentSix = new Appointment();
         appointmentSix.setAppointmentId(6l);
@@ -168,7 +219,7 @@ public class AllDetails extends CommonBO {
         appointmentSix.setPurposeOfVisit(PatientDiseases.PATIENT_DISEASES.getDiseases());
         appointmentSix.setBp(120.00);
         appointmentSix.setTemperature(36.01);
-        appointmentSix.setDateOfVisit(new Date(2021 / 06 / 7));
+        appointmentSix.setDateOfVisit(getDateFormat("2021/04/06"));
 
         appointmentSeven = new Appointment();
         appointmentSeven.setAppointmentId(7l);
@@ -257,17 +308,17 @@ public class AllDetails extends CommonBO {
         bedMap.put(bedNoThree.getBedId(), bedNoThree);
 
         inPatientOne = new InPatient();
-        inPatientOne.setPatients(patientsDetails.get(patientsRose.getPatientId()));
+        inPatientOne.setPatients(patientsDetails.get(patients.getPatientId()));
         inPatientOne.setBed(bedMap.get(1l));
         inPatientOne.setIpIdentificationNumber(1l);
 
         inPatientTwo = new InPatient();
-        inPatientTwo.setPatients(patientsDetails.get(patientsLily.getPatientId()));
+        inPatientTwo.setPatients(patientsDetails.get(patients1.getPatientId()));
         inPatientTwo.setBed(bedMap.get(2l));
         inPatientTwo.setIpIdentificationNumber(2l);
 
         inPatientThree = new InPatient();
-        inPatientThree.setPatients(patientsDetails.get(patientsTommy.getPatientId()));
+        inPatientThree.setPatients(patientsDetails.get(patients2.getPatientId()));
         inPatientThree.setBed(bedMap.get(3l));
         inPatientThree.setIpIdentificationNumber(3l);
 
@@ -329,8 +380,8 @@ public class AllDetails extends CommonBO {
         ReportBO reportBo = new ReportBO();
         try {
             reportBo.displayPatientDetails(patientsDetails, 2l, "Jack");
-            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 1l);
-            reportBo.displayPatientsForPatientsId(patientsDetails, 1l);
+            reportBo.displayListOfVisitForPatientId(visitingInformationDetails, 2l);
+            reportBo.displayPatientsForPatientsId(patientsDetails, 2l);
             reportBo.displayPatientsForDoctorId(appointmentDetails, 1l);
             reportBo.displayOutPatientDetails(patientsDetails);
             reportBo.displayInPatientDetails(inPatientDetails);
