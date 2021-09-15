@@ -5,32 +5,32 @@ import java.util.Date;
 import java.util.List;
 
 public class ListProcess {
-    private static List<Integer> integerList;
-    private static List<Long> longList;
-    private static List<String> stringList;
-    private static List<Double> doubleList;
-    private static List<Float> floatList;
-    private static List<Date> dateList;
+    static List<Integer> integerList;
+    static List<Long> longList;
+    static List<String> stringList;
+    static List<Double> doubleList;
+    static List<Float> floatList;
+    static List<Date> dateList;
 
     static {
         integerList = new ArrayList<>();
-        integerList.add(1);
-        integerList.add(2);
+        integerList.add(10);
+        integerList.add(20);
 
         longList = new ArrayList<>();
-        longList.add(1234567l);
+        longList.add(987654321l);
 
         stringList = new ArrayList<>();
-        stringList.add("abc");
-        stringList.add("def");
-        stringList.add("ghi");
-        stringList.add("jkl");
+        stringList.add("xyz");
+        stringList.add("uvw");
+        stringList.add("rst");
+        stringList.add("opq");
 
         doubleList = new ArrayList<>();
-        doubleList.add(12345.12);
+        doubleList.add(12.12);
 
         floatList = new ArrayList<>();
-        floatList.add(72445.12f);
+        floatList.add(7244556.12f);
 
         dateList = new ArrayList<>();
         dateList.add(new Date());

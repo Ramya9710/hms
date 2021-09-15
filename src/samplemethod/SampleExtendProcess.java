@@ -5,30 +5,31 @@ import java.util.List;
 
 public class SampleExtendProcess extends ListProcess {
     public static List<Integer> getDisplayOfInteger() {
-        return ListProcess.integerList;
+        return integerList;
     }
 
     public static List<Long> getDisplayOfLong() {
-        return ListProcess.longList;
+        return longList;
     }
 
     public static List<String> getDisplayOfString() {
-        return ListProcess.stringList;
+        return stringList;
     }
 
     public static List<Double> getDisplayOfDouble() {
-        return ListProcess.doubleList;
+        return doubleList;
     }
 
     public static List<Float> getDisplayOfFloat() {
-        return ListProcess.floatList;
+        return floatList;
     }
 
-    public static List<Date> getDisplayOfDate(Date date) {
+    public static List<Date> getDisplayOfDate() {
         return dateList;
     }
 
     public static void main(String[] args) {
+
         integerList = getDisplayOfInteger();
         System.out.println("List of integer value :" + integerList);
         longList = getDisplayOfLong();
@@ -39,7 +40,7 @@ public class SampleExtendProcess extends ListProcess {
         System.out.println("List of float values :" + floatList);
         stringList = getDisplayOfString();
         System.out.println("List of String :" + stringList);
-        dateList = getDisplayOfDate(new Date());
+        dateList = getDisplayOfDate();
         System.out.println("Date :" + dateList);
 
     }
